@@ -10,11 +10,15 @@ type ProgressResponse = {
   outputFile: string | null;
 };
 
-const Download = () => {
+const Download: React.FC<{
+  username: string;
+}> = ({ username }) => {
   const [downloading, setDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
   const renderVideo = async () => {
-    const inputProps = {};
+    const inputProps = {
+      username,
+    };
     const body = {
       inputProps,
     };

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 export default function User() {
   const router = useRouter();
-  const username = router.query.user;
+  const username = ([] as string[]).concat(router.query.user)[0];
   return (
     <div className={styles.container}>
       <Head>
@@ -16,23 +16,25 @@ export default function User() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {username ? (
-        <Player
-          component={Stars}
-          compositionHeight={1080}
-          compositionWidth={1080}
-          durationInFrames={300}
-          fps={30}
-          style={{
-            width: 540,
-            height: 540,
-          }}
-          controls
-          inputProps={{
-            username,
-          }}
-        ></Player>
+        <>
+          <Player
+            component={Stars}
+            compositionHeight={1080}
+            compositionWidth={1080}
+            durationInFrames={300}
+            fps={30}
+            style={{
+              width: 540,
+              height: 540,
+            }}
+            controls
+            inputProps={{
+              username,
+            }}
+          ></Player>
+          <Download username={username}></Download>
+        </>
       ) : null}
-      <Download></Download>
     </div>
   );
 }
