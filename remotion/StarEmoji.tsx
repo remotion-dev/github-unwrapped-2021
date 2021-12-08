@@ -115,9 +115,9 @@ export const StarEmoji: React.FC = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(137.137 135.628) scale(122.819)"
         >
-          <stop offset="0.5" stop-color="#FDE030" />
-          <stop offset="0.92" stop-color="#F7C02B" />
-          <stop offset="1" stop-color="#F4A223" />
+          <stop offset="0.5" stopColor="#FDE030" />
+          <stop offset="0.92" stopColor="#F7C02B" />
+          <stop offset="1" stopColor="#F4A223" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_0_1"
@@ -127,8 +127,8 @@ export const StarEmoji: React.FC = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(203.809 87.0004) scale(51.5579)"
         >
-          <stop offset="0.2" stop-color="#FF4081" />
-          <stop offset="0.88" stop-color="#CC1775" />
+          <stop offset="0.2" stopColor="#FF4081" />
+          <stop offset="0.88" stopColor="#CC1775" />
         </radialGradient>
       </defs>
     </svg>

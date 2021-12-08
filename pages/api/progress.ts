@@ -27,7 +27,6 @@ export default async function handler(
     functionName,
     region: AWS_REGION,
   });
-  console.log(progress);
   res.status(200).json({
     overallProgress: progress.overallProgress,
     outputFile: progress.outputFile,

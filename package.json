@@ -8,15 +8,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@remotion/bundler": "3.0.0-lambda.196+d4d99a5b8",
-    "@remotion/cli": "3.0.0-lambda.196+d4d99a5b8",
-    "@remotion/lambda": "3.0.0-lambda.196+d4d99a5b8",
-    "@remotion/renderer": "3.0.0-lambda.196+d4d99a5b8",
-    "@remotion/player": "3.0.0-lambda.196+d4d99a5b8",
+    "@remotion/bundler": "3.0.0-lambda.200+0d7281dd3",
+    "@remotion/cli": "3.0.0-lambda.200+0d7281dd3",
+    "@remotion/lambda": "3.0.0-lambda.200+0d7281dd3",
+    "@remotion/renderer": "3.0.0-lambda.200+0d7281dd3",
+    "@remotion/player": "3.0.0-lambda.200+0d7281dd3",
     "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "remotion": "3.0.0-lambda.196+d4d99a5b8"
+    "remotion": "3.0.0-lambda.200+0d7281dd3"
   },
   "devDependencies": {
     "@types/react": "^17.0.37",
