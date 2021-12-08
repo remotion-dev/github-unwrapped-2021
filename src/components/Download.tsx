@@ -40,7 +40,9 @@ const Download = () => {
 
   return (
     <div>
-      <button onClick={renderVideo}>Download</button>
+      <button type="button" onClick={renderVideo}>
+        Download
+      </button>
       {downloading && <div>{downloadProgress}%</div>}
     </div>
   );

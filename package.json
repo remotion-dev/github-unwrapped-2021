@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview": "npx remotion preview remotion/index.tsx"
   },
   "dependencies": {
     "@remotion/bundler": "3.0.0-lambda.202+1f9050a92",

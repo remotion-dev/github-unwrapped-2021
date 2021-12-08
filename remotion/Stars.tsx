@@ -1,7 +1,7 @@
-import React from "react";
-import { AbsoluteFill } from "remotion";
+import React, { useEffect, useMemo, useState } from "react";
+import { AbsoluteFill, continueRender, delayRender } from "remotion";
+import { getUser, Stats } from "../src/get-user";
 import { StarEmoji } from "./StarEmoji";
-import { stats } from "./stats";
 
 const title: React.CSSProperties = {
   color: "#111",
@@ -22,11 +22,40 @@ const subtitle: React.CSSProperties = {
   textAlign: "center",
 };
 
-export const Stars: React.FC = () => {
-  const edge = stats.data.search.edges[0].node.starredRepositories;
-  const starsThisYear = edge.edges.filter(
-    (e) => new Date(e.starredAt).getFullYear() === 2021
-  );
+export const Stars: React.FC<{
+  username: string;
+}> = ({ username }) => {
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [handle] = useState(() => delayRender());
+
+  useEffect(() => {
+    getUser(username, "")
+      .then((data) => {
+        setStats(data);
+        continueRender(handle);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [handle, username]);
+
+  const data = useMemo(() => {
+    if (!stats) {
+      return null;
+    }
+
+    const edge =
+      stats.data.search.edges?.[0]?.node.starredRepositories.edges ?? [];
+    const starsThisYear = edge.filter(
+      (e) => new Date(e.starredAt).getFullYear() === 2021
+    );
+    return { starsThisYear };
+  }, [stats]);
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <AbsoluteFill
       style={{
@@ -38,17 +67,18 @@ export const Stars: React.FC = () => {
       <StarEmoji />
       <br />
       <div style={title}>
-        You gave {starsThisYear.length}{" "}
-        {starsThisYear.length === 1 ? "star" : "stars"} to open source projects
-        this year.
+        You gave {data.starsThisYear.length}{" "}
+        {data.starsThisYear.length === 1 ? "star" : "stars"} to open source
+        projects this year.
       </div>
       <br />
-      {starsThisYear.length === 0 ? (
-        <div style={subtitle}>It's not too late to spread the love! </div>
+      {data.starsThisYear.length === 0 ? (
+        <div style={subtitle}>It{"'"}s not too late to spread the love! </div>
       ) : (
         <div style={subtitle}>
-          The most recent one was <strong>{starsThisYear[0].node.name}</strong>{" "}
-          by <strong>{starsThisYear[0].node.owner.login}</strong>!
+          The most recent one was{" "}
+          <strong>{data.starsThisYear[0].node.name}</strong> by{" "}
+          <strong>{data.starsThisYear[0].node.owner.login}</strong>!
         </div>
       )}
     </AbsoluteFill>
