@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { Player } from "@remotion/player";
 import { Stars } from "../remotion/Stars";
+import Download from "../src/components/Download";
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -22,6 +23,7 @@ export default function Home() {
         }}
         controls
       ></Player>
+      <Download></Download>
     </div>
   );
 }

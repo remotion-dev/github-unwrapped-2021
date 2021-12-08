@@ -1,4 +1,5 @@
 import { Composition } from "remotion";
+import { COMP_NAME } from "../src/config";
 import { MyComp } from "./Composition";
 import { StarEmoji } from "./StarEmoji";
 import { Stars } from "./Stars";
@@ -12,7 +13,7 @@ export const Root: React.FC = () => {
         fps={30}
         height={1080}
         width={1080}
-        id="wrapped"
+        id={COMP_NAME}
       ></Composition>
       <Composition
         component={Stars}
