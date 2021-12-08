@@ -7,9 +7,6 @@ type Data = {
   bucketName: string;
 };
 
-process.env.AWS_ACCESS_KEY_ID = process.env.REMOTION_AWS_ACCESS_KEY_ID;
-process.env.AWS_SECRET_ACCESS_KEY = process.env.REMOTION_AWS_SECRET_ACCESS_KEY;
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
