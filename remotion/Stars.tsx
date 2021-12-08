@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { AbsoluteFill, continueRender, delayRender } from "remotion";
 import { getUser, Stats } from "../src/get-user";
+import { getUserLocal } from "./get-user-local";
 import { StarEmoji } from "./StarEmoji";
 
 const title: React.CSSProperties = {
@@ -29,7 +30,7 @@ export const Stars: React.FC<{
   const [handle] = useState(() => delayRender());
 
   useEffect(() => {
-    getUser(username, "")
+    getUserLocal(username)
       .then((data) => {
         setStats(data);
         continueRender(handle);

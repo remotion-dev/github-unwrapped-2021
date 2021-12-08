@@ -9,6 +9,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Stats>
 ) {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const body = JSON.parse(req.body) as RequestData;
 
   const data = await getUser(body.username, process.env.GITHUB_TOKEN as string);
