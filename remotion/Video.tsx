@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { COMP_NAME } from "../src/config";
 import { MyComp } from "./Composition";
 import { Main } from "./Main";
+import { ManyLanguages } from "./ManyLanguages";
 import { StarEmoji } from "./StarEmoji";
 import { Stars } from "./Stars";
 
@@ -34,7 +35,7 @@ export const Root: React.FC = () => {
       ></Composition>
       <Composition
         component={Main}
-        durationInFrames={900}
+        durationInFrames={300}
         fps={30}
         height={1080}
         width={1080}
@@ -42,6 +43,14 @@ export const Root: React.FC = () => {
         defaultProps={{
           username: "JonnyBurger",
         }}
+      ></Composition>
+      <Composition
+        component={ManyLanguages}
+        durationInFrames={300}
+        fps={30}
+        height={1080}
+        width={1080}
+        id="many-languages"
       ></Composition>
     </>
   );

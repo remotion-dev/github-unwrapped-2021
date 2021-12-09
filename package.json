@@ -14,6 +14,7 @@
     "@remotion/lambda": "3.0.0-lambda.202+1f9050a92",
     "@remotion/player": "3.0.0-lambda.202+1f9050a92",
     "@remotion/renderer": "3.0.0-lambda.202+1f9050a92",
+    "make-color-more-chill": "^0.2.2",
     "next": "12.0.7",
     "prettier-plugin-organize-imports": "^2.3.4",
     "react": "17.0.2",

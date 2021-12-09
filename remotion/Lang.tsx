@@ -5,7 +5,7 @@ import { ResponseType } from "../src/response-types";
 const title: React.CSSProperties = {
   color: "#111",
   fontWeight: "bold",
-  fontSize: 70,
+  fontSize: 100,
   fontFamily: "sans-serif",
   paddingLeft: 20,
   paddingRight: 20,
@@ -44,7 +44,7 @@ export const Lang: React.FC<{
         alignItems: "center",
       }}
     >
-      <div style={title}>{lang.name}</div>
+      <div style={{ ...title, color: lang.color }}>{lang.name}!</div>
     </AbsoluteFill>
   );
 };

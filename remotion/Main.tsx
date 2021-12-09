@@ -28,10 +28,10 @@ export const Main: React.FC<{
 
   return (
     <Series>
-      <Series.Sequence durationInFrames={300}>
+      <Series.Sequence durationInFrames={100}>
         <Stars stats={stats}></Stars>
       </Series.Sequence>
-      <Series.Sequence durationInFrames={300}>
+      <Series.Sequence durationInFrames={100}>
         <Lang stats={stats}></Lang>
       </Series.Sequence>
     </Series>
