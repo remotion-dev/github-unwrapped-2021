@@ -1,8 +1,12 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, Sequence, Series } from "remotion";
 import { ResponseType } from "../src/response-types";
 import groupBy from "lodash.groupby";
 import chunk from "lodash.chunk";
+import { lighten } from "polished";
+import { BACKGROUND_COLOR } from "../src/palette";
+import { Green } from "./Green";
+import { TotalContributions } from "./TotalContributions";
 
 export const Contributions: React.FC<{
   stats: ResponseType;
@@ -20,55 +24,44 @@ export const Contributions: React.FC<{
     return groupBy(allDays, (d) => d.date.split("-")[1]);
   }, [allDays]);
 
+  const totalContributions = useMemo(() => {
+    return allDays.map((d) => d.contributionCount).reduce((a, b) => a + b, 0);
+  }, [allDays]);
+
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "white",
+        backgroundColor: lighten(0.08, BACKGROUND_COLOR),
       }}
     >
       <div
         style={{
+          flex: 1,
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        {Object.keys(groupedByMonth).map((m) => {
-          const val = groupedByMonth[m];
-          const chunked = chunk(val, 7);
-          return (
-            <div
-              key={m[0]}
-              style={{
-                marginBottom: 120,
-              }}
-            >
-              {chunked.map((c) => {
-                return (
-                  <div
-                    key={c[0].date}
-                    style={{ flexDirection: "row", display: "flex" }}
-                  >
-                    {c.map((xx) => {
-                      return (
-                        <div
-                          key={xx.date}
-                          style={{
-                            backgroundColor: xx.color,
-                            width: 80,
-                            height: 80,
-                            borderRadius: 12,
-                            margin: 12,
-                          }}
-                        ></div>
-                      );
-                    })}
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+        <Series>
+          {Object.keys(groupedByMonth).map((m, i) => {
+            const val = groupedByMonth[m];
+            const chunked = chunk(val, 7);
+            return (
+              <Series.Sequence
+                key={m[0]}
+                durationInFrames={i === 0 ? 35 : i === 11 ? 33 : 12}
+                layout="none"
+              >
+                <Green chunked={chunked} i={i}></Green>
+              </Series.Sequence>
+            );
+          })}
+          <Series.Sequence durationInFrames={50}>
+            <TotalContributions
+              totalContributions={totalContributions}
+            ></TotalContributions>
+          </Series.Sequence>
+        </Series>
       </div>
     </AbsoluteFill>
   );

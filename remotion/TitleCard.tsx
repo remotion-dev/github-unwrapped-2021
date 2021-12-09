@@ -25,6 +25,16 @@ const titleStyle: React.CSSProperties = {
   fontFamily: "sans-serif",
   fontSize: 64,
   textAlign: "center",
+  fontWeight: "bold",
+  marginTop: 20,
+};
+
+const para: React.CSSProperties = {
+  color: BASE_COLOR,
+  fontFamily: "sans-serif",
+  fontSize: 32,
+  marginTop: 20,
+  textAlign: "center",
 };
 
 export const TitleCard: React.FC<{
@@ -45,13 +55,12 @@ export const TitleCard: React.FC<{
           src={stats.stats.data.search.edges[0].node.avatarUrl}
         ></img>
       </div>
-      <h1 style={titleStyle}>
-        {stats.stats.data.search.edges[0].node.login}
-        {"'"}s
+      <div style={titleStyle}>
+        This is my
         <br />
         GitHub Wrapped
-      </h1>
-      <p>presented by Remotion</p>
+      </div>
+      <div style={para}>@{stats.stats.data.search.edges[0].node.login}</div>
     </AbsoluteFill>
   );
 };

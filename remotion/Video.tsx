@@ -38,7 +38,7 @@ export const Root: React.FC = () => {
       ></Composition>
       <Composition
         component={Main}
-        durationInFrames={400}
+        durationInFrames={900}
         fps={30}
         height={1080}
         width={1080}
@@ -51,7 +51,7 @@ export const Root: React.FC = () => {
         component={Contributions}
         durationInFrames={400}
         fps={30}
-        height={1080 * 2}
+        height={1080}
         width={1080}
         id={"contributions"}
         defaultProps={{

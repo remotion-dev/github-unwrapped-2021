@@ -28,8 +28,8 @@ const title: React.CSSProperties = {
   fontWeight: 700,
   fontSize: 90,
   fontFamily: "sans-serif",
-  paddingLeft: 20,
-  paddingRight: 20,
+  paddingLeft: 70,
+  paddingRight: 70,
   textAlign: "center",
 };
 
@@ -80,10 +80,7 @@ export const ManyLanguages: React.FC = () => {
           alignItems: "center",
         }}
       >
-        <div style={title}>
-          There are <br />
-          many languages
-        </div>
+        <div style={title}>Out of all the languages out there...</div>
       </AbsoluteFill>
       <div style={row}>
         <div style={item(frame, fps, 0)}>

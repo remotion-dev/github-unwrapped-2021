@@ -70,9 +70,7 @@ export const Lang: React.FC<{
   );
 
   const text =
-    rotateProgress < 0.5
-      ? "But the one \n that's special to you is"
-      : lang.name;
+    rotateProgress < 0.5 ? "there's one that I like the most!" : lang.name;
 
   return (
     <AbsoluteFill
