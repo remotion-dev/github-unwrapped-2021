@@ -29,14 +29,14 @@ export const Main: React.FC<{
 
   return (
     <Series>
-      <Series.Sequence durationInFrames={100}>
-        <Stars stats={stats}></Stars>
-      </Series.Sequence>
       <Series.Sequence durationInFrames={200}>
         <ManyLanguages></ManyLanguages>
       </Series.Sequence>
       <Series.Sequence durationInFrames={180} offset={-20}>
         <Lang stats={stats}></Lang>
+      </Series.Sequence>
+      <Series.Sequence durationInFrames={100}>
+        <Stars stats={stats}></Stars>
       </Series.Sequence>
     </Series>
   );

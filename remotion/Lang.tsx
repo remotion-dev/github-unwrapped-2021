@@ -22,9 +22,9 @@ const title: React.CSSProperties = {
 export const Lang: React.FC<{
   stats: ResponseType;
 }> = ({ stats }) => {
-  const languages = stats.languages.data.user.repositories.nodes.map(
-    (n) => n.languages.edges[0].node
-  );
+  const languages = stats.languages.data.user.repositories.nodes
+    .filter((n) => n.languages.edges?.[0])
+    .map((n) => n.languages.edges[0].node);
 
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -77,7 +77,7 @@ export const Lang: React.FC<{
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: makeColorMoreChill(lang.color),
+        backgroundColor: makeColorMoreChill(lang.color, "#000"),
         justifyContent: "center",
         alignItems: "center",
         borderRadius: `${interpolate(scale, [0, 1], [50, 0])}%`,
