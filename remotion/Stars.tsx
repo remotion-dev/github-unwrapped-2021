@@ -1,16 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   AbsoluteFill,
-  continueRender,
   delayRender,
   interpolate,
   spring,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { getUser, Stats } from "../src/get-user";
 import { ResponseType } from "../src/response-types";
-import { getUserLocal } from "./get-user-local";
 import { StarEmoji } from "./StarEmoji";
 
 const title: React.CSSProperties = {

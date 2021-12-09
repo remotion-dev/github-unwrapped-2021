@@ -4,6 +4,7 @@ import { Player } from "@remotion/player";
 import { Stars } from "../remotion/Stars";
 import Download from "../src/components/Download";
 import { useRouter } from "next/router";
+import { Main } from "../remotion/Main";
 
 export default function User() {
   const router = useRouter();
@@ -18,10 +19,10 @@ export default function User() {
       {username ? (
         <>
           <Player
-            component={Stars}
+            component={Main}
             compositionHeight={1080}
             compositionWidth={1080}
-            durationInFrames={300}
+            durationInFrames={900}
             fps={30}
             style={{
               width: 540,

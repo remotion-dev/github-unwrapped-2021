@@ -2,10 +2,14 @@ import React from "react";
 import { AbsoluteFill } from "remotion";
 import { ResponseType } from "../src/response-types";
 
-type Language = {
-  id: string;
-  color: string;
-  name: string;
+const title: React.CSSProperties = {
+  color: "#111",
+  fontWeight: "bold",
+  fontSize: 70,
+  fontFamily: "sans-serif",
+  paddingLeft: 20,
+  paddingRight: 20,
+  textAlign: "center",
 };
 
 export const Lang: React.FC<{
@@ -28,8 +32,19 @@ export const Lang: React.FC<{
     .reverse();
 
   const lang = languages.find((l) => l.id === topEntries[0][0]);
-  const second = languages.find((l) => l.id === topEntries[1][0]);
-  console.log(lang);
-  console.log(second);
-  return <AbsoluteFill>hi</AbsoluteFill>;
+
+  if (!lang) {
+    return null;
+  }
+  return (
+    <AbsoluteFill
+      style={{
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div style={title}>{lang.name}</div>
+    </AbsoluteFill>
+  );
 };
