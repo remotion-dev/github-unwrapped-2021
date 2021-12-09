@@ -5,6 +5,7 @@ import { getUserLocal } from "./get-user-local";
 import { Lang } from "./Lang";
 import { ManyLanguages } from "./ManyLanguages";
 import { Stars } from "./Stars";
+import { TitleCard } from "./TitleCard";
 
 export const Main: React.FC<{
   username: string;
@@ -29,6 +30,9 @@ export const Main: React.FC<{
 
   return (
     <Series>
+      <Series.Sequence durationInFrames={60}>
+        <TitleCard stats={stats}></TitleCard>
+      </Series.Sequence>
       <Series.Sequence durationInFrames={200}>
         <ManyLanguages></ManyLanguages>
       </Series.Sequence>

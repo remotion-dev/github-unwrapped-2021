@@ -5,6 +5,9 @@ export const stats = {
         {
           node: {
             login: "JonnyBurger",
+            avatarUrl:
+              "https://avatars.githubusercontent.com/u/1629785?u=12eb94da6070d00fc924761ce06e3a428d01b7e9&v=4",
+
             bioHTML: "<div>Creative hacker\n\n</div>",
             email: "hi@jonny.io",
             pullRequests: {

@@ -2,8 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { lighten } from "polished";
 import React, { useCallback, useState } from "react";
-
-const BASE_COLOR = "#124f01";
+import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 
 const input: React.CSSProperties = {
   padding: 16,
@@ -14,7 +13,7 @@ const input: React.CSSProperties = {
 };
 
 const headerStyle: React.CSSProperties = {
-  backgroundColor: lighten(0.75, BASE_COLOR),
+  backgroundColor: BACKGROUND_COLOR,
   paddingTop: "10vh",
   paddingBottom: "10vh",
   textAlign: "center",
