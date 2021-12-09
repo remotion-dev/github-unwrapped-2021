@@ -10,6 +10,7 @@ const query = (username: string) =>
       node {
         ... on User {
           login
+          avatarUrl
           bioHTML
           pullRequests (first: 1) {
             edges {
