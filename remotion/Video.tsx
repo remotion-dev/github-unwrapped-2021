@@ -7,6 +7,7 @@ import { ManyLanguages } from "./ManyLanguages";
 import { StarEmoji } from "./StarEmoji";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
+import { Contributions } from "./Contrib";
 
 export const Root: React.FC = () => {
   return (
@@ -44,6 +45,17 @@ export const Root: React.FC = () => {
         id={COMP_NAME}
         defaultProps={{
           username: "JonnyBurger",
+        }}
+      ></Composition>
+      <Composition
+        component={Contributions}
+        durationInFrames={400}
+        fps={30}
+        height={1080 * 2}
+        width={1080}
+        id={"contributions"}
+        defaultProps={{
+          stats: defaultResponse,
         }}
       ></Composition>
       <Composition
