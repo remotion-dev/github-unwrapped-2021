@@ -1,10 +1,11 @@
-import { getRenderProgress } from "@remotion/lambda";
+import { getRenderProgress, RenderProgress } from "@remotion/lambda";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { functionName, AWS_REGION } from "../../src/config";
 
 type Data = {
   overallProgress: number;
   outputFile: string | null;
+  progress: RenderProgress;
 };
 
 type RequestData = {
@@ -27,5 +28,6 @@ export default async function handler(
   res.status(200).json({
     overallProgress: progress.overallProgress,
     outputFile: progress.outputFile,
+    progress,
   });
 }
