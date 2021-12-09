@@ -4,19 +4,20 @@ import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 export const StarEmoji: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const fr = spring({
-    fps,
-    frame,
-  });
 
   const rotate = interpolate(frame, [0, 100], [0, 2 * Math.PI]);
-  const scale = interpolate(fr, [0, 1], [0, 1]);
+  const scale = spring({
+    fps,
+    frame,
+    config: {},
+  });
 
   return (
     <svg
       style={{
-        height: 350,
-        width: 350,
+        height: 680,
+        width: 680,
+        transform: `scale(${scale})`,
       }}
       viewBox="0 0 276 276"
       fill="none"
