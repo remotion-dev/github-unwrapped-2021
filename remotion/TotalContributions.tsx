@@ -16,6 +16,14 @@ const title: React.CSSProperties = {
   fontWeight: "bold",
 };
 
+const subtitle: React.CSSProperties = {
+  textAlign: "center",
+  fontSize: 36,
+  fontFamily: "sans-serif",
+  color: BASE_COLOR,
+  fontWeight: "bold",
+};
+
 export const TotalContributions: React.FC<{
   totalContributions: number;
 }> = ({ totalContributions }) => {
@@ -35,16 +43,18 @@ export const TotalContributions: React.FC<{
   });
   const scale = interpolate(prog, [0, 1], [0.6, 1.2]);
 
+  const op = interpolate(prog, [0.9, 1], [0, 1]);
+
   return (
     <AbsoluteFill
       style={{
         justifyContent: "center",
         alignItems: "center",
+        transform: `scale(${scale})`,
       }}
     >
-      <div style={{ ...title, transform: `scale(${scale})` }}>
-        {Math.round(num)}
-      </div>
+      <div style={{ ...title }}>{Math.round(num)}</div>
+      <div style={{ ...subtitle, opacity: op }}>to be exact!</div>
     </AbsoluteFill>
   );
 };

@@ -7,6 +7,7 @@ import { lighten } from "polished";
 import { BACKGROUND_COLOR } from "../src/palette";
 import { Green } from "./Green";
 import { TotalContributions } from "./TotalContributions";
+import { IDidALot } from "./IDidALot";
 
 export const Contributions: React.FC<{
   stats: ResponseType;
@@ -43,6 +44,9 @@ export const Contributions: React.FC<{
         }}
       >
         <Series>
+          <Series.Sequence durationInFrames={30}>
+            <IDidALot commitCount={totalContributions}></IDidALot>
+          </Series.Sequence>
           {Object.keys(groupedByMonth).map((m, i) => {
             const val = groupedByMonth[m];
             const chunked = chunk(val, 7);

@@ -88,19 +88,10 @@ export const Stars: React.FC<{
       >
         <br />
         <div style={title}>
-          You gave {data.starsThisYear.length}{" "}
-          {data.starsThisYear.length === 1 ? "star" : "stars"} to open source
-          projects this year.
+          I found {data.starsThisYear.length}{" "}
+          {data.starsThisYear.length === 1 ? "project" : "projects"} this year
+          that I really liked!
         </div>
-        <br />
-        {data.starsThisYear.length === 0 ? (
-          <div style={subtitle}>It{"'"}s not too late to spread the love! </div>
-        ) : (
-          <div style={subtitle}>
-            The most recent one was {data.starsThisYear[0].node.name} by{" "}
-            {data.starsThisYear[0].node.owner.login}!
-          </div>
-        )}
       </AbsoluteFill>
     </AbsoluteFill>
   );

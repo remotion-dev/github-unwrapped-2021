@@ -47,7 +47,7 @@ export const Main: React.FC<{
         <Series.Sequence durationInFrames={180}>
           <Stars stats={stats}></Stars>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={300}>
+        <Series.Sequence durationInFrames={280}>
           <Contributions stats={stats}></Contributions>
         </Series.Sequence>
       </Series>
