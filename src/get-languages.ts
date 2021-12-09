@@ -2,26 +2,26 @@ import { languages } from "../remotion/languages";
 
 const query = (username: string) => {
   return `
-    {
-      user(login: "${username}") {
-        repositories(last: 50, isFork: false) {
-          nodes {
-            name
-            url
-            languages (first: 3) {
-              edges {
-                size
-                node {
-                  id
-                  color
-                  name
-                }
-              }
+{
+  user(login: "${username}") {
+    repositories(last: 50, isFork: false) {
+      nodes {
+        name
+        url
+        languages (first: 1, orderBy: {field: SIZE, direction: DESC}) {
+          edges {
+            size
+            node {
+              id
+              color
+              name
             }
           }
         }
       }
     }
+  }
+}
     `;
 };
 

@@ -33,27 +33,11 @@ const subtitle: React.CSSProperties = {
 };
 
 export const Stars: React.FC<{
-  username: string;
-}> = ({ username }) => {
-  const [stats, setStats] = useState<ResponseType | null>(null);
+  stats: ResponseType;
+}> = ({ stats }) => {
   const [handle] = useState(() => delayRender());
 
-  useEffect(() => {
-    getUserLocal(username)
-      .then((data) => {
-        setStats(data);
-        continueRender(handle);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [handle, username]);
-
   const data = useMemo(() => {
-    if (!stats) {
-      return null;
-    }
-
     const edge =
       stats.stats.data.search.edges?.[0]?.node.starredRepositories.edges ?? [];
     const starsThisYear = edge.filter(
