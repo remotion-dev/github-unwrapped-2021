@@ -23,7 +23,7 @@ export const Root: React.FC = () => {
         fps={30}
         height={1080}
         width={1080}
-        id={COMP_NAME}
+        id="stars"
       ></Composition>
       <Composition
         component={StarEmoji}
@@ -39,7 +39,7 @@ export const Root: React.FC = () => {
         fps={30}
         height={1080}
         width={1080}
-        id="main"
+        id={COMP_NAME}
         defaultProps={{
           username: "JonnyBurger",
         }}
