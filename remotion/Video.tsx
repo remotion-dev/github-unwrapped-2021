@@ -35,7 +35,7 @@ export const Root: React.FC = () => {
       ></Composition>
       <Composition
         component={Main}
-        durationInFrames={300}
+        durationInFrames={400}
         fps={30}
         height={1080}
         width={1080}

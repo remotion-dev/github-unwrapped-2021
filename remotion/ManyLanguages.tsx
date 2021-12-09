@@ -1,5 +1,11 @@
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import {
+  AbsoluteFill,
+  interpolate,
+  spring,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { C } from "./icons/C";
 import { Dart } from "./icons/Dart";
 import { Elixir } from "./icons/Elixir";
@@ -17,82 +23,121 @@ import { Swift } from "./icons/Swift";
 import { Typescript } from "./icons/Typescript";
 import { Zig } from "./icons/Zig";
 
-const column: React.CSSProperties = {};
+const title: React.CSSProperties = {
+  color: "#111",
+  fontWeight: 700,
+  fontSize: 90,
+  fontFamily: "sans-serif",
+  paddingLeft: 20,
+  paddingRight: 20,
+  textAlign: "center",
+};
 
 const row: React.CSSProperties = {
   flexDirection: "row",
   display: "flex",
   flex: 1,
+  perspective: 900,
 };
 
-const item: React.CSSProperties = {
-  flex: 1,
-  justifyContent: "center",
-  alignItems: "center",
-  display: "flex",
-  position: "relative",
+const item = (
+  frame: number,
+  fps: number,
+  index: number
+): React.CSSProperties => {
+  const progress = spring({
+    frame: frame - 60 - index * 2,
+    fps,
+    config: {
+      damping: 200,
+    },
+  });
+
+  const rad = interpolate(progress, [0, 1], [-Math.PI, 0]);
+  return {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+    position: "relative",
+    backfaceVisibility: "hidden",
+    transform: `rotateX(${rad}rad)`,
+  };
 };
 
 export const ManyLanguages: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "black",
+        backgroundColor: "white",
       }}
     >
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div style={title}>
+          There are <br />
+          many languages
+        </div>
+      </AbsoluteFill>
       <div style={row}>
-        <div style={item}>
+        <div style={item(frame, fps, 0)}>
           <Ruby></Ruby>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 1)}>
           <Rust></Rust>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 2)}>
           <Typescript></Typescript>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 3)}>
           <C></C>
         </div>
       </div>
       <div style={row}>
-        <div style={item}>
+        <div style={item(frame, fps, 4)}>
           <Dart></Dart>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 5)}>
           <Elixir></Elixir>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 6)}>
           <Erlang></Erlang>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 7)}>
           <Flutter></Flutter>
         </div>
       </div>
       <div style={row}>
-        <div style={item}>
+        <div style={item(frame, fps, 8)}>
           <Go></Go>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 9)}>
           <Javascript></Javascript>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 10)}>
           <Scala></Scala>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 11)}>
           <Php></Php>
         </div>
       </div>
       <div style={row}>
-        <div style={item}>
+        <div style={item(frame, fps, 12)}>
           <Python></Python>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 13)}>
           <Swift></Swift>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 14)}>
           <Zig></Zig>
         </div>
-        <div style={item}>
+        <div style={item(frame, fps, 15)}>
           <Haskell></Haskell>
         </div>
       </div>
