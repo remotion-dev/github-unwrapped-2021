@@ -9,6 +9,7 @@ import { TitleCard } from "./TitleCard";
 import music from "./music.mp3";
 import { Audio } from "remotion";
 import { Contributions } from "./Contrib";
+import { EndCard } from "./EndCard";
 
 export const Main: React.FC<{
   username: string;
@@ -44,11 +45,14 @@ export const Main: React.FC<{
         <Series.Sequence durationInFrames={120} offset={-20}>
           <Lang stats={stats}></Lang>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={180}>
+        <Series.Sequence durationInFrames={120}>
           <Stars stats={stats}></Stars>
         </Series.Sequence>
         <Series.Sequence durationInFrames={280}>
           <Contributions stats={stats}></Contributions>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={280}>
+          <EndCard></EndCard>
         </Series.Sequence>
       </Series>
     </AbsoluteFill>

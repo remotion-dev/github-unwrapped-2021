@@ -12,7 +12,7 @@ import { ResponseType } from "../src/response-types";
 const title: React.CSSProperties = {
   color: "#111",
   fontWeight: "bold",
-  fontSize: 100,
+  fontSize: 80,
   fontFamily: "sans-serif",
   paddingLeft: 20,
   paddingRight: 20,
