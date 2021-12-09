@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { getContrast } from "polished";
+import { getContributions } from "../../../src/get-contributions";
 import { getLanguages } from "../../../src/get-languages";
 import { getUser } from "../../../src/get-user";
 import { ResponseType } from "../../../src/response-types";
@@ -20,13 +22,15 @@ export default async function handler(
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Cache-Control", "max-age=86400, public");
 
-  const [stats, languages] = await Promise.all([
+  const [stats, languages, contributions] = await Promise.all([
     getUser(user, process.env.GITHUB_TOKEN as string),
     getLanguages(user, process.env.GITHUB_TOKEN),
+    getContributions(user, process.env.GITHUB_TOKEN),
   ]);
 
   res.status(200).json({
     stats,
+    contributions,
     languages,
   });
 }
