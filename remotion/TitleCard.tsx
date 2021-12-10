@@ -2,6 +2,7 @@ import { transparentize } from "polished";
 import React from "react";
 import {
   AbsoluteFill,
+  Img,
   interpolate,
   spring,
   useCurrentFrame,
@@ -38,21 +39,11 @@ const image: React.CSSProperties = {
 const titleStyle: React.CSSProperties = {
   color: BASE_COLOR,
   fontFamily: "sans-serif",
-  fontSize: 64,
+  fontSize: 80,
   textAlign: "center",
   fontWeight: "bold",
   marginTop: 20,
 };
-
-const para: React.CSSProperties = {
-  color: BASE_COLOR,
-  fontFamily: "sans-serif",
-  fontSize: 32,
-  marginTop: 20,
-  textAlign: "center",
-};
-
-/* eslint-disable @next/next/no-img-element */
 
 export const TitleCard: React.FC<{
   stats: ResponseType;
@@ -108,11 +99,11 @@ export const TitleCard: React.FC<{
           }}
         >
           <div style={imageStyle}>
-            <img
+            <Img
               style={image}
               alt="Your avatar"
               src={stats.stats.data.search.edges[0].node.avatarUrl}
-            ></img>
+            ></Img>
           </div>
           <div
             style={{
