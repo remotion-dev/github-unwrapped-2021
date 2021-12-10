@@ -10,12 +10,18 @@ type TopLanguage = {
   name: string;
 };
 
+type Weekdays = {
+  least: string;
+  most: string;
+};
+
 export type CompactStats = {
   contributionCount: number;
   contributions: { [key: string]: SpaceSavingContribution[] };
   avatar: string;
   topLanguage: TopLanguage | null;
   starsThisYear: number;
+  weekdays;
 };
 
 export const getStarsThisYear = (response: All) => {
@@ -24,6 +30,37 @@ export const getStarsThisYear = (response: All) => {
     (e) => new Date(e.starredAt).getFullYear() === 2021
   );
   return starsThisYear.length;
+};
+
+type Weekday = "0" | "1" | "2" | "3" | "4" | "5" | "6";
+
+export const getMostProductive = (response: All): Weekdays => {
+  const weekdays: { [key in Weekday]: number } = {
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+  };
+  for (const r of response.data.user.contributionsCollection.contributionCalendar.weeks
+    .map((w) => w.contributionDays)
+    .flat(1)) {
+    weekdays[r.weekday] += r.contributionCount;
+  }
+
+  const entries = Object.entries(weekdays);
+
+  const sortedDays = entries.slice().sort((a, b) => a[1] - b[1]);
+
+  const least = sortedDays[0][0];
+  const most = sortedDays[sortedDays.length - 1][0];
+
+  return {
+    least,
+    most,
+  };
 };
 
 export const getTopLanguage = (response: All): TopLanguage => {
@@ -79,5 +116,6 @@ export const mapResponseToStats = (response: All): CompactStats => {
     avatar: response.data.user.avatarUrl,
     topLanguage: getTopLanguage(response),
     starsThisYear: getStarsThisYear(response),
+    weekdays: getMostProductive(response),
   };
 };
