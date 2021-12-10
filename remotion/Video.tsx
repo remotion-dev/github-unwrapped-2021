@@ -1,6 +1,6 @@
 import { Composition } from "remotion";
 import { COMP_NAME } from "../src/config";
-import { defaultResponse } from "../src/response-types";
+import { all } from "./all";
 import { MyComp } from "./Composition";
 import { Contributions } from "./Contrib";
 import { Main } from "./Main";
@@ -46,7 +46,7 @@ export const Root: React.FC = () => {
         width={1080}
         id={COMP_NAME}
         defaultProps={{
-          stats: mapResponseToStats(defaultResponse),
+          stats: mapResponseToStats(all),
         }}
       ></Composition>
       <Composition
@@ -57,7 +57,7 @@ export const Root: React.FC = () => {
         width={1080}
         id={"contributions"}
         defaultProps={{
-          stats: mapResponseToStats(defaultResponse),
+          stats: mapResponseToStats(all),
         }}
       ></Composition>
       <Composition
@@ -76,7 +76,7 @@ export const Root: React.FC = () => {
         width={1080}
         id="title-card"
         defaultProps={{
-          stats: mapResponseToStats(defaultResponse),
+          stats: mapResponseToStats(all),
         }}
       ></Composition>
       <Composition

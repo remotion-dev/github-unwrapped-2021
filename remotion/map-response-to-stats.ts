@@ -1,5 +1,5 @@
 import groupBy from "lodash.groupby";
-import { ResponseType } from "../src/response-types";
+import { All } from "../src/get-all";
 
 // Space saving format for contributions to not run into 256KB payload format
 // weekday, contributions, date, color
@@ -18,18 +18,17 @@ export type CompactStats = {
   starsThisYear: number;
 };
 
-export const getStarsThisYear = (response: ResponseType) => {
-  const edge =
-    response.stats.data.search.edges?.[0]?.node.starredRepositories.edges ?? [];
+export const getStarsThisYear = (response: All) => {
+  const edge = response.data.user.starredRepositories.edges ?? [];
   const starsThisYear = edge.filter(
     (e) => new Date(e.starredAt).getFullYear() === 2021
   );
   return starsThisYear.length;
 };
 
-export const getTopLanguage = (response: ResponseType): TopLanguage => {
+export const getTopLanguage = (response: All): TopLanguage => {
   const langs: { [key: string]: number } = {};
-  const languages = response.languages.data.user.repositories.nodes
+  const languages = response.data.user.repositories.nodes
     .filter((n) => n.languages.edges?.[0])
     .map((n) => n.languages.edges[0].node);
 
@@ -55,9 +54,9 @@ export const getTopLanguage = (response: ResponseType): TopLanguage => {
   };
 };
 
-export const mapResponseToStats = (response: ResponseType): CompactStats => {
+export const mapResponseToStats = (response: All): CompactStats => {
   const allDays =
-    response.contributions.data.user.contributionsCollection.contributionCalendar.weeks
+    response.data.user.contributionsCollection.contributionCalendar.weeks
       .map((w) => w.contributionDays)
       .flat(1);
 
@@ -77,7 +76,7 @@ export const mapResponseToStats = (response: ResponseType): CompactStats => {
   return {
     contributionCount: allDays.reduce((a, b) => a + b.contributionCount, 0),
     contributions: groupedByMonth,
-    avatar: response.stats.data.search.edges[0].node.avatarUrl,
+    avatar: response.data.user.avatarUrl,
     topLanguage: getTopLanguage(response),
     starsThisYear: getStarsThisYear(response),
   };

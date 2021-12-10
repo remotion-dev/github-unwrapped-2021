@@ -1,8 +1,8 @@
 import { renderVideoOnLambda } from "@remotion/lambda";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getUserLocal } from "../../remotion/get-user-data";
 import { mapResponseToStats } from "../../remotion/map-response-to-stats";
 import { AWS_REGION, COMP_NAME, functionName, SITE_ID } from "../../src/config";
+import { getAll } from "../../src/get-all";
 
 type Data = {
   renderId: string;
@@ -18,7 +18,10 @@ export default async function handler(
   if (typeof username !== "string") {
     throw new TypeError("Username should be a string");
   }
-  const userData = mapResponseToStats(await getUserLocal(username));
+  // TODO: Render right away
+  const userData = mapResponseToStats(
+    await getAll(username, process.env.GITHUB_TOKEN)
+  );
   const { renderId, bucketName } = await renderVideoOnLambda({
     region: AWS_REGION,
     functionName: functionName,

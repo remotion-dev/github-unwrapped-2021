@@ -3,13 +3,13 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { getUserLocal } from "../remotion/get-user-data";
 import { Main } from "../remotion/Main";
 import {
   CompactStats,
   mapResponseToStats,
 } from "../remotion/map-response-to-stats";
 import Download from "../src/components/Download";
+import { getAll } from "../src/get-all";
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true };
@@ -24,8 +24,8 @@ export const getStaticProps = async ({ params }) => {
   }
 
   try {
-    const ast = await getUserLocal(user);
-    if (ast.stats.data.search.edges.length === 0) {
+    const ast = await getAll(user, process.env.GITHUB_TOKEN);
+    if (!ast.data.user) {
       return { notFound: true };
     }
     const compact = mapResponseToStats(ast);
