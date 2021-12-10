@@ -2,12 +2,13 @@ import { Composition } from "remotion";
 import { COMP_NAME } from "../src/config";
 import { defaultResponse } from "../src/response-types";
 import { MyComp } from "./Composition";
+import { Contributions } from "./Contrib";
 import { Main } from "./Main";
 import { ManyLanguages } from "./ManyLanguages";
 import { StarEmoji } from "./StarEmoji";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
-import { Contributions } from "./Contrib";
+import { TransitionDemo } from "./TransitionDemo";
 
 export const Root: React.FC = () => {
   return (
@@ -76,6 +77,14 @@ export const Root: React.FC = () => {
         defaultProps={{
           stats: defaultResponse,
         }}
+      ></Composition>
+      <Composition
+        component={TransitionDemo}
+        durationInFrames={300}
+        fps={30}
+        height={1080}
+        width={1080}
+        id="transition"
       ></Composition>
     </>
   );

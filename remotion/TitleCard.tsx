@@ -19,6 +19,7 @@ const outerImage: React.CSSProperties = {
   justifyContent: "center",
   alignItems: "center",
   boxShadow: "0 0 40px " + transparentize(0.9, BASE_COLOR),
+  position: "relative",
 };
 
 const imageStyle: React.CSSProperties = {
@@ -120,6 +121,7 @@ export const TitleCard: React.FC<{
               fontWeight: "bold",
               color: BACKGROUND_COLOR,
               paddingBottom: 38,
+              overflow: "hidden",
             }}
           >
             2021
