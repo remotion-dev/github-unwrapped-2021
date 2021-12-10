@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
 type RenderResponse = {
   renderId: string;
@@ -16,11 +16,8 @@ const Download: React.FC<{
   const [downloading, setDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
   const renderVideo = async () => {
-    const inputProps = {
-      username,
-    };
     const body = {
-      inputProps,
+      username,
     };
     setDownloading(true);
     const response = await fetch("/api/render", {

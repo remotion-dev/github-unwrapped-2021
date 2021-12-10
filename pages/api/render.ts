@@ -1,5 +1,6 @@
 import { renderVideoOnLambda } from "@remotion/lambda";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getUserLocal } from "../../remotion/get-user-data";
 import { AWS_REGION, COMP_NAME, functionName, SITE_ID } from "../../src/config";
 
 type Data = {
@@ -12,12 +13,17 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const body = JSON.parse(req.body);
+  const username = body.username;
+  if (typeof username !== "string") {
+    throw new TypeError("Username should be a string");
+  }
+  const userData = await getUserLocal(username);
   const { renderId, bucketName } = await renderVideoOnLambda({
     region: AWS_REGION,
     functionName: functionName,
     serveUrl: SITE_ID,
     composition: COMP_NAME,
-    inputProps: body.inputProps,
+    inputProps: { stats: userData },
     codec: "h264-mkv",
     imageFormat: "jpeg",
     maxRetries: 1,
