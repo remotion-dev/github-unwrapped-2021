@@ -44,7 +44,7 @@ export const Root: React.FC = () => {
         width={1080}
         id={COMP_NAME}
         defaultProps={{
-          username: "JonnyBurger",
+          stats: defaultResponse,
         }}
       ></Composition>
       <Composition

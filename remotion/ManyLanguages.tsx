@@ -61,6 +61,7 @@ const item = (
     display: "flex",
     position: "relative",
     backfaceVisibility: "hidden",
+    WebkitBackfaceVisibility: "hidden",
     transform: `rotateX(${rad}rad)`,
   };
 };

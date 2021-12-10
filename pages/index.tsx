@@ -78,6 +78,7 @@ export default function Home() {
 
         <form onSubmit={onSubmit}>
           <input
+            autoFocus
             value={username}
             onChange={onChange}
             type={"text"}

@@ -1,32 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { AbsoluteFill, continueRender, delayRender, Series } from "remotion";
+import React from "react";
+import { AbsoluteFill, Audio, Series } from "remotion";
 import { ResponseType } from "../src/response-types";
-import { getUserLocal } from "./get-user-local";
+import { Contributions } from "./Contrib";
+import { EndCard } from "./EndCard";
 import { Lang } from "./Lang";
 import { ManyLanguages } from "./ManyLanguages";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
-import { Audio } from "remotion";
-import { Contributions } from "./Contrib";
-import { EndCard } from "./EndCard";
 
 export const Main: React.FC<{
-  username: string;
-}> = ({ username }) => {
-  const [stats, setStats] = useState<ResponseType | null>(null);
-  const [handle] = useState(() => delayRender());
-
-  useEffect(() => {
-    getUserLocal(username)
-      .then((data) => {
-        setStats(data);
-        continueRender(handle);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [handle, username]);
-
+  stats: ResponseType;
+}> = ({ stats }) => {
   if (!stats) {
     return null;
   }
@@ -35,7 +19,7 @@ export const Main: React.FC<{
     <AbsoluteFill>
       <Audio src="https://jonnyburger.s3.eu-central-1.amazonaws.com/wrapped-music.mp3"></Audio>
       <Series>
-        <Series.Sequence durationInFrames={60}>
+        <Series.Sequence durationInFrames={90}>
           <TitleCard stats={stats}></TitleCard>
         </Series.Sequence>
         <Series.Sequence durationInFrames={140}>

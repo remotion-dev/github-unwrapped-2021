@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
-import { AbsoluteFill, Sequence, Series } from "remotion";
-import { ResponseType } from "../src/response-types";
-import groupBy from "lodash.groupby";
 import chunk from "lodash.chunk";
+import groupBy from "lodash.groupby";
 import { lighten } from "polished";
+import React, { useMemo } from "react";
+import { AbsoluteFill, Series } from "remotion";
 import { BACKGROUND_COLOR } from "../src/palette";
+import { ResponseType } from "../src/response-types";
 import { Green } from "./Green";
-import { TotalContributions } from "./TotalContributions";
 import { IDidALot } from "./IDidALot";
+import { TotalContributions } from "./TotalContributions";
 
 export const Contributions: React.FC<{
   stats: ResponseType;
@@ -53,7 +53,7 @@ export const Contributions: React.FC<{
             return (
               <Series.Sequence
                 key={m[0]}
-                durationInFrames={i === 0 ? 35 : i === 11 ? 33 : 12}
+                durationInFrames={i === 0 ? 35 : i === 11 ? 33 : 8}
                 layout="none"
               >
                 <Green chunked={chunked} i={i}></Green>
