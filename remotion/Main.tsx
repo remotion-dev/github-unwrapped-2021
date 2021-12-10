@@ -7,6 +7,7 @@ import { ManyLanguages } from "./ManyLanguages";
 import { CompactStats } from "./map-response-to-stats";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
+import { TopWeekDays } from "./TopWeekday";
 import { Transition } from "./Transition";
 
 export const Main: React.FC<{
@@ -38,12 +39,17 @@ export const Main: React.FC<{
             <Stars stats={stats}></Stars>
           </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={280} offset={-20}>
+        <Series.Sequence durationInFrames={260} offset={-20}>
           <Transition>
             <Contributions stats={stats}></Contributions>
           </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={280}>
+        <Series.Sequence durationInFrames={100} offset={-20}>
+          <Transition>
+            <TopWeekDays stats={stats}></TopWeekDays>
+          </Transition>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={280} offset={-20}>
           <Transition>
             <EndCard></EndCard>
           </Transition>

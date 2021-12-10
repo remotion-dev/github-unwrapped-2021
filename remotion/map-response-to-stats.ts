@@ -11,8 +11,11 @@ type TopLanguage = {
 };
 
 type Weekdays = {
-  least: string;
-  most: string;
+  least: Weekday;
+  leastCount: number;
+  mostCount: number;
+  most: Weekday;
+  ratio: number;
 };
 
 export type CompactStats = {
@@ -21,7 +24,7 @@ export type CompactStats = {
   avatar: string;
   topLanguage: TopLanguage | null;
   starsThisYear: number;
-  weekdays;
+  weekdays: Weekdays;
 };
 
 export const getStarsThisYear = (response: All) => {
@@ -32,7 +35,7 @@ export const getStarsThisYear = (response: All) => {
   return starsThisYear.length;
 };
 
-type Weekday = "0" | "1" | "2" | "3" | "4" | "5" | "6";
+export type Weekday = "0" | "1" | "2" | "3" | "4" | "5" | "6";
 
 export const getMostProductive = (response: All): Weekdays => {
   const weekdays: { [key in Weekday]: number } = {
@@ -50,16 +53,21 @@ export const getMostProductive = (response: All): Weekdays => {
     weekdays[r.weekday] += r.contributionCount;
   }
 
-  const entries = Object.entries(weekdays);
+  const entries = Object.entries(weekdays) as [Weekday, number][];
 
   const sortedDays = entries.slice().sort((a, b) => a[1] - b[1]);
 
-  const least = sortedDays[0][0];
-  const most = sortedDays[sortedDays.length - 1][0];
+  const [leastDay, leastAmount] = sortedDays[0];
+  const [mostDay, mostAmount] = sortedDays[sortedDays.length - 1];
+
+  const ratio = Math.max(mostAmount, 1) / Math.max(leastAmount, 1);
 
   return {
-    least,
-    most,
+    least: leastDay,
+    most: mostDay,
+    ratio: ratio,
+    leastCount: leastAmount,
+    mostCount: mostAmount,
   };
 };
 

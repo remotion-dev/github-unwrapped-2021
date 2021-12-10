@@ -9,6 +9,7 @@ import { mapResponseToStats } from "./map-response-to-stats";
 import { StarEmoji } from "./StarEmoji";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
+import { TopWeekDays } from "./TopWeekday";
 import { TransitionDemo } from "./TransitionDemo";
 
 export const Root: React.FC = () => {
@@ -86,6 +87,17 @@ export const Root: React.FC = () => {
         height={1080}
         width={1080}
         id="transition"
+      ></Composition>
+      <Composition
+        component={TopWeekDays}
+        durationInFrames={300}
+        fps={30}
+        height={1080}
+        width={1080}
+        id="weekdays"
+        defaultProps={{
+          stats: mapResponseToStats(all),
+        }}
       ></Composition>
     </>
   );
