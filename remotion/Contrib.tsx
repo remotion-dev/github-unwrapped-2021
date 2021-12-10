@@ -44,7 +44,7 @@ export const Contributions: React.FC<{
         }}
       >
         <Series>
-          <Series.Sequence durationInFrames={30}>
+          <Series.Sequence durationInFrames={45}>
             <IDidALot commitCount={totalContributions}></IDidALot>
           </Series.Sequence>
           {Object.keys(groupedByMonth).map((m, i) => {

@@ -23,10 +23,10 @@ export const Transition: React.FC = ({ children }) => {
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "green",
         borderTopLeftRadius: `${perc}% 50%`,
         borderBottomLeftRadius: `${perc}% 50%`,
         transform: `translateX(${translation}px)`,
+        overflow: "hidden",
       }}
     >
       {children}

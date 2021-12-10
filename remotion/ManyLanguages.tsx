@@ -6,6 +6,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { ORANGE, ORANGE_BACKGROUND } from "../src/palette";
 import { C } from "./icons/C";
 import { Dart } from "./icons/Dart";
 import { Elixir } from "./icons/Elixir";
@@ -24,13 +25,13 @@ import { Typescript } from "./icons/Typescript";
 import { Zig } from "./icons/Zig";
 
 const title: React.CSSProperties = {
-  color: "#111",
   fontWeight: 700,
   fontSize: 90,
   fontFamily: "sans-serif",
   paddingLeft: 70,
   paddingRight: 70,
   textAlign: "center",
+  color: ORANGE,
 };
 
 const row: React.CSSProperties = {
@@ -46,7 +47,7 @@ const item = (
   index: number
 ): React.CSSProperties => {
   const progress = spring({
-    frame: frame - 60 - index * 2,
+    frame: frame - 40 - index * 1,
     fps,
     config: {
       damping: 200,
@@ -72,7 +73,7 @@ export const ManyLanguages: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "white",
+        backgroundColor: ORANGE_BACKGROUND,
       }}
     >
       <AbsoluteFill

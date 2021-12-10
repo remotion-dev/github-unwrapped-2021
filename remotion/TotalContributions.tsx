@@ -10,7 +10,7 @@ import { BASE_COLOR } from "../src/palette";
 
 const title: React.CSSProperties = {
   textAlign: "center",
-  fontSize: 160,
+  fontSize: 200,
   fontFamily: "sans-serif",
   color: BASE_COLOR,
   fontWeight: "bold",

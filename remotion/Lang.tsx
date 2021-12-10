@@ -79,7 +79,6 @@ export const Lang: React.FC<{
         justifyContent: "center",
         alignItems: "center",
         borderRadius: `${interpolate(scale, [0, 1], [50, 0])}%`,
-        transform: `scale(${scale})`,
         perspective: 2000,
       }}
     >

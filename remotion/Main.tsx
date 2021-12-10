@@ -7,6 +7,7 @@ import { Lang } from "./Lang";
 import { ManyLanguages } from "./ManyLanguages";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
+import { Transition } from "./Transition";
 
 export const Main: React.FC<{
   stats: ResponseType;
@@ -19,23 +20,33 @@ export const Main: React.FC<{
     <AbsoluteFill>
       <Audio src="https://jonnyburger.s3.eu-central-1.amazonaws.com/wrapped-music.mp3"></Audio>
       <Series>
-        <Series.Sequence durationInFrames={90}>
+        <Series.Sequence durationInFrames={120}>
           <TitleCard stats={stats}></TitleCard>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={140}>
-          <ManyLanguages></ManyLanguages>
+        <Series.Sequence durationInFrames={120} offset={-20}>
+          <Transition>
+            <ManyLanguages></ManyLanguages>
+          </Transition>
         </Series.Sequence>
         <Series.Sequence durationInFrames={120} offset={-20}>
-          <Lang stats={stats}></Lang>
+          <Transition>
+            <Lang stats={stats}></Lang>
+          </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={120}>
-          <Stars stats={stats}></Stars>
+        <Series.Sequence durationInFrames={120} offset={-20}>
+          <Transition>
+            <Stars stats={stats}></Stars>
+          </Transition>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={280} offset={-20}>
+          <Transition>
+            <Contributions stats={stats}></Contributions>
+          </Transition>
         </Series.Sequence>
         <Series.Sequence durationInFrames={280}>
-          <Contributions stats={stats}></Contributions>
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={280}>
-          <EndCard></EndCard>
+          <Transition>
+            <EndCard></EndCard>
+          </Transition>
         </Series.Sequence>
       </Series>
     </AbsoluteFill>

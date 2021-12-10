@@ -1,17 +1,17 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import {
   AbsoluteFill,
-  delayRender,
   interpolate,
   spring,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { BLUE, BLUE_BACKGROUND } from "../src/palette";
 import { ResponseType } from "../src/response-types";
 import { StarEmoji } from "./StarEmoji";
 
 const title: React.CSSProperties = {
-  color: "#111",
+  color: BLUE,
   fontWeight: "bold",
   fontSize: 70,
   fontFamily: "sans-serif",
@@ -20,20 +20,9 @@ const title: React.CSSProperties = {
   textAlign: "center",
 };
 
-const subtitle: React.CSSProperties = {
-  color: "#111",
-  fontSize: 32,
-  fontFamily: "sans-serif",
-  paddingLeft: 200,
-  paddingRight: 200,
-  textAlign: "center",
-};
-
 export const Stars: React.FC<{
   stats: ResponseType;
 }> = ({ stats }) => {
-  const [handle] = useState(() => delayRender());
-
   const data = useMemo(() => {
     const edge =
       stats.stats.data.search.edges?.[0]?.node.starredRepositories.edges ?? [];
@@ -65,7 +54,7 @@ export const Stars: React.FC<{
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: "white",
+        backgroundColor: BLUE_BACKGROUND,
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -88,9 +77,9 @@ export const Stars: React.FC<{
       >
         <br />
         <div style={title}>
-          I found {data.starsThisYear.length}{" "}
-          {data.starsThisYear.length === 1 ? "project" : "projects"} this year
-          that I really liked!
+          {data.starsThisYear.length}{" "}
+          {data.starsThisYear.length === 1 ? "repo" : "repos"} deserved <br />{" "}
+          my star this year.
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
