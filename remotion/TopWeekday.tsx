@@ -35,7 +35,7 @@ const label: React.CSSProperties = {
 const title: React.CSSProperties = {
   color: PINK,
   fontWeight: "bold",
-  fontSize: 60,
+  fontSize: 80,
   fontFamily: "sans-serif",
   paddingLeft: 50,
   paddingRight: 50,
@@ -70,9 +70,7 @@ export const TopWeekDays: React.FC<{
       }}
     >
       <div style={title}>
-        You are {Math.round((stats.weekdays.ratio - 1) * 100)}% most productive
-        on {weekdayToName(stats.weekdays.most)} than{" "}
-        {weekdayToName(stats.weekdays.least)}.
+        {weekdayToName(stats.weekdays.least)} is my most productive day.
       </div>
       <div
         style={{
