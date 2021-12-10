@@ -6,7 +6,6 @@ import { Lang } from "./Lang";
 import { ManyLanguages } from "./ManyLanguages";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
-import music from "./music.mp3";
 import { Audio } from "remotion";
 import { Contributions } from "./Contrib";
 import { EndCard } from "./EndCard";
@@ -34,7 +33,7 @@ export const Main: React.FC<{
 
   return (
     <AbsoluteFill>
-      <Audio src={music}></Audio>
+      <Audio src="https://jonnyburger.s3.eu-central-1.amazonaws.com/wrapped-music.mp3"></Audio>
       <Series>
         <Series.Sequence durationInFrames={60}>
           <TitleCard stats={stats}></TitleCard>
