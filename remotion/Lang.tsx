@@ -7,7 +7,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { ResponseType } from "../src/response-types";
+import { CompactStats } from "./map-response-to-stats";
 
 const title: React.CSSProperties = {
   color: "#111",
@@ -20,12 +20,8 @@ const title: React.CSSProperties = {
 };
 
 export const Lang: React.FC<{
-  stats: ResponseType;
+  stats: CompactStats;
 }> = ({ stats }) => {
-  const languages = stats.languages.data.user.repositories.nodes
-    .filter((n) => n.languages.edges?.[0])
-    .map((n) => n.languages.edges[0].node);
-
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -45,21 +41,7 @@ export const Lang: React.FC<{
     },
   });
 
-  const langs: { [key: string]: number } = {};
-  for (const lang of languages) {
-    if (!langs[lang.id]) {
-      langs[lang.id] = 0;
-    }
-    langs[lang.id]++;
-  }
-
-  const topEntries = Object.entries(langs)
-    .sort((a, b) => a[1] - b[1])
-    .reverse();
-
-  const lang = languages.find((l) => l.id === topEntries[0][0]);
-
-  if (!lang) {
+  if (!stats.topLanguage) {
     return null;
   }
 
@@ -70,12 +52,14 @@ export const Lang: React.FC<{
   );
 
   const text =
-    rotateProgress < 0.5 ? "there's one that I like the most!" : lang.name;
+    rotateProgress < 0.5
+      ? "there's one that I like the most!"
+      : stats.topLanguage.name;
 
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: makeColorMoreChill(lang.color, "#000"),
+        backgroundColor: makeColorMoreChill(stats.topLanguage.color, "#000"),
         justifyContent: "center",
         alignItems: "center",
         borderRadius: `${interpolate(scale, [0, 1], [50, 0])}%`,

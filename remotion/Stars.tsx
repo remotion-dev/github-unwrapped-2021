@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import {
   AbsoluteFill,
   interpolate,
@@ -7,7 +7,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { BLUE, BLUE_BACKGROUND } from "../src/palette";
-import { ResponseType } from "../src/response-types";
+import { CompactStats } from "./map-response-to-stats";
 import { StarEmoji } from "./StarEmoji";
 
 const title: React.CSSProperties = {
@@ -21,17 +21,8 @@ const title: React.CSSProperties = {
 };
 
 export const Stars: React.FC<{
-  stats: ResponseType;
+  stats: CompactStats;
 }> = ({ stats }) => {
-  const data = useMemo(() => {
-    const edge =
-      stats.stats.data.search.edges?.[0]?.node.starredRepositories.edges ?? [];
-    const starsThisYear = edge.filter(
-      (e) => new Date(e.starredAt).getFullYear() === 2021
-    );
-    return { starsThisYear };
-  }, [stats]);
-
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -46,10 +37,6 @@ export const Stars: React.FC<{
   const scaleUp = interpolate(scale, [0, 1], [1, 0.5]);
   const moveUp = interpolate(scale, [0, 1], [1000, 150]);
   const emojiUp = interpolate(scale, [0, 1], [0, -400]);
-
-  if (!data) {
-    return null;
-  }
 
   return (
     <AbsoluteFill
@@ -77,9 +64,8 @@ export const Stars: React.FC<{
       >
         <br />
         <div style={title}>
-          {data.starsThisYear.length}{" "}
-          {data.starsThisYear.length === 1 ? "repo" : "repos"} deserved <br />{" "}
-          my star this year.
+          {stats.starsThisYear} {stats.starsThisYear === 1 ? "repo" : "repos"}{" "}
+          deserved <br /> my star this year.
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

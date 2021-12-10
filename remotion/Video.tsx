@@ -5,6 +5,7 @@ import { MyComp } from "./Composition";
 import { Contributions } from "./Contrib";
 import { Main } from "./Main";
 import { ManyLanguages } from "./ManyLanguages";
+import { mapResponseToStats } from "./map-response-to-stats";
 import { StarEmoji } from "./StarEmoji";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
@@ -45,7 +46,7 @@ export const Root: React.FC = () => {
         width={1080}
         id={COMP_NAME}
         defaultProps={{
-          stats: defaultResponse,
+          stats: mapResponseToStats(defaultResponse),
         }}
       ></Composition>
       <Composition
@@ -56,7 +57,7 @@ export const Root: React.FC = () => {
         width={1080}
         id={"contributions"}
         defaultProps={{
-          stats: defaultResponse,
+          stats: mapResponseToStats(defaultResponse),
         }}
       ></Composition>
       <Composition
@@ -75,7 +76,7 @@ export const Root: React.FC = () => {
         width={1080}
         id="title-card"
         defaultProps={{
-          stats: defaultResponse,
+          stats: mapResponseToStats(defaultResponse),
         }}
       ></Composition>
       <Composition

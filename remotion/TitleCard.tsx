@@ -9,7 +9,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
-import { ResponseType } from "../src/response-types";
+import { CompactStats } from "./map-response-to-stats";
 
 const outerImage: React.CSSProperties = {
   padding: 24,
@@ -47,7 +47,7 @@ const titleStyle: React.CSSProperties = {
 };
 
 export const TitleCard: React.FC<{
-  stats: ResponseType;
+  stats: CompactStats;
 }> = ({ stats }) => {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
@@ -100,11 +100,7 @@ export const TitleCard: React.FC<{
           }}
         >
           <div style={imageStyle}>
-            <Img
-              style={image}
-              alt="Your avatar"
-              src={stats.stats.data.search.edges[0].node.avatarUrl}
-            ></Img>
+            <Img style={image} alt="Your avatar" src={stats.avatar}></Img>
           </div>
           <div
             style={{

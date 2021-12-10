@@ -1,16 +1,16 @@
 import React from "react";
 import { AbsoluteFill, Audio, Series } from "remotion";
-import { ResponseType } from "../src/response-types";
 import { Contributions } from "./Contrib";
 import { EndCard } from "./EndCard";
 import { Lang } from "./Lang";
 import { ManyLanguages } from "./ManyLanguages";
+import { CompactStats } from "./map-response-to-stats";
 import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
 import { Transition } from "./Transition";
 
 export const Main: React.FC<{
-  stats: ResponseType;
+  stats: CompactStats;
 }> = ({ stats }) => {
   if (!stats) {
     return null;

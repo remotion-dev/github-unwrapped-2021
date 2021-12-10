@@ -1,34 +1,16 @@
 import chunk from "lodash.chunk";
-import groupBy from "lodash.groupby";
 import { lighten } from "polished";
-import React, { useMemo } from "react";
+import React from "react";
 import { AbsoluteFill, Series } from "remotion";
 import { BACKGROUND_COLOR } from "../src/palette";
-import { ResponseType } from "../src/response-types";
 import { Green } from "./Green";
 import { IDidALot } from "./IDidALot";
+import { CompactStats } from "./map-response-to-stats";
 import { TotalContributions } from "./TotalContributions";
 
 export const Contributions: React.FC<{
-  stats: ResponseType;
+  stats: CompactStats;
 }> = ({ stats }) => {
-  const allDays = useMemo(() => {
-    return stats.contributions.data.user.contributionsCollection.contributionCalendar.weeks
-      .map((w) => w.contributionDays)
-      .flat(1);
-  }, [
-    stats.contributions.data.user.contributionsCollection.contributionCalendar
-      .weeks,
-  ]);
-
-  const groupedByMonth = useMemo(() => {
-    return groupBy(allDays, (d) => d.date.split("-")[1]);
-  }, [allDays]);
-
-  const totalContributions = useMemo(() => {
-    return allDays.map((d) => d.contributionCount).reduce((a, b) => a + b, 0);
-  }, [allDays]);
-
   return (
     <AbsoluteFill
       style={{
@@ -45,10 +27,10 @@ export const Contributions: React.FC<{
       >
         <Series>
           <Series.Sequence durationInFrames={45}>
-            <IDidALot commitCount={totalContributions}></IDidALot>
+            <IDidALot commitCount={stats.contributionCount}></IDidALot>
           </Series.Sequence>
-          {Object.keys(groupedByMonth).map((m, i) => {
-            const val = groupedByMonth[m];
+          {Object.keys(stats.contributions).map((m, i) => {
+            const val = stats.contributions[m];
             const chunked = chunk(val, 7);
             return (
               <Series.Sequence
@@ -62,7 +44,7 @@ export const Contributions: React.FC<{
           })}
           <Series.Sequence durationInFrames={50}>
             <TotalContributions
-              totalContributions={totalContributions}
+              totalContributions={stats.contributionCount}
             ></TotalContributions>
           </Series.Sequence>
         </Series>

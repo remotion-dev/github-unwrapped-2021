@@ -5,8 +5,11 @@ import { useRouter } from "next/router";
 import React from "react";
 import { getUserLocal } from "../remotion/get-user-data";
 import { Main } from "../remotion/Main";
+import {
+  CompactStats,
+  mapResponseToStats,
+} from "../remotion/map-response-to-stats";
 import Download from "../src/components/Download";
-import { ResponseType } from "../src/response-types";
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true };
@@ -25,7 +28,8 @@ export const getStaticProps = async ({ params }) => {
     if (ast.stats.data.search.edges.length === 0) {
       return { notFound: true };
     }
-    return { props: { user: ast } };
+    const compact = mapResponseToStats(ast);
+    return { props: { user: compact } };
   } catch (error) {
     console.error(error);
     return { notFound: true };
@@ -37,7 +41,7 @@ const style: React.CSSProperties = {
   flexDirection: "column",
 };
 
-export default function User({ user }: { user: ResponseType | null }) {
+export default function User({ user }: { user: CompactStats | null }) {
   const router = useRouter();
   const username = ([] as string[]).concat(router.query.user)[0];
 
