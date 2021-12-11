@@ -54,8 +54,14 @@ const Faq: React.FC = () => {
         </p>
         <h2>Who is behind GitHub Wrapped?</h2>
         <p>
-          No affiliation with GitHub. This is a hackathon project by Jonny
-          Burger.
+          This is a hackathon project by Jonny Burger. No affiliation with
+          GitHub.{" "}
+        </p>
+        <h2>What is the song?</h2>
+        <p>
+          <a href="https://musicvine.com/track/adi-goldstein/the-librarian">
+            {'"'}The Librarian{'"'} by Adi Goldstein.
+          </a>
         </p>
       </section>
     </div>

@@ -20,7 +20,7 @@ export const Main: React.FC<{
 
   return (
     <AbsoluteFill>
-      <Audio src="https://jonnyburger.s3.eu-central-1.amazonaws.com/fun.mp3"></Audio>
+      <Audio src="https://jonnyburger.s3.eu-central-1.amazonaws.com/the-librarian.mp3"></Audio>
       <Series>
         <Series.Sequence durationInFrames={130}>
           <TitleCard stats={stats}></TitleCard>
