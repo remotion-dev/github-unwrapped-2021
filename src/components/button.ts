@@ -12,4 +12,5 @@ export const button: React.CSSProperties = {
   fontWeight: "bold",
   fontFamily: "Jelle",
   borderBottom: "3px solid " + BASE_COLOR,
+  cursor: "pointer",
 };

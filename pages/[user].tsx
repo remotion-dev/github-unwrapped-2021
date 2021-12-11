@@ -1,3 +1,4 @@
+import { RenderProgress } from "@remotion/lambda";
 import { Player } from "@remotion/player";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,14 +7,11 @@ import { transparentize } from "polished";
 import React from "react";
 import { getFont } from "../remotion/font";
 import { Main } from "../remotion/Main";
-import {
-  CompactStats,
-  mapResponseToStats,
-} from "../remotion/map-response-to-stats";
+import { CompactStats } from "../remotion/map-response-to-stats";
 import { button } from "../src/components/button";
 import Download from "../src/components/Download";
-import { getFromCache, saveCache } from "../src/db/cache";
-import { getAll } from "../src/get-all";
+import { getRenderOrMake } from "../src/get-render-or-make";
+import { getStatsOrFetch } from "../src/get-stats-or-fetch";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 
 export async function getStaticPaths() {
@@ -21,6 +19,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async ({ params }) => {
+  console.log("hi");
   const { user } = params;
 
   if (user.length > 40) {
@@ -29,17 +28,16 @@ export const getStaticProps = async ({ params }) => {
   }
 
   try {
-    const cache = await getFromCache(user);
-    if (cache) {
-      return { props: { user: cache } };
-    }
-    const ast = await getAll(user, process.env.GITHUB_TOKEN);
-    if (!ast.data.user) {
+    const compact = await getStatsOrFetch(user);
+    if (!compact) {
       return { notFound: true };
     }
-    const compact = mapResponseToStats(ast);
-    await saveCache(user, compact);
-    return { props: { user: compact } };
+    const { progress, bucketName, renderId } = await getRenderOrMake(
+      user,
+      compact
+    );
+    console.log({ progress, bucketName, renderId });
+    return { props: { user: compact, progress, bucketName, renderId } };
   } catch (error) {
     console.error(error);
     return { notFound: true };
@@ -74,9 +72,19 @@ const layout: React.CSSProperties = {
 
 getFont();
 
-export default function User({ user }: { user: CompactStats | null }) {
+export default function User(props: {
+  user: CompactStats | null;
+  renderId: string;
+  progress: RenderProgress;
+  bucketName: string;
+}) {
+  const { user, progress, bucketName, renderId } = props;
+
   const router = useRouter();
   const username = ([] as string[]).concat(router.query.user)[0];
+  if (!user) {
+    return null;
+  }
 
   return (
     <div style={container}>
@@ -119,7 +127,12 @@ export default function User({ user }: { user: CompactStats | null }) {
         <div style={layout}>
           <div style={{ flex: 1 }}>
             <Link href="/" passHref>
-              <Download username={username}></Download>
+              <Download
+                initialProgress={progress}
+                bucketName={bucketName}
+                renderId={renderId}
+                username={username}
+              ></Download>
             </Link>
           </div>
           <div style={{ flex: 1 }}>

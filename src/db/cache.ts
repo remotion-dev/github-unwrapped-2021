@@ -19,7 +19,9 @@ export const saveCache = async (username: string, stats: CompactStats) => {
   });
 };
 
-export const getFromCache = async (username: string) => {
+export const getFromCache = async (
+  username: string
+): Promise<CompactStats | null> => {
   const coll = await collection();
   const f = await coll.findOne({
     username: username.toLowerCase(),

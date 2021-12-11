@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { RenderProgress } from "@remotion/lambda";
+import React, { useCallback, useEffect, useState } from "react";
 import { button } from "./button";
 
 type RenderResponse = {
@@ -6,46 +7,54 @@ type RenderResponse = {
   bucketName: string;
 };
 
-type ProgressResponse = {
-  overallProgress: number;
-  outputFile: string | null;
-};
-
 const Download: React.FC<{
   username: string;
-}> = ({ username }) => {
-  const [downloading, setDownloading] = useState(false);
-  const [downloadProgress, setDownloadProgress] = useState(0);
-  const renderVideo = async () => {
-    const body = {
-      username,
-    };
-    setDownloading(true);
-    const response = await fetch("/api/render", {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
-    const responseBody = (await response.json()) as RenderResponse;
-    const intervalId = setInterval(async () => {
+  initialProgress: RenderProgress;
+  renderId: string;
+  bucketName: string;
+}> = ({ initialProgress, renderId, bucketName }) => {
+  const [downloadProgress, setDownloadProgress] = useState(initialProgress);
+
+  const pollProgress = useCallback(async () => {
+    const poll = async () => {
       const progress = await fetch("/api/progress", {
         method: "POST",
-        body: JSON.stringify(responseBody),
+        body: JSON.stringify({
+          renderId,
+          bucketName,
+        }),
       });
-      const progressJson = (await progress.json()) as ProgressResponse;
-      setDownloadProgress(Math.ceil(progressJson.overallProgress * 100));
-      if (progressJson.overallProgress === 1) {
-        window.clearInterval(intervalId);
-        window.location.assign(progressJson.outputFile);
+      const progressJson = (await progress.json()) as RenderProgress;
+      setDownloadProgress(progressJson);
+      if (!progressJson.outputFile) {
+        setTimeout(poll, 1000);
       }
+    };
+
+    setTimeout(() => {
+      poll();
     }, 1000);
-  };
+  }, [bucketName, renderId]);
+
+  useEffect(() => {
+    pollProgress();
+  }, [pollProgress]);
 
   return (
     <div>
-      <button style={button} type="button" onClick={renderVideo}>
-        Download
-      </button>
-      {downloading && <div>{downloadProgress}%</div>}
+      {downloadProgress.outputFile ? (
+        <a href={downloadProgress.outputFile} download>
+          <button style={button} type="button">
+            Download video
+          </button>
+        </a>
+      ) : (
+        <button style={button} type="button">
+          {"Rendering... " +
+            Math.round(downloadProgress.overallProgress * 100) +
+            "%"}
+        </button>
+      )}
     </div>
   );
 };
