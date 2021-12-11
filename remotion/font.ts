@@ -1,6 +1,6 @@
 import { continueRender, delayRender } from "remotion";
 
-if ("FontFace" in window) {
+if (typeof window !== "undefined" && "FontFace" in window) {
   const font = new FontFace(
     "Jelle",
     "url(https://jonnyburger.s3.eu-central-1.amazonaws.com/Jellee-Bold.woff2)"
