@@ -47,6 +47,10 @@ export const getStaticProps = async ({ params }) => {
 const style: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
+  maxWidth: 800,
+  margin: "auto",
+  paddingLeft: 20,
+  paddingRight: 20,
 };
 
 const container: React.CSSProperties = {
@@ -72,9 +76,8 @@ const subtitle: React.CSSProperties = {
 };
 
 const layout: React.CSSProperties = {
-  width: 600,
   margin: "auto",
-  maxWidth: "100%",
+  width: "100%",
   display: "flex",
   flexDirection: "column",
 };
