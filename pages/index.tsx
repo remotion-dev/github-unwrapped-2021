@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { lighten } from "polished";
 import React, { useCallback, useState } from "react";
 import { getFont } from "../remotion/font";
+import { button } from "../src/components/button";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 
 const input = (loading: boolean): React.CSSProperties => ({
@@ -30,19 +30,6 @@ const h1: React.CSSProperties = {
   fontSize: 48,
   color: BASE_COLOR,
   fontFamily: "Jelle",
-};
-
-const button: React.CSSProperties = {
-  appearance: "none",
-  padding: "14px 28px",
-  border: 0,
-  color: "white",
-  backgroundColor: lighten(0.1, BASE_COLOR),
-  borderRadius: 10,
-  fontSize: 20,
-  fontWeight: "bold",
-  fontFamily: "Jelle",
-  borderBottom: "3px solid " + BASE_COLOR,
 };
 
 const paragraph: React.CSSProperties = {

@@ -10,6 +10,7 @@ import {
   CompactStats,
   mapResponseToStats,
 } from "../remotion/map-response-to-stats";
+import { button } from "../src/components/button";
 import Download from "../src/components/Download";
 import { getFromCache, saveCache } from "../src/db/cache";
 import { getAll } from "../src/get-all";
@@ -123,7 +124,7 @@ export default function User({ user }: { user: CompactStats | null }) {
           </div>
           <div style={{ flex: 1 }}>
             <Link href="/" passHref>
-              <button>Go back</button>
+              <button style={button}>Go back</button>
             </Link>
           </div>
         </div>

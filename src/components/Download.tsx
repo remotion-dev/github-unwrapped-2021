@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { button } from "./button";
 
 type RenderResponse = {
   renderId: string;
@@ -41,7 +42,7 @@ const Download: React.FC<{
 
   return (
     <div>
-      <button type="button" onClick={renderVideo}>
+      <button style={button} type="button" onClick={renderVideo}>
         Download
       </button>
       {downloading && <div>{downloadProgress}%</div>}
