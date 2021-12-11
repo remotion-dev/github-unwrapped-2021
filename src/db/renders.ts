@@ -28,7 +28,7 @@ export const saveRender = async ({
   return coll.insertOne({
     region,
     renderId,
-    username,
+    username: username.toLowerCase(),
     bucketName,
   });
 };
@@ -36,7 +36,7 @@ export const saveRender = async ({
 export const getRender = async (username: string) => {
   const coll = await rendersCollection();
   const render = await coll.findOne({
-    username,
+    username: username.toLowerCase(),
   });
 
   return render;

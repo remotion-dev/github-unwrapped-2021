@@ -63,6 +63,14 @@ const title: React.CSSProperties = {
   color: BASE_COLOR,
 };
 
+const layout: React.CSSProperties = {
+  width: 600,
+  margin: "auto",
+  maxWidth: "100%",
+  display: "flex",
+  flexDirection: "row",
+};
+
 getFont();
 
 export default function User({ user }: { user: CompactStats | null }) {
@@ -92,9 +100,7 @@ export default function User({ user }: { user: CompactStats | null }) {
               durationInFrames={900}
               fps={30}
               style={{
-                width: 600,
-                margin: "auto",
-                maxWidth: "100%",
+                ...layout,
                 boxShadow: "0 0 10px " + transparentize(0.8, BASE_COLOR),
               }}
               controls
@@ -102,12 +108,25 @@ export default function User({ user }: { user: CompactStats | null }) {
                 stats: user,
               }}
             ></Player>
-            <Download username={username}></Download>
           </>
         ) : null}
-        <Link href="/" passHref>
-          <button>Go back</button>
-        </Link>
+        <div
+          style={{
+            height: 40,
+          }}
+        ></div>
+        <div style={layout}>
+          <div style={{ flex: 1 }}>
+            <Link href="/" passHref>
+              <Download username={username}></Download>
+            </Link>
+          </div>
+          <div style={{ flex: 1 }}>
+            <Link href="/" passHref>
+              <button>Go back</button>
+            </Link>
+          </div>
+        </div>
       </header>
     </div>
   );
