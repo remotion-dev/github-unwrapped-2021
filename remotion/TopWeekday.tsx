@@ -13,20 +13,20 @@ import { CompactStats, Weekday } from "./map-response-to-stats";
 
 const weekdayToName = (weekday: Weekday) => {
   return [
-    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
+    "Sunday",
   ][weekday];
 };
 
 const label: React.CSSProperties = {
   textAlign: "center",
   color: PINK,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   marginTop: 20,
   fontWeight: "bold",
   fontSize: 36,
@@ -36,29 +36,20 @@ const title: React.CSSProperties = {
   color: PINK,
   fontWeight: "bold",
   fontSize: 80,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   paddingLeft: 50,
   paddingRight: 50,
   textAlign: "center",
   marginBottom: 100,
 };
 
-const higher = 500;
+const higher = 400;
 
 export const TopWeekDays: React.FC<{
   stats: CompactStats;
 }> = ({ stats }) => {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
-  const lower = Math.max(150, higher * (1 / stats.weekdays.ratio));
-
-  const progress = spring({
-    fps,
-    frame,
-    config: {
-      damping: 200,
-    },
-  });
 
   return (
     <AbsoluteFill
@@ -70,69 +61,77 @@ export const TopWeekDays: React.FC<{
       }}
     >
       <div style={title}>
-        {weekdayToName(stats.weekdays.least)} is my most productive day.
+        {weekdayToName(stats.weekdays.most)} was my most productive day.
       </div>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
-          alignItems: "flex-end",
-          height: 500,
         }}
       >
-        <div>
-          <div
-            style={{
-              width: 200,
-              height: interpolate(progress, [0, 1], [50, lower]),
-              borderRadius: 30,
-              backgroundColor: lighten(0.1, PINK),
-              display: "flex",
-              color: interpolateColors(
-                progress,
-                [0, 1],
-                [lighten(0.1, PINK), PINK_BACKGROUND]
-              ),
-              justifyContent: "center",
-              alignItems: "flex-end",
-              fontFamily: "sans-serif",
-              fontWeight: "bold",
-              fontSize: 24,
-              paddingBottom: interpolate(progress, [0, 1], [0, 30]),
-            }}
-          >
-            {stats.weekdays.leastCount}
-          </div>
-          <div style={{ ...label, color: lighten(0.1, PINK) }}>
-            {weekdayToName(stats.weekdays.least)}
-          </div>
-        </div>
-        <div style={{ width: 100 }}></div>
-        <div>
-          <div
-            style={{
-              width: 200,
-              height: interpolate(progress, [0, 1], [50, higher]),
-              borderRadius: 30,
-              backgroundColor: PINK,
-              display: "flex",
-              color: interpolateColors(
-                progress,
-                [0, 1],
-                [PINK, PINK_BACKGROUND]
-              ),
-              justifyContent: "center",
-              alignItems: "flex-end",
-              fontFamily: "sans-serif",
-              fontWeight: "bold",
-              fontSize: 24,
-              paddingBottom: interpolate(progress, [0, 1], [0, 30]),
-            }}
-          >
-            {stats.weekdays.mostCount}
-          </div>
-          <div style={label}>{weekdayToName(stats.weekdays.most)}</div>
-        </div>
+        {stats.weekdays.days.map((d, i) => {
+          const lower = Math.max(150, (d / stats.weekdays.mostCount) * higher);
+          const isMostProductive = stats.weekdays.most === String(i);
+
+          const progress = spring({
+            fps,
+            frame: frame - i * 3,
+            config: {
+              damping: 200,
+            },
+          });
+
+          return (
+            <div key={d}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "flex-end",
+                  height: 500,
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      width: 90,
+                      height: interpolate(progress, [0, 1], [50, lower]),
+                      borderRadius: 30,
+                      backgroundColor: isMostProductive
+                        ? PINK
+                        : lighten(0.15, PINK),
+                      display: "flex",
+                      color: interpolateColors(
+                        progress,
+                        [0, 1],
+                        [lighten(0.1, PINK), PINK_BACKGROUND]
+                      ),
+                      justifyContent: "center",
+                      alignItems: "flex-end",
+                      fontFamily: "Jelle",
+                      fontWeight: "bold",
+                      fontSize: 24,
+                      paddingBottom: interpolate(progress, [0, 1], [0, 30]),
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      ...label,
+                      color: isMostProductive ? PINK : lighten(0.15, PINK),
+                    }}
+                  >
+                    {["M", "T", "W", "T", "F", "S", "S"][i]}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: 30,
+                  }}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </AbsoluteFill>
   );

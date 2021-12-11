@@ -27,7 +27,7 @@ import { Zig } from "./icons/Zig";
 const title: React.CSSProperties = {
   fontWeight: 700,
   fontSize: 90,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   paddingLeft: 70,
   paddingRight: 70,
   textAlign: "center",

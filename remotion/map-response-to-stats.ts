@@ -16,6 +16,7 @@ type Weekdays = {
   mostCount: number;
   most: Weekday;
   ratio: number;
+  days: number[];
 };
 
 export type CompactStats = {
@@ -50,7 +51,7 @@ export const getMostProductive = (response: All): Weekdays => {
   for (const r of response.data.user.contributionsCollection.contributionCalendar.weeks
     .map((w) => w.contributionDays)
     .flat(1)) {
-    weekdays[r.weekday] += r.contributionCount;
+    weekdays[remapWeekdays(r.weekday)] += r.contributionCount;
   }
 
   const entries = Object.entries(weekdays) as [Weekday, number][];
@@ -68,7 +69,32 @@ export const getMostProductive = (response: All): Weekdays => {
     ratio: ratio,
     leastCount: leastAmount,
     mostCount: mostAmount,
+    days: Object.values(weekdays),
   };
+};
+
+export const remapWeekdays = (weekday: number): Weekday => {
+  if (weekday === 0) {
+    return "6";
+  }
+  if (weekday === 1) {
+    return "0";
+  }
+  if (weekday === 2) {
+    return "1";
+  }
+  if (weekday === 3) {
+    return "2";
+  }
+  if (weekday === 4) {
+    return "3";
+  }
+  if (weekday === 5) {
+    return "4";
+  }
+  if (weekday === 6) {
+    return "5";
+  }
 };
 
 export const getTopLanguage = (response: All): TopLanguage => {

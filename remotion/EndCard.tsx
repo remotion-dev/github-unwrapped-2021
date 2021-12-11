@@ -6,7 +6,7 @@ import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 const title: React.CSSProperties = {
   textAlign: "center",
   fontSize: 70,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   color: BASE_COLOR,
   fontWeight: "bold",
 };
@@ -14,7 +14,7 @@ const title: React.CSSProperties = {
 const subtitle: React.CSSProperties = {
   textAlign: "center",
   fontSize: 36,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   color: BASE_COLOR,
   fontWeight: "bold",
   marginTop: 12,

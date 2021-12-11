@@ -13,7 +13,7 @@ const title: React.CSSProperties = {
   color: "#111",
   fontWeight: "bold",
   fontSize: 80,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   paddingLeft: 20,
   paddingRight: 20,
   textAlign: "center",

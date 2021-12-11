@@ -14,7 +14,7 @@ const title: React.CSSProperties = {
   color: BLUE,
   fontWeight: "bold",
   fontSize: 70,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   paddingLeft: 20,
   paddingRight: 20,
   textAlign: "center",

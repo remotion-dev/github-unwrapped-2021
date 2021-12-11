@@ -6,7 +6,7 @@ import { SpaceSavingContribution } from "./map-response-to-stats";
 const title: React.CSSProperties = {
   textAlign: "center",
   fontSize: 70,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   color: BASE_COLOR,
 };
 

@@ -39,7 +39,7 @@ const image: React.CSSProperties = {
 
 const titleStyle: React.CSSProperties = {
   color: BASE_COLOR,
-  fontFamily: "sans-serif",
+  fontFamily: "Jelle",
   fontSize: 80,
   textAlign: "center",
   fontWeight: "bold",
@@ -113,7 +113,7 @@ export const TitleCard: React.FC<{
               justifyContent: "center",
               alignItems: "center",
               fontSize: 110,
-              fontFamily: "sans-serif",
+              fontFamily: "Jelle",
               fontWeight: "bold",
               color: BACKGROUND_COLOR,
               paddingBottom: 38,
