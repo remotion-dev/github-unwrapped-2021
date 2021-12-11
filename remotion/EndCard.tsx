@@ -37,8 +37,7 @@ export const EndCard: React.FC = () => {
           justifyContent: "flex-end",
         }}
       >
-        <div style={subtitle}>githubwrapped.com</div>
-        <div style={subtitle}>Made using Remotion</div>
+        <div style={subtitle}>GithubWrapped.com</div>
         <div
           style={{
             height: 40,

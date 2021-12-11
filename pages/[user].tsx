@@ -3,7 +3,7 @@ import { Player } from "@remotion/player";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { transparentize } from "polished";
+import { lighten, transparentize } from "polished";
 import React from "react";
 import { getFont } from "../remotion/font";
 import { Main } from "../remotion/Main";
@@ -11,6 +11,7 @@ import { CompactStats } from "../remotion/map-response-to-stats";
 import { backButton } from "../src/components/button";
 import Download from "../src/components/Download";
 import { Footer, FOOTER_HEIGHT } from "../src/components/Footer";
+import Spinner from "../src/components/spinner";
 import { getRenderOrMake } from "../src/get-render-or-make";
 import { getStatsOrFetch } from "../src/get-stats-or-fetch";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
@@ -58,6 +59,16 @@ const title: React.CSSProperties = {
   fontFamily: "Jelle",
   textAlign: "center",
   color: BASE_COLOR,
+  marginBottom: 0,
+};
+
+const subtitle: React.CSSProperties = {
+  fontFamily: "Jelle",
+  textAlign: "center",
+  fontSize: 20,
+  color: lighten(0.3, BASE_COLOR),
+  marginTop: 14,
+  marginBottom: 0,
 };
 
 const layout: React.CSSProperties = {
@@ -81,7 +92,7 @@ export default function User(props: {
   const router = useRouter();
   const username = ([] as string[]).concat(router.query.user)[0];
   if (!user) {
-    return null;
+    return <Spinner></Spinner>;
   }
 
   return (
@@ -96,7 +107,11 @@ export default function User(props: {
       </Head>
       <div style={container}>
         <header style={style}>
-          <h1 style={title}>🎁 Your #GithubWrapped is ready!</h1>
+          <br></br>
+          <br></br>
+          <h1 style={title}>Here is your #GithubWrapped!</h1>
+          <h3 style={subtitle}>@{username}</h3>
+          <br></br>
           {user ? (
             <>
               <Player
