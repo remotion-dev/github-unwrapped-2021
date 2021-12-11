@@ -59,7 +59,10 @@ export const Lang: React.FC<{
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: makeColorMoreChill(stats.topLanguage.color, "#000"),
+        backgroundColor: makeColorMoreChill(
+          stats.topLanguage.color ?? "#000",
+          "#000"
+        ),
         justifyContent: "center",
         alignItems: "center",
         borderRadius: `${interpolate(scale, [0, 1], [50, 0])}%`,
@@ -67,7 +70,12 @@ export const Lang: React.FC<{
       }}
     >
       <div
-        style={{ ...title, color: "white", transform: `rotateY(${rotate}rad)` }}
+        style={{
+          ...title,
+          fontSize: rotateProgress < 0.5 ? 80 : 200,
+          color: "white",
+          transform: `rotateY(${rotate}rad)`,
+        }}
         dangerouslySetInnerHTML={{ __html: text }}
       ></div>
     </AbsoluteFill>
