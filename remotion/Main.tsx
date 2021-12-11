@@ -2,10 +2,11 @@ import React from "react";
 import { AbsoluteFill, Audio, Series } from "remotion";
 import { Contributions } from "./Contrib";
 import { EndCard } from "./EndCard";
+import { EndCard2 } from "./EndCard2";
+import { Issues } from "./Issues";
 import { Lang } from "./Lang";
 import { ManyLanguages } from "./ManyLanguages";
 import { CompactStats } from "./map-response-to-stats";
-import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
 import { TopWeekDays } from "./TopWeekday";
 import { Transition } from "./Transition";
@@ -19,40 +20,43 @@ export const Main: React.FC<{
 
   return (
     <AbsoluteFill>
-      <Audio src="https://jonnyburger.s3.eu-central-1.amazonaws.com/wrapped-music.mp3"></Audio>
+      <Audio src="https://jonnyburger.s3.eu-central-1.amazonaws.com/fun.mp3"></Audio>
       <Series>
-        <Series.Sequence durationInFrames={120}>
+        <Series.Sequence durationInFrames={130}>
           <TitleCard stats={stats}></TitleCard>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={120} offset={-20}>
+        <Series.Sequence durationInFrames={120} offset={-25}>
           <Transition>
             <ManyLanguages></ManyLanguages>
           </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={120} offset={-20}>
+        <Series.Sequence durationInFrames={120} offset={-25}>
           <Transition>
             <Lang stats={stats}></Lang>
           </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={120} offset={-20}>
-          <Transition>
-            <Stars stats={stats}></Stars>
-          </Transition>
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={260} offset={-20}>
+        <Series.Sequence durationInFrames={260} offset={-25}>
           <Transition>
             <Contributions stats={stats}></Contributions>
           </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={100} offset={-20}>
+        <Series.Sequence durationInFrames={220} offset={-25}>
+          <Transition>
+            <Issues stats={stats}></Issues>
+          </Transition>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={120} offset={-25}>
           <Transition>
             <TopWeekDays stats={stats}></TopWeekDays>
           </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={280} offset={-20}>
+        <Series.Sequence durationInFrames={60} offset={-25}>
           <Transition>
             <EndCard></EndCard>
           </Transition>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={150} offset={0}>
+          <EndCard2 />
         </Series.Sequence>
       </Series>
     </AbsoluteFill>

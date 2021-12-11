@@ -123,7 +123,7 @@ export default function User(props: {
                 component={Main}
                 compositionHeight={1080}
                 compositionWidth={1080}
-                durationInFrames={900}
+                durationInFrames={990}
                 fps={30}
                 style={{
                   ...layout,

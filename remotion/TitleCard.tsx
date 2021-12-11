@@ -66,7 +66,7 @@ export const TitleCard: React.FC<{
 
   const rotateProg = spring({
     fps,
-    frame: frame - 45,
+    frame: frame - 60,
     config: {
       damping: 200,
     },

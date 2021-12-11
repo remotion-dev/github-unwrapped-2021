@@ -19,6 +19,11 @@ type Weekdays = {
   days: number[];
 };
 
+type Issues = {
+  closed: number;
+  open: number;
+};
+
 export type CompactStats = {
   contributionCount: number;
   contributions: { [key: string]: SpaceSavingContribution[] };
@@ -26,6 +31,14 @@ export type CompactStats = {
   topLanguage: TopLanguage | null;
   starsThisYear: number;
   weekdays: Weekdays;
+  issues: Issues;
+};
+
+export const getIssues = (response: All): Issues => {
+  return {
+    closed: response.data.user.closedIssues.totalCount,
+    open: response.data.user.openIssues.totalCount,
+  };
 };
 
 export const getStarsThisYear = (response: All) => {
@@ -151,5 +164,6 @@ export const mapResponseToStats = (response: All): CompactStats => {
     topLanguage: getTopLanguage(response),
     starsThisYear: getStarsThisYear(response),
     weekdays: getMostProductive(response),
+    issues: getIssues(response),
   };
 };

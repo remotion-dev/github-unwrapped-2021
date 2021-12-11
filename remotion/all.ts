@@ -1,14 +1,11 @@
 export const all = {
   data: {
     user: {
-      pullRequests: {
-        edges: [
-          {
-            node: {
-              additions: 0,
-            },
-          },
-        ],
+      openIssues: {
+        totalCount: 30,
+      },
+      closedIssues: {
+        totalCount: 165,
       },
       starredRepositories: {
         edges: [
@@ -1697,7 +1694,7 @@ export const all = {
             languages: {
               edges: [
                 {
-                  size: 219249,
+                  size: 216323,
                   node: {
                     id: "MDg6TGFuZ3VhZ2UyODc=",
                     color: "#2b7489",
@@ -4139,9 +4136,15 @@ export const all = {
                   color: "#9be9a8",
                 },
                 {
-                  contributionCount: 9,
+                  contributionCount: 14,
                   weekday: 5,
                   date: "2021-12-10T00:00:00.000+00:00",
+                  color: "#9be9a8",
+                },
+                {
+                  contributionCount: 17,
+                  weekday: 6,
+                  date: "2021-12-11T00:00:00.000+00:00",
                   color: "#9be9a8",
                 },
               ],

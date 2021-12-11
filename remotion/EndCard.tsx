@@ -29,21 +29,7 @@ export const EndCard: React.FC = () => {
         alignItems: "center",
       }}
     >
-      <div style={title}>
-        What a year!<br></br>#GithubWrapped
-      </div>
-      <AbsoluteFill
-        style={{
-          justifyContent: "flex-end",
-        }}
-      >
-        <div style={subtitle}>GithubWrapped.com</div>
-        <div
-          style={{
-            height: 40,
-          }}
-        ></div>
-      </AbsoluteFill>
+      <div style={title}>Wonder how you{"'"}ll compare?</div>
     </AbsoluteFill>
   );
 };

@@ -43,6 +43,7 @@ export const Footer: React.FC = () => {
           <span
             style={{
               color: lighten(0.1, BASE_COLOR),
+              cursor: "pointer",
             }}
           >
             FAQ

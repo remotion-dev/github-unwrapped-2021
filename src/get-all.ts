@@ -5,12 +5,11 @@ export type All = typeof all;
 const query = (username: string) =>
   `{
   user(login: "${username}") {
-    pullRequests(first: 1) {
-      edges {
-        node {
-          additions
-        }
-      }
+    openIssues: issues (first: 100, orderBy: {field:CREATED_AT, direction: ASC} filterBy: {since: "2021-01-01T00:00:00.000Z"}, states: OPEN) {
+      totalCount
+    }
+    closedIssues: issues (first: 100, orderBy: {field:CREATED_AT, direction: ASC} filterBy: {since: "2021-01-01T00:00:00.000Z"}, states: CLOSED) {
+      totalCount
     }
     starredRepositories(first: 100, orderBy: {field: STARRED_AT, direction: DESC}) {
       edges {

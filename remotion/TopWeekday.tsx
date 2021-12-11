@@ -75,7 +75,7 @@ export const TopWeekDays: React.FC<{
 
           const progress = spring({
             fps,
-            frame: frame - i * 3,
+            frame: frame - i * 3 - 20,
             config: {
               damping: 200,
             },

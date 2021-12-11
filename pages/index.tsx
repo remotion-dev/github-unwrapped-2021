@@ -1,16 +1,17 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { lighten } from "polished";
 import React, { useCallback, useState } from "react";
 import { getFont } from "../remotion/font";
 import { button } from "../src/components/button";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 
-const input = (loading: boolean): React.CSSProperties => ({
+const input = (): React.CSSProperties => ({
   padding: 16,
-  border: "2px solid transparent",
   borderRadius: 8,
   fontSize: 28,
-  fontFamily: "inherit",
+  fontFamily: "Jelle",
+  textAlign: "center",
 });
 
 const container: React.CSSProperties = {
@@ -44,6 +45,15 @@ const paragraph: React.CSSProperties = {
 };
 
 getFont();
+
+const buttonStyle = (disabled: boolean): React.CSSProperties =>
+  disabled
+    ? {
+        ...button,
+        backgroundColor: lighten(0.6, BASE_COLOR),
+        borderBottomColor: lighten(0.4, BASE_COLOR),
+      }
+    : button;
 
 export default function Home() {
   const router = useRouter();
@@ -88,18 +98,20 @@ export default function Home() {
 
           <form onSubmit={onSubmit}>
             <input
-              autoFocus
               value={username}
               onChange={onChange}
               type={"text"}
               disabled={loading}
-              style={input(loading)}
+              autoComplete="none"
+              name="github_username"
+              style={input()}
+              className="github-username"
               placeholder="GitHub username"
             ></input>
             <br />
             <br />
             <input
-              style={button}
+              style={buttonStyle(loading)}
               type="submit"
               value={loading ? "Getting your Wrapped..." : "Get your Wrapped"}
             />
