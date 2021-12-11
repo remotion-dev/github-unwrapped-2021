@@ -9,6 +9,7 @@ import {
   CompactStats,
   mapResponseToStats,
 } from "../remotion/map-response-to-stats";
+import { getFromCache, saveCache } from "../src/cache";
 import Download from "../src/components/Download";
 import { getAll } from "../src/get-all";
 
@@ -25,11 +26,16 @@ export const getStaticProps = async ({ params }) => {
   }
 
   try {
+    const cache = await getFromCache(user);
+    if (cache) {
+      return { props: { user: cache } };
+    }
     const ast = await getAll(user, process.env.GITHUB_TOKEN);
     if (!ast.data.user) {
       return { notFound: true };
     }
     const compact = mapResponseToStats(ast);
+    await saveCache(user, compact);
     return { props: { user: compact } };
   } catch (error) {
     console.error(error);
