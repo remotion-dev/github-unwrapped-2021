@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { getFont } from "../remotion/font";
 import { Main } from "../remotion/Main";
 import {
   CompactStats,
@@ -40,6 +41,8 @@ const style: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
 };
+
+getFont();
 
 export default function User({ user }: { user: CompactStats | null }) {
   const router = useRouter();
