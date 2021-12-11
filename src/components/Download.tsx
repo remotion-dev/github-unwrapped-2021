@@ -2,9 +2,11 @@ import { RenderProgress } from "@remotion/lambda";
 import React, { useCallback, useEffect, useState } from "react";
 import { button } from "./button";
 
-type RenderResponse = {
-  renderId: string;
-  bucketName: string;
+const downloadButton: React.CSSProperties = {
+  ...button,
+  width: "100%",
+  paddingTop: 28,
+  paddingBottom: 28,
 };
 
 const Download: React.FC<{
@@ -12,7 +14,7 @@ const Download: React.FC<{
   initialProgress: RenderProgress;
   renderId: string;
   bucketName: string;
-}> = ({ initialProgress, renderId, bucketName }) => {
+}> = ({ initialProgress, renderId, bucketName, username }) => {
   const [downloadProgress, setDownloadProgress] = useState(initialProgress);
 
   const pollProgress = useCallback(async () => {
@@ -43,13 +45,13 @@ const Download: React.FC<{
   return (
     <div>
       {downloadProgress.outputFile ? (
-        <a href={downloadProgress.outputFile} download>
-          <button style={button} type="button">
+        <a href={downloadProgress.outputFile} download={`${username}.mp4`}>
+          <button style={downloadButton} type="button">
             Download video
           </button>
         </a>
       ) : (
-        <button style={button} type="button">
+        <button style={downloadButton} type="button">
           {"Rendering... " +
             Math.round(downloadProgress.overallProgress * 100) +
             "%"}

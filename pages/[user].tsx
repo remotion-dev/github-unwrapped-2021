@@ -8,7 +8,7 @@ import React from "react";
 import { getFont } from "../remotion/font";
 import { Main } from "../remotion/Main";
 import { CompactStats } from "../remotion/map-response-to-stats";
-import { button } from "../src/components/button";
+import { backButton } from "../src/components/button";
 import Download from "../src/components/Download";
 import { getRenderOrMake } from "../src/get-render-or-make";
 import { getStatsOrFetch } from "../src/get-stats-or-fetch";
@@ -49,7 +49,7 @@ const style: React.CSSProperties = {
 
 const container: React.CSSProperties = {
   backgroundColor: BACKGROUND_COLOR,
-  height: "100%",
+  minHeight: "100%",
   width: "100%",
   position: "absolute",
 };
@@ -65,7 +65,7 @@ const layout: React.CSSProperties = {
   margin: "auto",
   maxWidth: "100%",
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
 };
 
 getFont();
@@ -123,21 +123,35 @@ export default function User(props: {
           }}
         ></div>
         <div style={layout}>
-          <div style={{ flex: 1 }}>
-            <Link href="/" passHref>
-              <Download
-                initialProgress={progress}
-                bucketName={bucketName}
-                renderId={renderId}
-                username={username}
-              ></Download>
-            </Link>
-          </div>
-          <div style={{ flex: 1 }}>
-            <Link href="/" passHref>
-              <button style={button}>Go back</button>
-            </Link>
-          </div>
+          <p
+            style={{
+              color: BASE_COLOR,
+              fontFamily: "Jelle",
+              textAlign: "center",
+            }}
+          >
+            Download your video and tweet it using{" "}
+            <span
+              style={{
+                color: "black",
+              }}
+            >
+              #GithubWrapped
+            </span>{" "}
+            hashtag!
+          </p>
+          <Link href="/" passHref>
+            <Download
+              initialProgress={progress}
+              bucketName={bucketName}
+              renderId={renderId}
+              username={username}
+            ></Download>
+          </Link>
+          <br></br>
+          <Link href="/" passHref>
+            <button style={backButton}>View wrapped for another user</button>
+          </Link>
         </div>
       </header>
     </div>

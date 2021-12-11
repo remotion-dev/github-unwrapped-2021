@@ -38,7 +38,7 @@ export const Contributions: React.FC<{
                 durationInFrames={i === 0 ? 35 : i === 11 ? 33 : 8}
                 layout="none"
               >
-                <Green chunked={chunked} i={i}></Green>
+                <Green key={m[0]} chunked={chunked} i={i}></Green>
               </Series.Sequence>
             );
           })}

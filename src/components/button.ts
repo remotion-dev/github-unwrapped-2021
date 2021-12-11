@@ -1,4 +1,5 @@
 import lighten from "polished/lib/color/lighten";
+import React from "react";
 import { BASE_COLOR } from "../palette";
 
 export const button: React.CSSProperties = {
@@ -13,4 +14,11 @@ export const button: React.CSSProperties = {
   fontFamily: "Jelle",
   borderBottom: "3px solid " + BASE_COLOR,
   cursor: "pointer",
+};
+
+export const backButton: React.CSSProperties = {
+  ...button,
+  backgroundColor: lighten(0.6, BASE_COLOR),
+  borderBottomColor: lighten(0.4, BASE_COLOR),
+  color: BASE_COLOR,
 };
