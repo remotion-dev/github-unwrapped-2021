@@ -1,4 +1,4 @@
-import { CompactStats } from "../remotion/map-response-to-stats";
+import { CompactStats } from "../../remotion/map-response-to-stats";
 import { mongoClient } from "./mongo";
 
 type CacheCollection = {

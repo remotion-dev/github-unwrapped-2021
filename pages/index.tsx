@@ -2,27 +2,34 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { lighten } from "polished";
 import React, { useCallback, useState } from "react";
+import { getFont } from "../remotion/font";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 
-const input: React.CSSProperties = {
+const input = (loading: boolean): React.CSSProperties => ({
   padding: 16,
   border: "2px solid transparent",
   borderRadius: 8,
   fontSize: 28,
   fontFamily: "inherit",
-};
+});
 
 const headerStyle: React.CSSProperties = {
   backgroundColor: BACKGROUND_COLOR,
-  paddingTop: "10vh",
-  paddingBottom: "10vh",
+  height: "100%",
+  width: "100%",
   textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  position: "absolute",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 const h1: React.CSSProperties = {
   fontWeight: "bold",
   fontSize: 48,
   color: BASE_COLOR,
+  fontFamily: "Jelle",
 };
 
 const button: React.CSSProperties = {
@@ -32,22 +39,30 @@ const button: React.CSSProperties = {
   color: "white",
   backgroundColor: lighten(0.1, BASE_COLOR),
   borderRadius: 10,
-  fontFamily: "inherit",
   fontSize: 20,
   fontWeight: "bold",
+  fontFamily: "Jelle",
+  borderBottom: "3px solid " + BASE_COLOR,
 };
 
 const paragraph: React.CSSProperties = {
   color: BASE_COLOR,
 };
 
+getFont();
+
 export default function Home() {
   const router = useRouter();
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit: React.FormEventHandler = useCallback(
     (e) => {
       e.preventDefault();
+      if (username.trim() === "") {
+        return;
+      }
+      setLoading(true);
       router.push(`/${username}`);
     },
     [router, username]
@@ -82,12 +97,17 @@ export default function Home() {
             value={username}
             onChange={onChange}
             type={"text"}
-            style={input}
+            disabled={loading}
+            style={input(loading)}
             placeholder="GitHub username"
           ></input>
           <br />
           <br />
-          <input style={button} type="submit" value="Get your Wrapped" />
+          <input
+            style={button}
+            type="submit"
+            value={loading ? "Getting your Wrapped..." : "Get your Wrapped"}
+          />
         </form>
       </header>
     </div>
