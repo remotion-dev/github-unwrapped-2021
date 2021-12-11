@@ -26,10 +26,10 @@ export const Transition: React.FC = ({ children }) => {
         borderTopLeftRadius: `${perc}% 50%`,
         borderBottomLeftRadius: `${perc}% 50%`,
         transform: `translateX(${translation}px)`,
-        overflow: "hidden",
+        WebkitMaskImage: "-webkit-radial-gradient(white, black)",
       }}
     >
-      {children}
+      <AbsoluteFill>{children}</AbsoluteFill>
     </AbsoluteFill>
   );
 };

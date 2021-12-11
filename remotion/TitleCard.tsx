@@ -79,66 +79,66 @@ export const TitleCard: React.FC<{
     <AbsoluteFill
       style={{
         backgroundColor: BACKGROUND_COLOR,
-        perspective: 900,
       }}
     >
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          backfaceVisibility: "hidden",
-          WebkitBackfaceVisibility: "hidden",
-          transform: `scale(${scale}) rotateY(${rotation}rad)`,
-        }}
-      >
-        <div
+      {rotation < Math.PI / 2 ? (
+        <AbsoluteFill
           style={{
-            ...outerImage,
-            transform: `scale(${avatarScale})`,
-            borderRadius: "50%",
-            overflow: "hidden",
+            justifyContent: "center",
+            alignItems: "center",
+
+            transform: `scale(${scale}) rotateY(${rotation}rad)`,
           }}
         >
-          <div style={imageStyle}>
-            <Img style={image} alt="Your avatar" src={stats.avatar}></Img>
-          </div>
           <div
             style={{
-              position: "absolute",
-              height: 180,
-              width: "100%",
-              bottom: 0,
-              backgroundColor: "white",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontSize: 110,
-              fontFamily: "Jelle",
-              fontWeight: "bold",
-              color: BACKGROUND_COLOR,
-              paddingBottom: 38,
+              ...outerImage,
+              transform: `scale(${avatarScale})`,
+              borderRadius: "50%",
               overflow: "hidden",
             }}
           >
-            2021
+            <div style={imageStyle}>
+              <Img style={image} alt="Your avatar" src={stats.avatar}></Img>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                height: 180,
+                width: "100%",
+                bottom: 0,
+                backgroundColor: "white",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: 110,
+                fontFamily: "Jelle",
+                fontWeight: "bold",
+                color: BACKGROUND_COLOR,
+                paddingBottom: 38,
+                overflow: "hidden",
+              }}
+            >
+              2021
+            </div>
           </div>
-        </div>
-      </AbsoluteFill>
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          backfaceVisibility: "hidden",
-          WebkitBackfaceVisibility: "hidden",
-          transform: `scale(${scale}) rotateY(${rotation2}rad)`,
-        }}
-      >
-        <div style={titleStyle}>
-          This is my
-          <br />
-          #GithubWrapped
-        </div>
-      </AbsoluteFill>
+        </AbsoluteFill>
+      ) : null}
+      {rotation2 > -Math.PI / 2 ? (
+        <AbsoluteFill
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            transform: `scale(${scale}) rotateY(${rotation2}rad)`,
+          }}
+        >
+          <div style={titleStyle}>
+            This is my
+            <br />
+            #GithubWrapped
+          </div>
+        </AbsoluteFill>
+      ) : null}
     </AbsoluteFill>
   );
 };

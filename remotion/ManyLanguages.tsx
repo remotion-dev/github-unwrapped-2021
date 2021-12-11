@@ -55,14 +55,14 @@ const item = (
   });
 
   const rad = interpolate(progress, [0, 1], [-Math.PI, 0]);
+
   return {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
+    opacity: rad < -Math.PI / 2 ? 0 : 1,
     position: "relative",
-    backfaceVisibility: "hidden",
-    WebkitBackfaceVisibility: "hidden",
     transform: `rotateX(${rad}rad)`,
   };
 };
