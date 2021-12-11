@@ -19,7 +19,6 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async ({ params }) => {
-  console.log("hi");
   const { user } = params;
 
   if (user.length > 40) {
@@ -36,7 +35,6 @@ export const getStaticProps = async ({ params }) => {
       user,
       compact
     );
-    console.log({ progress, bucketName, renderId });
     return { props: { user: compact, progress, bucketName, renderId } };
   } catch (error) {
     console.error(error);
