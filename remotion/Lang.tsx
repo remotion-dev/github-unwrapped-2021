@@ -72,7 +72,7 @@ export const Lang: React.FC<{
       <div
         style={{
           ...title,
-          fontSize: rotateProgress < 0.5 ? 80 : 200,
+          fontSize: rotateProgress < 0.5 ? 80 : 140,
           color: "white",
           transform: `rotateY(${rotate}rad)`,
         }}

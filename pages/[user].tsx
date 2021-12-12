@@ -1,10 +1,11 @@
 import { RenderProgress } from "@remotion/lambda";
-import { Player } from "@remotion/player";
+import { Player, PlayerRef } from "@remotion/player";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { lighten, transparentize } from "polished";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { AbsoluteFill } from "remotion";
 import { getFont } from "../remotion/font";
 import { Main } from "../remotion/Main";
 import { CompactStats } from "../remotion/map-response-to-stats";
@@ -90,10 +91,34 @@ export default function User(props: {
   progress: RenderProgress;
   bucketName: string;
 }) {
+  const [ready, setReady] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const player = useRef<PlayerRef>(null);
   const { user, progress, bucketName, renderId } = props;
 
   const router = useRouter();
   const username = ([] as string[]).concat(router.query.user)[0];
+
+  useEffect(() => {
+    if (!ready || !user) {
+      return;
+    }
+    console.log("hi");
+    player.current.addEventListener("pause", () => {
+      setPlaying(false);
+    });
+    player.current.addEventListener("ended", () => {
+      setPlaying(false);
+    });
+    player.current.addEventListener("play", () => {
+      setPlaying(true);
+    });
+  }, [ready, user]);
+
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
   if (!user) {
     return <Spinner></Spinner>;
   }
@@ -116,10 +141,14 @@ export default function User(props: {
           <h3 style={subtitle}>@{username}</h3>
           <br></br>
           {user ? (
-            <>
+            <div
+              style={{
+                position: "relative",
+              }}
+            >
               <Player
+                ref={player}
                 // TODO: Investigate
-                numberOfSharedAudioTags={0}
                 component={Main}
                 compositionHeight={1080}
                 compositionWidth={1080}
@@ -129,12 +158,63 @@ export default function User(props: {
                   ...layout,
                   boxShadow: "0 0 10px " + transparentize(0.8, BASE_COLOR),
                 }}
-                controls
                 inputProps={{
                   stats: user,
                 }}
               ></Player>
-            </>
+              <AbsoluteFill
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  display: "flex",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  player.current.toggle();
+                }}
+              >
+                {playing ? null : (
+                  <div
+                    style={{
+                      width: 300,
+                      height: 300,
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      boxShadow: "0 0 40px " + transparentize(0.9, BASE_COLOR),
+                    }}
+                  >
+                    <svg
+                      style={{
+                        height: 100,
+                        transform: `translateX(10px)`,
+                      }}
+                      viewBox="0 0 448 512"
+                    >
+                      <path
+                        fill={BASE_COLOR}
+                        d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+                      ></path>
+                    </svg>
+                    <br />
+                    <div
+                      style={{
+                        color: BASE_COLOR,
+                        fontFamily: "Jelle",
+                        textTransform: "uppercase",
+                        fontSize: 24,
+                      }}
+                    >
+                      Click to play
+                    </div>
+                  </div>
+                )}
+              </AbsoluteFill>
+            </div>
           ) : null}
           <div
             style={{
