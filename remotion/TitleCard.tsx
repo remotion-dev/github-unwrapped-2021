@@ -72,8 +72,8 @@ export const TitleCard: React.FC<{
     },
   });
 
-  const rotation = interpolate(rotateProg, [0, 1], [0, Math.PI]);
-  const rotation2 = interpolate(rotateProg, [0, 1], [-Math.PI, 0]);
+  const scaleY = interpolate(rotateProg, [0, 1], [1, -1]);
+  const scaleY2 = interpolate(rotateProg, [0, 1], [-1, 1]);
 
   return (
     <AbsoluteFill
@@ -81,55 +81,60 @@ export const TitleCard: React.FC<{
         backgroundColor: BACKGROUND_COLOR,
       }}
     >
-      {rotation < Math.PI / 2 ? (
+      {scaleY > 0 ? (
         <AbsoluteFill
           style={{
             justifyContent: "center",
             alignItems: "center",
 
-            transform: `scale(${scale}) rotateY(${rotation}rad)`,
+            transform: `scale(${scaleY}, ${scale})`,
           }}
         >
           <div
             style={{
-              ...outerImage,
               transform: `scale(${avatarScale})`,
-              borderRadius: "50%",
-              overflow: "hidden",
             }}
           >
-            <div style={imageStyle}>
-              <Img style={image} alt="Your avatar" src={stats.avatar}></Img>
-            </div>
             <div
               style={{
-                position: "absolute",
-                height: 180,
-                width: "100%",
-                bottom: 0,
-                backgroundColor: "white",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: 110,
-                fontFamily: "Jelle",
-                fontWeight: "bold",
-                color: BACKGROUND_COLOR,
-                paddingBottom: 38,
-                overflow: "hidden",
+                ...outerImage,
+                borderRadius: "50%",
+                WebkitMaskImage: "-webkit-radial-gradient(white, black)",
               }}
             >
-              2021
+              <div style={imageStyle}>
+                <Img style={image} alt="Your avatar" src={stats.avatar}></Img>
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  height: 180,
+                  width: "100%",
+                  bottom: 0,
+                  backgroundColor: "white",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: 110,
+                  fontFamily: "Jelle",
+                  fontWeight: "bold",
+                  color: BACKGROUND_COLOR,
+                  paddingBottom: 38,
+                  overflow: "hidden",
+                }}
+              >
+                2021
+              </div>
             </div>
           </div>
         </AbsoluteFill>
       ) : null}
-      {rotation2 > -Math.PI / 2 ? (
+      {scaleY2 > 0 ? (
         <AbsoluteFill
           style={{
             justifyContent: "center",
             alignItems: "center",
-            transform: `scale(${scale}) rotateY(${rotation2}rad)`,
+            transform: `scale(${scaleY2}, ${scale})`,
           }}
         >
           <div style={titleStyle}>

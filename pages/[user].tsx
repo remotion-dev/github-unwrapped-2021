@@ -149,6 +149,7 @@ export default function User(props: {
               <Player
                 ref={player}
                 // TODO: Investigate
+                numberOfSharedAudioTags={0}
                 component={Main}
                 compositionHeight={1080}
                 compositionWidth={1080}

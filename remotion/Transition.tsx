@@ -25,7 +25,7 @@ export const Transition: React.FC = ({ children }) => {
       style={{
         borderTopLeftRadius: `${perc}% 50%`,
         borderBottomLeftRadius: `${perc}% 50%`,
-        transform: `translateX(${translation}px)`,
+        left: translation,
         WebkitMaskImage: "-webkit-radial-gradient(white, black)",
       }}
     >

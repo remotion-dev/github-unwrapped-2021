@@ -48,7 +48,7 @@ export const Lang: React.FC<{
   const rotate = interpolate(
     rotateProgress,
     [0, 0.5, 0.500001, 1],
-    [0, Math.PI / 2, -Math.PI / 2, 0]
+    [1, 0, 0, 1]
   );
 
   const text =
@@ -74,10 +74,11 @@ export const Lang: React.FC<{
           ...title,
           fontSize: rotateProgress < 0.5 ? 80 : 140,
           color: "white",
-          transform: `rotateY(${rotate}rad)`,
+          transform: `scale(${rotate}, 1)`,
         }}
-        dangerouslySetInnerHTML={{ __html: text }}
-      ></div>
+      >
+        {text}
+      </div>
     </AbsoluteFill>
   );
 };
