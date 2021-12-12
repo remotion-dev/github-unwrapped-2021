@@ -176,8 +176,8 @@ export default function User(props: {
                 {playing ? null : (
                   <div
                     style={{
-                      width: 300,
-                      height: 300,
+                      width: 200,
+                      height: 200,
                       backgroundColor: "white",
                       borderRadius: "50%",
                       display: "flex",
@@ -189,8 +189,8 @@ export default function User(props: {
                   >
                     <svg
                       style={{
-                        height: 100,
-                        transform: `translateX(10px)`,
+                        height: 60,
+                        transform: `translateX(3px)`,
                       }}
                       viewBox="0 0 448 512"
                     >
@@ -205,7 +205,7 @@ export default function User(props: {
                         color: BASE_COLOR,
                         fontFamily: "Jelle",
                         textTransform: "uppercase",
-                        fontSize: 24,
+                        fontSize: 18,
                       }}
                     >
                       Click to play

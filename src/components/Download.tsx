@@ -7,6 +7,7 @@ const downloadButton: React.CSSProperties = {
   width: "100%",
   paddingTop: 28,
   paddingBottom: 28,
+  textAlign: "center",
 };
 
 const Download: React.FC<{
@@ -46,9 +47,7 @@ const Download: React.FC<{
     <div>
       {downloadProgress.outputFile ? (
         <a href={downloadProgress.outputFile} download={`${username}.mp4`}>
-          <button style={downloadButton} type="button">
-            Download video
-          </button>
+          <div style={downloadButton}>Download video</div>
         </a>
       ) : (
         <button style={downloadButton} type="button">
