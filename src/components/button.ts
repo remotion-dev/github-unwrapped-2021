@@ -4,6 +4,7 @@ import { BASE_COLOR } from "../palette";
 
 export const button: React.CSSProperties = {
   appearance: "none",
+  WebkitAppearance: "none",
   padding: "14px 28px",
   border: 0,
   color: "white",
