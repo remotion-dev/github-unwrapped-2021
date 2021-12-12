@@ -4,8 +4,9 @@ import {
   renderVideoOnLambda,
 } from "@remotion/lambda";
 import { CompactStats } from "../remotion/map-response-to-stats";
-import { AWS_REGION, COMP_NAME, functionName, SITE_ID } from "./config";
+import { COMP_NAME, SITE_ID } from "./config";
 import { getRender, saveRender } from "./db/renders";
+import { getRandomRegion, regions } from "./regions";
 
 type GetRenderOrMake = {
   renderId: string;
@@ -22,7 +23,7 @@ export const getRenderOrMake = async (
   if (cache) {
     const progress = await getRenderProgress({
       bucketName: cache.bucketName,
-      functionName,
+      functionName: regions[cache.region],
       region: cache.region,
       renderId: cache.renderId,
     });
@@ -32,10 +33,11 @@ export const getRenderOrMake = async (
       renderId: cache.renderId,
     };
   }
+  const region = getRandomRegion();
 
   const { renderId, bucketName } = await renderVideoOnLambda({
-    region: AWS_REGION,
-    functionName: functionName,
+    region: region,
+    functionName: regions[region],
     serveUrl: SITE_ID,
     composition: COMP_NAME,
     inputProps: { stats: stats },
@@ -46,15 +48,15 @@ export const getRenderOrMake = async (
     privacy: "public",
   });
   saveRender({
-    region: AWS_REGION,
+    region: region,
     bucketName,
     renderId,
     username,
   });
   const progress = await getRenderProgress({
     bucketName: bucketName,
-    functionName,
-    region: AWS_REGION,
+    functionName: regions[region],
+    region: region,
     renderId,
   });
   return { renderId, bucketName, progress };

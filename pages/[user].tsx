@@ -1,4 +1,4 @@
-import { RenderProgress } from "@remotion/lambda";
+import { AwsRegion, RenderProgress } from "@remotion/lambda";
 import { Player, PlayerInternals, PlayerRef } from "@remotion/player";
 import Head from "next/head";
 import Link from "next/link";
@@ -116,6 +116,8 @@ export default function User(props: {
   renderId: string;
   progress: RenderProgress;
   bucketName: string;
+  functionName: string;
+  region: AwsRegion;
 }) {
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -304,6 +306,8 @@ export default function User(props: {
                 bucketName={bucketName}
                 renderId={renderId}
                 username={username}
+                functionName={props.functionName}
+                region={props.region}
               ></Download>
               {iosSafari() ? (
                 <p

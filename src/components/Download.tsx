@@ -1,4 +1,4 @@
-import { RenderProgress } from "@remotion/lambda";
+import { AwsRegion, RenderProgress } from "@remotion/lambda";
 import React, { forwardRef, useCallback, useEffect, useState } from "react";
 import { button } from "./button";
 
@@ -15,7 +15,12 @@ const Download: React.FC<{
   initialProgress: RenderProgress;
   renderId: string;
   bucketName: string;
-}> = ({ initialProgress, renderId, bucketName, username }, ref) => {
+  region: AwsRegion;
+  functionName: string;
+}> = (
+  { initialProgress, renderId, bucketName, username, region, functionName },
+  ref
+) => {
   const [downloadProgress, setDownloadProgress] = useState(initialProgress);
 
   const pollProgress = useCallback(async () => {
@@ -25,6 +30,8 @@ const Download: React.FC<{
         body: JSON.stringify({
           renderId,
           bucketName,
+          region,
+          functionName,
         }),
       });
       const progressJson = (await progress.json()) as RenderProgress;
