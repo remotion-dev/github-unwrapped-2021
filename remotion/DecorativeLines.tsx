@@ -19,6 +19,7 @@ export const DecorativeLines: React.FC = () => {
         width={width}
         height={height}
         progress={1}
+        curliness={3}
       ></Decoration>
       <Decoration
         start={start2}
@@ -26,6 +27,7 @@ export const DecorativeLines: React.FC = () => {
         width={width}
         height={height}
         progress={1}
+        curliness={3}
       ></Decoration>
     </AbsoluteFill>
   );
