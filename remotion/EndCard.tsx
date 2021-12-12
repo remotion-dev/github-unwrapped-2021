@@ -1,5 +1,10 @@
 import React from "react";
-import { AbsoluteFill, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  spring,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 import { Decoration } from "./Decoration";
 
@@ -21,7 +26,16 @@ const subtitle: React.CSSProperties = {
 };
 
 export const EndCard: React.FC = () => {
-  const { width, height } = useVideoConfig();
+  const { width, height, fps } = useVideoConfig();
+  const frame = useCurrentFrame();
+  const line = spring({
+    fps,
+    frame: frame - 10,
+    config: {
+      mass: 4,
+      damping: 200,
+    },
+  });
   return (
     <AbsoluteFill
       style={{
@@ -29,16 +43,20 @@ export const EndCard: React.FC = () => {
       }}
     >
       <Decoration
-        start={[1, 0.5]}
-        end={[0.7, 0]}
+        start={[1, 0.2]}
+        end={[0.2, 1]}
         width={width}
         height={height}
+        progress={line}
+        curliness={3}
       ></Decoration>
       <Decoration
-        start={[0, 0.55]}
-        end={[0.5, 1]}
+        end={[0.5, 0]}
+        start={[0, 0.5]}
         width={width}
         height={height}
+        progress={line - 0.2}
+        curliness={2}
       ></Decoration>
       <AbsoluteFill
         style={{

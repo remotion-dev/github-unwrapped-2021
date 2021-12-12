@@ -118,12 +118,16 @@ export default function Home() {
               end={[0.7, 0]}
               width={size.width}
               height={size.height}
+              progress={1}
+              curliness={3}
             ></Decoration>
             <Decoration
               start={[0, 0.55]}
               end={[0.5, 1]}
               width={size.width}
               height={size.height}
+              progress={1}
+              curliness={3}
             ></Decoration>
           </>
         ) : null}

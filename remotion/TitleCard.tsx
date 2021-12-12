@@ -9,6 +9,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
+import { Decoration } from "./Decoration";
 import { CompactStats } from "./map-response-to-stats";
 
 const outerImage: React.CSSProperties = {
@@ -75,18 +76,49 @@ export const TitleCard: React.FC<{
   const scaleY = interpolate(rotateProg, [0, 1], [1, -1]);
   const scaleY2 = interpolate(rotateProg, [0, 1], [-1, 1]);
 
+  const { width, height } = useVideoConfig();
+  const line = spring({
+    fps,
+    frame: frame - 10,
+    config: {
+      mass: 4,
+      damping: 200,
+    },
+  });
+
   return (
     <AbsoluteFill
       style={{
         backgroundColor: BACKGROUND_COLOR,
       }}
     >
+      <AbsoluteFill
+        style={{
+          opacity: 0.5,
+        }}
+      >
+        <Decoration
+          start={[0.2, 1]}
+          end={[0.3, 0]}
+          width={width}
+          height={height}
+          progress={line}
+          curliness={3}
+        ></Decoration>
+        <Decoration
+          end={[0.5, 1]}
+          start={[0.7, 0]}
+          width={width}
+          height={height}
+          progress={line}
+          curliness={3}
+        ></Decoration>
+      </AbsoluteFill>
       {scaleY > 0 ? (
         <AbsoluteFill
           style={{
             justifyContent: "center",
             alignItems: "center",
-
             transform: `scale(${scaleY}, ${scale})`,
           }}
         >
@@ -108,17 +140,17 @@ export const TitleCard: React.FC<{
               <div
                 style={{
                   position: "absolute",
-                  height: 180,
+                  height: 140,
                   width: "100%",
                   bottom: 0,
                   backgroundColor: "white",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  fontSize: 110,
+                  fontSize: 80,
                   fontFamily: "Jelle",
                   fontWeight: "bold",
-                  color: BACKGROUND_COLOR,
+                  color: BASE_COLOR,
                   paddingBottom: 38,
                   overflow: "hidden",
                 }}

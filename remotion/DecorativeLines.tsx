@@ -18,12 +18,14 @@ export const DecorativeLines: React.FC = () => {
         end={end}
         width={width}
         height={height}
+        progress={1}
       ></Decoration>
       <Decoration
         start={start2}
         end={end2}
         width={width}
         height={height}
+        progress={1}
       ></Decoration>
     </AbsoluteFill>
   );

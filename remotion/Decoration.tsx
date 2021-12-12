@@ -42,7 +42,9 @@ export const Decoration: React.FC<{
   end: readonly [number, number];
   width: number;
   height: number;
-}> = ({ width, height, start, end }) => {
+  progress: number;
+  curliness: number;
+}> = ({ width, height, progress, start, end, curliness }) => {
   const ref = useRef<HTMLCanvasElement>(null);
   const scale = Math.sqrt(width * height) / 700;
 
@@ -56,17 +58,18 @@ export const Decoration: React.FC<{
     const ctx = ref.current.getContext("2d");
     ctx.clearRect(0, 0, width, height);
 
-    for (let i = -0.8; i < 1.8; i += 0.005) {
+    for (let i = -0.8; i < 1.8 * progress; i += 0.005) {
       const pointX =
         interpolate(i, [0, 1], [start[0], end[0]]) +
-        noiseX.noise2D(0, i / 2) * 0.1;
+        noiseX.noise2D(0, (i / 2) * curliness) * 0.1;
       const pointY =
-        interpolate(i, [0, 1], [start[1], end[1]]) + noiseY.noise2D(0, i) * 0.1;
+        interpolate(i, [0, 1], [start[1], end[1]]) +
+        noiseY.noise2D(0, (i / 2) * curliness) * 0.1;
 
       ctx.fillStyle = LINE_COLOR;
       ctx.fillRect(pointX * width, pointY * height, pointSize, pointSize);
     }
-  }, [end, height, start, width]);
+  }, [curliness, end, height, progress, start, width]);
   return (
     <AbsoluteFill
       style={{
@@ -99,22 +102,25 @@ export const Decoration: React.FC<{
           [start[1], end[1]]
         );
 
+        const effHeight = getEffectiveSize(size[0], size[1], 160) * size[1];
+        const effWidth = getEffectiveSize(size[0], size[1], 160) * size[0];
+
         return (
           <AbsoluteFill
             key={i}
             style={{
-              left: pointX * width - 75,
-              top: pointY * height - 75,
+              left: pointX * width + effHeight / 2,
+              top: pointY * height + effWidth / 2,
               transformOrigin: "center center",
             }}
           >
             <AbsoluteFill>
               <Component
                 style={{
-                  height: getEffectiveSize(size[0], size[1], 100) * size[1],
-                  width: getEffectiveSize(size[0], size[1], 100) * size[0],
+                  height: effHeight,
+                  width: effWidth,
                   transform: `rotate(${
-                    random("rotate" + i) * Math.PI
+                    random("rotatey" + start.join(",") + i) * Math.PI
                   }rad) scale(${scale})`,
                 }}
                 fill={BACKGROUND_COLOR}
