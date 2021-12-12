@@ -61,7 +61,9 @@ export const TopWeekDays: React.FC<{
       }}
     >
       <div style={title}>
-        {weekdayToName(stats.weekdays.most)} was my most productive day.
+        {stats.weekdays.mostCount === 0
+          ? "I'm rather outside than in front of the screen."
+          : `${weekdayToName(stats.weekdays.most)} was my most productive day.`}
       </div>
       <div
         style={{
@@ -71,7 +73,8 @@ export const TopWeekDays: React.FC<{
       >
         {stats.weekdays.days.map((d, i) => {
           const lower = Math.max(150, (d / stats.weekdays.mostCount) * higher);
-          const isMostProductive = stats.weekdays.most === String(i);
+          const isMostProductive =
+            stats.weekdays.most === String(i) && stats.weekdays.mostCount > 0;
 
           const progress = spring({
             fps,

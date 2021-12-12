@@ -5,7 +5,7 @@ import { All } from "../src/get-all";
 // weekday, contributions, date, color
 export type SpaceSavingContribution = [number, number, string, string];
 
-type TopLanguage = {
+export type TopLanguage = {
   color: string;
   name: string;
 };

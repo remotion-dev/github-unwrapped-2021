@@ -7,6 +7,7 @@ import {
 } from "remotion";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 import { Decoration } from "./Decoration";
+import { CompactStats } from "./map-response-to-stats";
 
 const title: React.CSSProperties = {
   textAlign: "center",
@@ -25,7 +26,9 @@ const subtitle: React.CSSProperties = {
   marginTop: 12,
 };
 
-export const EndCard: React.FC = () => {
+export const EndCard: React.FC<{
+  stats: CompactStats;
+}> = ({ stats }) => {
   const { width, height, fps } = useVideoConfig();
   const frame = useCurrentFrame();
   const line = spring({
@@ -36,6 +39,9 @@ export const EndCard: React.FC = () => {
       damping: 200,
     },
   });
+
+  const zeroCommits = stats.contributionCount === 0;
+
   return (
     <AbsoluteFill
       style={{
@@ -64,7 +70,11 @@ export const EndCard: React.FC = () => {
           alignItems: "center",
         }}
       >
-        <div style={title}>Wonder how you{"'"}ll compare?</div>
+        <div style={title}>
+          {zeroCommits
+            ? "Actually, everything is on GitLab."
+            : `Wonder how you'll compare?`}
+        </div>
       </AbsoluteFill>
     </AbsoluteFill>
   );

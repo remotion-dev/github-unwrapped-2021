@@ -52,7 +52,7 @@ export const Main: React.FC<{
         </Series.Sequence>
         <Series.Sequence durationInFrames={85} offset={-25}>
           <Transition>
-            <EndCard></EndCard>
+            <EndCard stats={stats}></EndCard>
           </Transition>
         </Series.Sequence>
         <Series.Sequence durationInFrames={150} offset={-25}>

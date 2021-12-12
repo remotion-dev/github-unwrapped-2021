@@ -1,5 +1,5 @@
 import makeColorMoreChill from "make-color-more-chill";
-import React from "react";
+import React, { useMemo } from "react";
 import {
   AbsoluteFill,
   interpolate,
@@ -7,7 +7,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { CompactStats } from "./map-response-to-stats";
+import { CompactStats, TopLanguage } from "./map-response-to-stats";
 
 const title: React.CSSProperties = {
   color: "#111",
@@ -41,9 +41,15 @@ export const Lang: React.FC<{
     },
   });
 
-  if (!stats.topLanguage) {
-    return null;
-  }
+  const topLanguage: TopLanguage = useMemo(() => {
+    if (!stats.topLanguage) {
+      return {
+        color: null,
+        name: "None",
+      };
+    }
+    return stats.topLanguage;
+  }, [stats.topLanguage]);
 
   const rotate = interpolate(
     rotateProgress,
@@ -53,14 +59,18 @@ export const Lang: React.FC<{
 
   const text =
     rotateProgress < 0.5
-      ? "there's one that I like the most!"
-      : stats.topLanguage.name;
+      ? topLanguage.name === "None"
+        ? "I really couldn't care about any of them"
+        : "there's one that I like the most!"
+      : topLanguage.name === "None"
+      ? "🤷‍♀️"
+      : topLanguage.name;
 
   return (
     <AbsoluteFill
       style={{
         backgroundColor: makeColorMoreChill(
-          stats.topLanguage.color ?? "#000",
+          topLanguage.color ?? "#000",
           "#000"
         ),
         justifyContent: "center",
