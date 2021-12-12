@@ -6,16 +6,18 @@ import { BASE_COLOR } from "../palette";
 export const FOOTER_HEIGHT = 50;
 
 const container: React.CSSProperties = {
-  height: FOOTER_HEIGHT,
+  minHeight: FOOTER_HEIGHT,
   fontFamily: "Jelle",
-  display: "flex",
   alignItems: "center",
   paddingLeft: 20,
   paddingRight: 20,
+  paddingTop: 20,
+  paddingBottom: 20,
   backgroundColor: lighten(0.8, BASE_COLOR),
   color: BASE_COLOR,
   justifyContent: "column",
   fontSize: 14,
+  display: "flex",
 };
 
 export const Footer: React.FC = () => {
@@ -32,8 +34,19 @@ export const Footer: React.FC = () => {
           rel="noreferrer"
         >
           Remotion
+        </a>{" "}
+        by{" "}
+        <a
+          target="_blank"
+          style={{
+            color: lighten(0.1, BASE_COLOR),
+          }}
+          href="https://twitter.com/JNYBGR"
+          rel="noreferrer"
+        >
+          Jonny Burger
         </a>
-        . Not affiliated with GitHub. Read
+        . Not affiliated with GitHub.
         <Link href="/faq" passHref>
           <span
             style={{
@@ -42,7 +55,7 @@ export const Footer: React.FC = () => {
             }}
           >
             {" "}
-            FAQ
+            About this site
           </span>
         </Link>
       </div>

@@ -65,6 +65,7 @@ export const Decoration: React.FC<{
         height: "100%",
         zIndex: 0,
         overflow: "hidden",
+        pointerEvents: "none",
       }}
     >
       <canvas
