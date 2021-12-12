@@ -14,7 +14,7 @@ import { Transition } from "./Transition";
 export const Main: React.FC<{
   stats: CompactStats;
   enableDecoration: boolean;
-}> = ({ stats }) => {
+}> = ({ stats, enableDecoration }) => {
   if (!stats) {
     return null;
   }
