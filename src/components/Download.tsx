@@ -44,7 +44,7 @@ const Download: React.FC<{
     setTimeout(() => {
       poll();
     }, 1000);
-  }, [bucketName, renderId]);
+  }, [bucketName, functionName, region, renderId]);
 
   useEffect(() => {
     pollProgress();
