@@ -90,8 +90,8 @@ export const Decoration: React.FC<{
           <AbsoluteFill
             key={i}
             style={{
-              left: pointX * width - 100,
-              top: pointY * height - 100,
+              left: pointX * width - 75,
+              top: pointY * height - 75,
               transformOrigin: "center center",
             }}
           >

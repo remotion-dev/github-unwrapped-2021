@@ -1,18 +1,18 @@
+import { PlayerInternals } from "@remotion/player";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { lighten } from "polished";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Decoration } from "../remotion/Decoration";
 import { getFont } from "../remotion/font";
 import { button } from "../src/components/button";
 import { Footer, FOOTER_HEIGHT } from "../src/components/Footer";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
-import { useWindowSize } from "../src/use-window-size";
 
 const input = (): React.CSSProperties => ({
   padding: 16,
   borderRadius: 8,
-  fontSize: 28,
+  fontSize: 24,
   fontFamily: "Jelle",
   textAlign: "center",
 });
@@ -21,17 +21,14 @@ const container: React.CSSProperties = {
   height: "100%",
   width: "100%",
   position: "absolute",
-  justifyContent: "center",
-  alignItems: "center",
   display: "flex",
   flexDirection: "column",
+  paddingTop: "10vh",
 };
 
 const abs: React.CSSProperties = {
   minHeight: `calc(100vh - ${FOOTER_HEIGHT}px)`,
   width: "100%",
-  justifyContent: "center",
-  alignItems: "center",
   display: "flex",
   flexDirection: "column",
   overflow: "auto",
@@ -44,6 +41,7 @@ const headerStyle: React.CSSProperties = {
   paddingLeft: 20,
   paddingRight: 20,
   textAlign: "center",
+  margin: "auto",
 };
 
 const h1: React.CSSProperties = {
@@ -75,7 +73,11 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const size = useWindowSize();
+  const ref = useRef<HTMLDivElement>(null);
+
+  const size = PlayerInternals.useElementSize(ref, {
+    triggerOnWindowResize: true,
+  });
 
   const onSubmit: React.FormEventHandler = useCallback(
     (e) => {
@@ -108,19 +110,23 @@ export default function Home() {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
       </Head>
-      <div style={abs}>
-        <Decoration
-          start={[1, 0.5]}
-          end={[0.7, 0]}
-          width={size.width}
-          height={size.height}
-        ></Decoration>
-        <Decoration
-          start={[0, 0.55]}
-          end={[0.5, 1]}
-          width={size.width}
-          height={size.height}
-        ></Decoration>
+      <div style={abs} ref={ref}>
+        {size ? (
+          <>
+            <Decoration
+              start={[1, 0.5]}
+              end={[0.7, 0]}
+              width={size.width}
+              height={size.height}
+            ></Decoration>
+            <Decoration
+              start={[0, 0.55]}
+              end={[0.5, 1]}
+              width={size.width}
+              height={size.height}
+            ></Decoration>
+          </>
+        ) : null}
         <div style={container}>
           <header style={headerStyle}>
             <div style={h1}>Your coding year in review</div>

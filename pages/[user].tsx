@@ -3,7 +3,7 @@ import { Player, PlayerInternals, PlayerRef } from "@remotion/player";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { lighten, transparentize } from "polished";
+import { transparentize } from "polished";
 import React, { useEffect, useRef, useState } from "react";
 import { AbsoluteFill } from "remotion";
 import { Decoration } from "../remotion/Decoration";
@@ -88,7 +88,7 @@ const subtitle: React.CSSProperties = {
   fontFamily: "Jelle",
   textAlign: "center",
   fontSize: 20,
-  color: lighten(0.3, BASE_COLOR),
+  color: "red",
   marginTop: 14,
   marginBottom: 0,
 };
@@ -205,6 +205,7 @@ export default function User(props: {
                     ...layout,
                     boxShadow: "0 0 10px " + transparentize(0.8, BASE_COLOR),
                     borderRadius: 10,
+                    overflow: "hidden",
                   }}
                   inputProps={{
                     stats: user,
