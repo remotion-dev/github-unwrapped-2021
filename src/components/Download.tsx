@@ -1,5 +1,5 @@
 import { RenderProgress } from "@remotion/lambda";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { forwardRef, useCallback, useEffect, useState } from "react";
 import { button } from "./button";
 
 const downloadButton: React.CSSProperties = {
@@ -14,7 +14,7 @@ const Download: React.FC<{
   initialProgress: RenderProgress;
   renderId: string;
   bucketName: string;
-}> = ({ initialProgress, renderId, bucketName, username }) => {
+}> = ({ initialProgress, renderId, bucketName, username }, ref) => {
   const [downloadProgress, setDownloadProgress] = useState(initialProgress);
 
   const pollProgress = useCallback(async () => {
@@ -61,4 +61,4 @@ const Download: React.FC<{
   );
 };
 
-export default Download;
+export default forwardRef(Download);

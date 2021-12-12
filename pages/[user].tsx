@@ -103,7 +103,6 @@ export default function User(props: {
     if (!ready || !user) {
       return;
     }
-    console.log("hi");
     player.current.addEventListener("pause", () => {
       setPlaying(false);
     });
@@ -148,8 +147,6 @@ export default function User(props: {
             >
               <Player
                 ref={player}
-                // TODO: Investigate
-                numberOfSharedAudioTags={0}
                 component={Main}
                 compositionHeight={1080}
                 compositionWidth={1080}
@@ -171,8 +168,9 @@ export default function User(props: {
                   display: "flex",
                   cursor: "pointer",
                 }}
-                onClick={() => {
-                  player.current.toggle();
+                onClick={(e) => {
+                  // @ts-expect-error
+                  player.current.toggle(e);
                 }}
               >
                 {playing ? null : (
