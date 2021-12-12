@@ -105,8 +105,9 @@ export default function Home() {
         <title>#GithubWrapped 2021</title>
         <meta
           name="description"
-          content="Your personalized video review of your coding 2021."
+          content="Get your personalized video review of your coding 2021."
         />
+        <meta property="og:image" content="/flash.png" />
         <link rel="icon" href="/fav.png" />
         <meta
           name="viewport"

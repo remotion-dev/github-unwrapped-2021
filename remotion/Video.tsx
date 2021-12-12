@@ -1,9 +1,10 @@
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
 import { COMP_NAME } from "../src/config";
 import { all } from "./all";
 import { MyComp } from "./Composition";
 import { Contributions } from "./Contrib";
 import { DecorativeLines } from "./DecorativeLines";
+import { Flashcard } from "./Flashcard";
 import { Issues } from "./Issues";
 import { Main } from "./Main";
 import { ManyLanguages } from "./ManyLanguages";
@@ -123,6 +124,12 @@ export const Root: React.FC = () => {
           stats: mapResponseToStats(all),
         }}
       ></Composition>
+      <Still
+        component={Flashcard}
+        height={630}
+        width={1200}
+        id="flashcard"
+      ></Still>
     </>
   );
 };
