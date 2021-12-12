@@ -81,6 +81,7 @@ export const Root: React.FC = () => {
         width={1080}
         id="title-card"
         defaultProps={{
+          enableDecoration: false,
           stats: mapResponseToStats(all),
         }}
       ></Composition>
