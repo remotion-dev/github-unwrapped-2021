@@ -137,7 +137,7 @@ export const Issues: React.FC<{
               opacity: interpolate(spr, [0, 0.5], [1, 0]),
             }}
           >
-            issues opened
+            {open === 1 ? "issue" : "issues"} opened
           </div>
           <div
             style={{
@@ -147,7 +147,7 @@ export const Issues: React.FC<{
               opacity: interpolate(spr, [0.5, 1], [0, 1]),
             }}
           >
-            are still open
+            {closed === 1 ? "is" : "are"} still open
           </div>
         </div>
       </AbsoluteFill>

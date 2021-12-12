@@ -21,6 +21,16 @@ export async function getStaticPaths() {
   return { paths: [], fallback: true };
 }
 
+const iosSafari = () => {
+  if (typeof window === "undefined") {
+    return false;
+  }
+  const ua = window.navigator.userAgent;
+  const iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+  const webkit = !!ua.match(/WebKit/i);
+  return iOS && webkit;
+};
+
 export const getStaticProps = async ({ params }) => {
   const { user } = params;
 
@@ -238,14 +248,28 @@ export default function User(props: {
               </span>{" "}
               hashtag!
             </p>
-            <Link href="/" passHref>
+            <a href="/" download={`${username}.mp4`}>
               <Download
                 initialProgress={progress}
                 bucketName={bucketName}
                 renderId={renderId}
                 username={username}
               ></Download>
-            </Link>
+            </a>
+            {iosSafari() ? (
+              <p
+                style={{
+                  color: BASE_COLOR,
+                  fontFamily: "Jelle",
+                  textAlign: "center",
+                  fontSize: 12,
+                }}
+              >
+                Tip for iOS Safari: Long press the {'"'}Download button{'"'},
+                then press {'"'}Download Linked File{'"'} to save the video
+                locally.
+              </p>
+            ) : null}
             <br></br>
             <Link href="/" passHref>
               <button style={backButton}>View for another user</button>
