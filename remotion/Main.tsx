@@ -13,6 +13,7 @@ import { Transition } from "./Transition";
 
 export const Main: React.FC<{
   stats: CompactStats;
+  enableDecoration: boolean;
 }> = ({ stats }) => {
   if (!stats) {
     return null;
@@ -23,7 +24,10 @@ export const Main: React.FC<{
       <Audio src="https://jonnyburger.s3.eu-central-1.amazonaws.com/the-librarian.mp3"></Audio>
       <Series>
         <Series.Sequence durationInFrames={130}>
-          <TitleCard stats={stats}></TitleCard>
+          <TitleCard
+            enableDecoration={enableDecoration}
+            stats={stats}
+          ></TitleCard>
         </Series.Sequence>
         <Series.Sequence durationInFrames={120} offset={-25}>
           <Transition>
@@ -52,7 +56,10 @@ export const Main: React.FC<{
         </Series.Sequence>
         <Series.Sequence durationInFrames={85} offset={-25}>
           <Transition>
-            <EndCard stats={stats}></EndCard>
+            <EndCard
+              enableDecoration={enableDecoration}
+              stats={stats}
+            ></EndCard>
           </Transition>
         </Series.Sequence>
         <Series.Sequence durationInFrames={150} offset={-25}>

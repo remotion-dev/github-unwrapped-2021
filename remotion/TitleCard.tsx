@@ -49,7 +49,8 @@ const titleStyle: React.CSSProperties = {
 
 export const TitleCard: React.FC<{
   stats: CompactStats;
-}> = ({ stats }) => {
+  enableDecoration: boolean;
+}> = ({ stats, enableDecoration }) => {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
   const appear = spring({
@@ -97,22 +98,26 @@ export const TitleCard: React.FC<{
           opacity: 0.5,
         }}
       >
-        <Decoration
-          start={[0.2, 1]}
-          end={[0.3, 0]}
-          width={width}
-          height={height}
-          progress={line}
-          curliness={3}
-        ></Decoration>
-        <Decoration
-          end={[0.5, 1]}
-          start={[0.7, 0]}
-          width={width}
-          height={height}
-          progress={line}
-          curliness={3}
-        ></Decoration>
+        {enableDecoration ? (
+          <>
+            <Decoration
+              start={[0.2, 1]}
+              end={[0.3, 0]}
+              width={width}
+              height={height}
+              progress={line}
+              curliness={3}
+            ></Decoration>
+            <Decoration
+              end={[0.5, 1]}
+              start={[0.7, 0]}
+              width={width}
+              height={height}
+              progress={line}
+              curliness={3}
+            ></Decoration>
+          </>
+        ) : null}
       </AbsoluteFill>
       {scaleY > 0 ? (
         <AbsoluteFill

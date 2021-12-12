@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { transparentize } from "polished";
 import React, { useEffect, useRef, useState } from "react";
 import { AbsoluteFill } from "remotion";
-import { Decoration } from "../remotion/Decoration";
 import { getFont } from "../remotion/font";
 import { Main } from "../remotion/Main";
 import { CompactStats } from "../remotion/map-response-to-stats";
@@ -131,7 +130,6 @@ export default function User(props: {
   const player = useRef<PlayerRef>(null);
   const ref = useRef<HTMLDivElement>(null);
   const { user, progress, bucketName, renderId } = props;
-  const size = useSizeIfClient(ref);
 
   const router = useRouter();
   const username = ([] as string[]).concat(router.query.user)[0];
@@ -179,26 +177,6 @@ export default function User(props: {
         <link rel="icon" href="/fav.png" />
       </Head>
       <div style={abs}>
-        {size ? (
-          <>
-            <Decoration
-              start={[1, 0.5]}
-              end={[0.7, 0]}
-              width={size.width}
-              height={size.height}
-              progress={1}
-              curliness={1}
-            ></Decoration>
-            <Decoration
-              start={[0, 0.55]}
-              end={[0.5, 1]}
-              width={size.width}
-              height={size.height}
-              progress={1}
-              curliness={1}
-            ></Decoration>
-          </>
-        ) : null}
         <div style={container}>
           <header style={style}>
             <br></br>
@@ -227,6 +205,7 @@ export default function User(props: {
                   }}
                   inputProps={{
                     stats: user,
+                    enableDecoration: false,
                   }}
                 ></Player>
                 <AbsoluteFill

@@ -17,18 +17,10 @@ const title: React.CSSProperties = {
   fontWeight: "bold",
 };
 
-const subtitle: React.CSSProperties = {
-  textAlign: "center",
-  fontSize: 36,
-  fontFamily: "Jelle",
-  color: BASE_COLOR,
-  fontWeight: "bold",
-  marginTop: 12,
-};
-
 export const EndCard: React.FC<{
   stats: CompactStats;
-}> = ({ stats }) => {
+  enableDecoration: boolean;
+}> = ({ stats, enableDecoration }) => {
   const { width, height, fps } = useVideoConfig();
   const frame = useCurrentFrame();
   const line = spring({
@@ -48,22 +40,26 @@ export const EndCard: React.FC<{
         backgroundColor: BACKGROUND_COLOR,
       }}
     >
-      <Decoration
-        start={[1, 0.2]}
-        end={[0.2, 1]}
-        width={width}
-        height={height}
-        progress={line}
-        curliness={3}
-      ></Decoration>
-      <Decoration
-        end={[0.5, 0]}
-        start={[0, 0.5]}
-        width={width}
-        height={height}
-        progress={line - 0.2}
-        curliness={2}
-      ></Decoration>
+      {enableDecoration ? (
+        <>
+          <Decoration
+            start={[1, 0.2]}
+            end={[0.2, 1]}
+            width={width}
+            height={height}
+            progress={line}
+            curliness={3}
+          ></Decoration>
+          <Decoration
+            end={[0.5, 0]}
+            start={[0, 0.5]}
+            width={width}
+            height={height}
+            progress={line - 0.2}
+            curliness={2}
+          ></Decoration>
+        </>
+      ) : null}
       <AbsoluteFill
         style={{
           justifyContent: "center",
