@@ -104,10 +104,10 @@ export const Issues: React.FC<{
             stroke="#986ee2"
             strokeWidth="10"
             strokeDasharray={`${closeRatio * Math.PI * 10} ${Math.PI * 10}`}
-            transform={`rotate(${openRatio * 360})`}
             style={{
               transformBox: "fill-box",
               transformOrigin: "center",
+              transform: `rotate(${openRatio * 360}deg)`,
             }}
           />
         </svg>
