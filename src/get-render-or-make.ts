@@ -1,4 +1,5 @@
 import {
+  AwsRegion,
   getRenderProgress,
   RenderProgress,
   renderVideoOnLambda,
@@ -12,6 +13,8 @@ type GetRenderOrMake = {
   renderId: string;
   bucketName: string;
   progress: RenderProgress;
+  functionName: string;
+  region: AwsRegion;
 };
 
 export const getRenderOrMake = async (
@@ -31,6 +34,8 @@ export const getRenderOrMake = async (
       progress,
       bucketName: cache.bucketName,
       renderId: cache.renderId,
+      functionName: cache.functionName,
+      region: cache.region,
     };
   }
   const region = getRandomRegion();
@@ -52,6 +57,7 @@ export const getRenderOrMake = async (
     bucketName,
     renderId,
     username,
+    functionName: regions[region],
   });
   const progress = await getRenderProgress({
     bucketName: bucketName,
@@ -59,5 +65,11 @@ export const getRenderOrMake = async (
     region: region,
     renderId,
   });
-  return { renderId, bucketName, progress };
+  return {
+    renderId,
+    bucketName,
+    progress,
+    region,
+    functionName: regions[region],
+  };
 };

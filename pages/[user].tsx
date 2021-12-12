@@ -45,11 +45,18 @@ export const getStaticProps = async ({ params }) => {
     if (!compact) {
       return { notFound: true };
     }
-    const { progress, bucketName, renderId } = await getRenderOrMake(
-      user,
-      compact
-    );
-    return { props: { user: compact, progress, bucketName, renderId } };
+    const { progress, bucketName, renderId, region, functionName } =
+      await getRenderOrMake(user, compact);
+    return {
+      props: {
+        user: compact,
+        progress,
+        bucketName,
+        renderId,
+        region,
+        functionName,
+      },
+    };
   } catch (error) {
     console.error(error);
     return { notFound: true };

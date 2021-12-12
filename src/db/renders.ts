@@ -6,6 +6,7 @@ type Render = {
   region: AwsRegion;
   username: string;
   bucketName: string;
+  functionName: string;
 };
 
 export const rendersCollection = async () => {
@@ -18,11 +19,13 @@ export const saveRender = async ({
   username,
   renderId,
   bucketName,
+  functionName,
 }: {
   region: AwsRegion;
   username: string;
   renderId: string;
   bucketName: string;
+  functionName: string;
 }) => {
   const coll = await rendersCollection();
   return coll.insertOne({
@@ -30,6 +33,7 @@ export const saveRender = async ({
     renderId,
     username: username.toLowerCase(),
     bucketName,
+    functionName,
   });
 };
 
