@@ -53,6 +53,7 @@ export const EndCard2: React.FC = () => {
           justifyContent: "center",
         }}
       >
+        <div style={subtitle}>Get yours at</div>
         <div
           style={{
             ...subtitle,

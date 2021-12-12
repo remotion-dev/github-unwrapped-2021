@@ -42,6 +42,7 @@ export const getRenderOrMake = async (
     codec: "h264-mkv",
     imageFormat: "jpeg",
     maxRetries: 1,
+    framesPerLambda: 80,
     privacy: "public",
   });
   saveRender({

@@ -50,13 +50,15 @@ export const Main: React.FC<{
             <TopWeekDays stats={stats}></TopWeekDays>
           </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={60} offset={-25}>
+        <Series.Sequence durationInFrames={85} offset={-25}>
           <Transition>
             <EndCard></EndCard>
           </Transition>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={150} offset={0}>
-          <EndCard2 />
+        <Series.Sequence durationInFrames={150} offset={-25}>
+          <Transition>
+            <EndCard2 />
+          </Transition>
         </Series.Sequence>
       </Series>
     </AbsoluteFill>

@@ -1,7 +1,7 @@
-import { lighten } from "polished";
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, useVideoConfig } from "remotion";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
+import { Decoration } from "./Decoration";
 
 const title: React.CSSProperties = {
   textAlign: "center",
@@ -21,15 +21,33 @@ const subtitle: React.CSSProperties = {
 };
 
 export const EndCard: React.FC = () => {
+  const { width, height } = useVideoConfig();
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: lighten(0.08, BACKGROUND_COLOR),
-        justifyContent: "center",
-        alignItems: "center",
+        backgroundColor: BACKGROUND_COLOR,
       }}
     >
-      <div style={title}>Wonder how you{"'"}ll compare?</div>
+      <Decoration
+        start={[1, 0.5]}
+        end={[0.7, 0]}
+        width={width}
+        height={height}
+      ></Decoration>
+      <Decoration
+        start={[0, 0.55]}
+        end={[0.5, 1]}
+        width={width}
+        height={height}
+      ></Decoration>
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div style={title}>Wonder how you{"'"}ll compare?</div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

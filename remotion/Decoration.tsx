@@ -28,6 +28,15 @@ const items: {
   },
 ];
 
+const getEffectiveSize = (width: number, height: number, size: number) => {
+  const heightScale = size / width;
+  const widthScale = size / height;
+
+  const smaller = Math.min(heightScale, widthScale);
+
+  return smaller;
+};
+
 export const Decoration: React.FC<{
   start: readonly [number, number];
   end: readonly [number, number];
@@ -35,7 +44,7 @@ export const Decoration: React.FC<{
   height: number;
 }> = ({ width, height, start, end }) => {
   const ref = useRef<HTMLCanvasElement>(null);
-  const scale = Math.sqrt(width * height) / 1000;
+  const scale = Math.sqrt(width * height) / 700;
 
   useEffect(() => {
     if (!ref.current) {
@@ -79,12 +88,16 @@ export const Decoration: React.FC<{
         }}
       ></canvas>
       {items.map(({ Component, size }, i) => {
-        const pointX =
-          interpolate(i, [-0.2, items.length - 1 + 0.2], [start[0], end[0]]) +
-          noiseX.noise2D(0, i / items.length) * 0.1;
-        const pointY =
-          interpolate(i, [-0.2, items.length - 1 + 0.2], [start[1], end[1]]) +
-          noiseY.noise2D(0, i / items.length) * 0.1;
+        const pointX = interpolate(
+          i,
+          [-0.2, items.length - 1 + 0.2],
+          [start[0], end[0]]
+        );
+        const pointY = interpolate(
+          i,
+          [-0.2, items.length - 1 + 0.2],
+          [start[1], end[1]]
+        );
 
         return (
           <AbsoluteFill
@@ -98,7 +111,8 @@ export const Decoration: React.FC<{
             <AbsoluteFill>
               <Component
                 style={{
-                  width: 150,
+                  height: getEffectiveSize(size[0], size[1], 100) * size[1],
+                  width: getEffectiveSize(size[0], size[1], 100) * size[0],
                   transform: `rotate(${
                     random("rotate" + i) * Math.PI
                   }rad) scale(${scale})`,
