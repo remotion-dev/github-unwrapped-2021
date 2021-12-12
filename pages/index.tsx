@@ -42,6 +42,7 @@ const h1: React.CSSProperties = {
 const paragraph: React.CSSProperties = {
   color: BASE_COLOR,
   lineHeight: 1.5,
+  fontFamily: "Jelle",
 };
 
 getFont();

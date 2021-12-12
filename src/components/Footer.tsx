@@ -14,6 +14,8 @@ const container: React.CSSProperties = {
   paddingRight: 20,
   backgroundColor: lighten(0.8, BASE_COLOR),
   color: BASE_COLOR,
+  justifyContent: "column",
+  fontSize: 14,
 };
 
 export const Footer: React.FC = () => {
@@ -31,14 +33,7 @@ export const Footer: React.FC = () => {
         >
           Remotion
         </a>
-        . Not affiliated with GitHub.
-      </div>
-      <div
-        style={{
-          flex: 1,
-        }}
-      ></div>
-      <div>
+        . Not affiliated with GitHub. Read
         <Link href="/faq" passHref>
           <span
             style={{
@@ -46,6 +41,7 @@ export const Footer: React.FC = () => {
               cursor: "pointer",
             }}
           >
+            {" "}
             FAQ
           </span>
         </Link>
