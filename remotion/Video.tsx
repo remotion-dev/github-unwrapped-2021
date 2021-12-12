@@ -3,6 +3,7 @@ import { COMP_NAME } from "../src/config";
 import { all } from "./all";
 import { MyComp } from "./Composition";
 import { Contributions } from "./Contrib";
+import { DecorativeLines } from "./DecorativeLines";
 import { Issues } from "./Issues";
 import { Main } from "./Main";
 import { ManyLanguages } from "./ManyLanguages";
@@ -107,6 +108,17 @@ export const Root: React.FC = () => {
         height={1080}
         width={1080}
         id="issues"
+        defaultProps={{
+          stats: mapResponseToStats(all),
+        }}
+      ></Composition>
+      <Composition
+        component={DecorativeLines}
+        durationInFrames={300}
+        fps={30}
+        height={1080}
+        width={1080}
+        id="decorative-lines"
         defaultProps={{
           stats: mapResponseToStats(all),
         }}
