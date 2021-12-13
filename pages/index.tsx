@@ -10,9 +10,9 @@ import { Footer, FOOTER_HEIGHT } from "../src/components/Footer";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 
 const input = (): React.CSSProperties => ({
-  padding: 16,
+  padding: 14,
   borderRadius: 8,
-  fontSize: 24,
+  fontSize: 22,
   fontFamily: "Jelle",
   textAlign: "center",
 });
@@ -46,7 +46,7 @@ const headerStyle: React.CSSProperties = {
 
 const h1: React.CSSProperties = {
   fontWeight: "bold",
-  fontSize: 48,
+  fontSize: 40,
   color: BASE_COLOR,
   fontFamily: "Jelle",
 };
@@ -54,6 +54,7 @@ const h1: React.CSSProperties = {
 const paragraph: React.CSSProperties = {
   color: BASE_COLOR,
   lineHeight: 1.5,
+  fontSize: 15,
   fontFamily: "Jelle",
 };
 
