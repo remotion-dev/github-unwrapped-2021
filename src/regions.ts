@@ -1,16 +1,16 @@
 import { AwsRegion } from "@remotion/lambda";
 
 export const regions: { [key in AwsRegion]: string } = {
-  "ap-northeast-1": "remotion-render-16p7u8jqa3",
-  "ap-south-1": "remotion-render-ucag5jh5fz",
-  "ap-southeast-1": "remotion-render-sh4zftktqx",
-  "ap-southeast-2": "remotion-render-ti2do2gpmr",
-  "eu-central-1": "remotion-render-j7xk1p09kl",
-  "eu-west-1": "remotion-render-xvjz96lr6n",
-  "eu-west-2": "remotion-render-8bvyarmp5t",
-  "us-east-1": "remotion-render-hd1y0kwdcf",
-  "us-east-2": "remotion-render-k3tilmhzx4",
-  "us-west-2": "remotion-render-262eahg3yx",
+  "ap-northeast-1": "remotion-render-4fmqfux9di",
+  "ap-south-1": "remotion-render-0o3apxbmkc",
+  "ap-southeast-1": "remotion-render-pbma6vbbo2",
+  "ap-southeast-2": "remotion-render-d86x3345fa",
+  "eu-central-1": "remotion-render-90ft7r8v0n",
+  "eu-west-1": "remotion-render-9d0uq5zh7g",
+  "eu-west-2": "remotion-render-mp3ucgfck5",
+  "us-east-1": "remotion-render-wqoe3pfmzh",
+  "us-east-2": "remotion-render-yzyrh733bk",
+  "us-west-2": "remotion-render-8iutdsvlm4",
 };
 
 export const getRandomRegion = (): AwsRegion => {
