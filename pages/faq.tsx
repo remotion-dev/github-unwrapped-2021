@@ -54,8 +54,8 @@ const Faq: React.FC = () => {
             @remotion/player
           </a>{" "}
           library is being used. When a username is entered for the first time,
-          we render the video to an MP4 in a AWS Lambda function and cache it in
-          an S3 bucket.
+          we render the video to an MP4 in an AWS Lambda function and cache it
+          in an S3 bucket.
         </p>
         <p>
           Want to make your own programmatic video solution? Check out{" "}
