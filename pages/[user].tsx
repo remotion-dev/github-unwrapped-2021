@@ -182,7 +182,11 @@ export default function User(props: {
               <br></br>
               <h1 style={title}>Here is your #GithubWrapped!</h1>
               <h3 style={subtitle}>@{username}</h3>
-              <br></br>
+              <div
+                style={{
+                  height: 20,
+                }}
+              ></div>
               {user ? (
                 <div
                   style={{
@@ -304,7 +308,11 @@ export default function User(props: {
                     video locally.
                   </p>
                 ) : null}
-                <br></br>
+                <div
+                  style={{
+                    height: 20,
+                  }}
+                ></div>
                 <Link href="/" passHref>
                   <button style={backButton}>View for another user</button>
                 </Link>
