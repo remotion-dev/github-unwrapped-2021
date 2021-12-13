@@ -9,7 +9,7 @@ export const regions: { [key in AwsRegion]: string } = {
   "eu-west-1": "remotion-render-9d0uq5zh7g",
   "eu-west-2": "remotion-render-mp3ucgfck5",
   "us-east-1": "remotion-render-wqoe3pfmzh",
-  "us-east-2": "remotion-render-yzyrh733bk",
+  "us-east-2": "remotion-render-cn0iwf0m65",
   "us-west-2": "remotion-render-8iutdsvlm4",
 };
 
