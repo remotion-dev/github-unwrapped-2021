@@ -66,7 +66,7 @@ export const getAll = async (username: string, token: string): Promise<All> => {
     },
   });
   const rateLimit = res.headers.get("x-ratelimit-remaining");
-  if (Math.random() < 1) {
+  if (Math.random() < 0.1) {
     slackbot.send("#wrapped", ["Rate limit remaining: " + rateLimit]);
   }
   return res.json();
