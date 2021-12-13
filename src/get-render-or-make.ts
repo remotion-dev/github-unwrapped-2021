@@ -21,8 +21,8 @@ export const getRenderOrMake = async (
   stats: CompactStats
 ): Promise<RenderProgressOrFinality> => {
   const cache = await getRender(username);
-  let _renderId: string | null = cache.renderId ?? null;
-  let _region: AwsRegion | null = null;
+  let _renderId: string | null = cache?.renderId ?? null;
+  let _region: AwsRegion | null = cache?.region ?? null;
   try {
     if (cache) {
       const progress = await getRenderProgressWithFinality(cache);

@@ -1,4 +1,5 @@
 import { all } from "../remotion/all";
+import { slackbot } from "./post-to-slack";
 
 export type All = typeof all;
 
@@ -64,5 +65,9 @@ export const getAll = async (username: string, token: string): Promise<All> => {
       "content-type": "application/json",
     },
   });
+  const rateLimit = res.headers.get("x-ratelimit-remaining");
+  if (Math.random() < 1) {
+    slackbot.send("#wrapped", ["Rate limit remaining: " + rateLimit]);
+  }
   return res.json();
 };
