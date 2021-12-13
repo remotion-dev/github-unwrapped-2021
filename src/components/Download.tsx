@@ -47,7 +47,7 @@ const Download: React.FC<{
     <div>
       {downloadProgress.type == "finality" &&
       downloadProgress.finality.type === "success" ? (
-        <a href={downloadProgress.finality.url} download={`${username}.mp4`}>
+        <a href={downloadProgress.finality.url} download={`${username}`}>
           <div style={downloadButton}>Download video</div>
         </a>
       ) : downloadProgress.type === "finality" &&
