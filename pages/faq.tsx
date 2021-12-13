@@ -42,9 +42,33 @@ const Faq: React.FC = () => {
           statistics. The video is written in React using Remotion.
         </p>
         <p>
-          To display the video, the @remotion/player library is being used. When
-          a username is entered for the first time, we render the video to an
-          MP4 in a AWS Lambda function and cache it in an S3 bucket.
+          To display the video, the{" "}
+          <a
+            target="_blank"
+            href="https://remotion.dev/docs/player"
+            rel="noreferrer"
+            style={{
+              color: "black",
+            }}
+          >
+            @remotion/player
+          </a>{" "}
+          library is being used. When a username is entered for the first time,
+          we render the video to an MP4 in a AWS Lambda function and cache it in
+          an S3 bucket.
+        </p>
+        <p>
+          Want to make your own programmatic video solution? Check out{" "}
+          <a
+            style={{
+              color: "black",
+            }}
+            target={"_blank"}
+            href="https://remotion.dev"
+            rel="noreferrer"
+          >
+            Remotion!
+          </a>
         </p>
 
         <h2>Is the project open source?</h2>
@@ -54,13 +78,43 @@ const Faq: React.FC = () => {
         </p>
         <h2>Who is behind GitHub Wrapped?</h2>
         <p>
-          This is a hackathon project by Jonny Burger. No affiliation with
-          GitHub.{" "}
+          This is a hackathon project by{" "}
+          <a
+            style={{
+              color: "black",
+            }}
+            target="_blank"
+            href="https://twitter.com/JNYBGR"
+            rel="noreferrer"
+          >
+            Jonny Burger
+          </a>
+          . No affiliation with GitHub.{" "}
         </p>
         <h2>What is the song?</h2>
         <p>
-          <a href="https://musicvine.com/track/adi-goldstein/the-librarian">
+          <a
+            style={{
+              color: "black",
+            }}
+            target="_blank"
+            href="https://musicvine.com/track/adi-goldstein/the-librarian"
+            rel="noreferrer"
+          >
             {'"'}The Librarian{'"'} by Adi Goldstein.
+          </a>
+        </p>
+        <h2>Contact</h2>
+        <p>
+          <a
+            style={{
+              color: "black",
+            }}
+            target="_blank"
+            href="mailto:hi@jonny.io"
+            rel="noreferrer"
+          >
+            hi@jonny.io
           </a>
         </p>
       </section>

@@ -1,75 +1,96 @@
 import {
   AwsRegion,
-  getRenderProgress,
   RenderProgress,
   renderVideoOnLambda,
 } from "@remotion/lambda";
+import { RenderProgressOrFinality } from "../pages/api/progress";
 import { CompactStats } from "../remotion/map-response-to-stats";
 import { COMP_NAME, SITE_ID } from "./config";
-import { getRender, saveRender } from "./db/renders";
+import {
+  Finality,
+  getRender,
+  saveRender,
+  updateRenderWithFinality,
+} from "./db/renders";
+import { getRenderProgressWithFinality } from "./get-render-progress-with-finality";
+import { slackbot } from "./post-to-slack";
 import { getRandomRegion, regions } from "./regions";
-
-type GetRenderOrMake = {
-  renderId: string;
-  bucketName: string;
-  progress: RenderProgress;
-  functionName: string;
-  region: AwsRegion;
-};
 
 export const getRenderOrMake = async (
   username: string,
   stats: CompactStats
-): Promise<GetRenderOrMake> => {
+): Promise<RenderProgressOrFinality> => {
   const cache = await getRender(username);
+  let _renderId: string | null = cache.renderId ?? null;
+  let _region: AwsRegion | null = null;
+  try {
+    if (cache) {
+      const progress = await getRenderProgressWithFinality(cache);
+      return progress;
+    }
+    const region = getRandomRegion();
+    const functionName = regions[region];
 
-  if (cache) {
-    const progress = await getRenderProgress({
-      bucketName: cache.bucketName,
-      functionName: regions[cache.region],
-      region: cache.region,
-      renderId: cache.renderId,
+    const { renderId, bucketName } = await renderVideoOnLambda({
+      region: region,
+      functionName,
+      serveUrl: SITE_ID,
+      composition: COMP_NAME,
+      inputProps: { stats: stats },
+      codec: "h264-mkv",
+      imageFormat: "jpeg",
+      maxRetries: 1,
+      framesPerLambda: 80,
+      privacy: "public",
     });
+    _renderId = renderId;
+    _region = region;
+    await saveRender({
+      region: region,
+      bucketName,
+      renderId,
+      username,
+      functionName,
+    });
+    const render = await getRender(username);
+    if (!render) {
+      throw new Error(`Didn't have error for ${username}`);
+    }
+    const progress = await getRenderProgressWithFinality(render);
+    return progress;
+  } catch (err) {
+    slackbot.send("#wrapped", [
+      `Failed to render video for ${username}`,
+      (err as Error).stack,
+    ]);
+    if (_renderId && _region) {
+      await updateRenderWithFinality(_renderId, cache.username, _region, {
+        type: "error",
+        errors: (err as Error).stack,
+      });
+    }
     return {
-      progress,
-      bucketName: cache.bucketName,
-      renderId: cache.renderId,
-      functionName: cache.functionName,
-      region: cache.region,
+      finality: {
+        type: "error",
+        errors: (err as Error).stack,
+      },
+      type: "finality",
     };
   }
-  const region = getRandomRegion();
+};
 
-  const { renderId, bucketName } = await renderVideoOnLambda({
-    region: region,
-    functionName: regions[region],
-    serveUrl: SITE_ID,
-    composition: COMP_NAME,
-    inputProps: { stats: stats },
-    codec: "h264-mkv",
-    imageFormat: "jpeg",
-    maxRetries: 1,
-    framesPerLambda: 80,
-    privacy: "public",
-  });
-  saveRender({
-    region: region,
-    bucketName,
-    renderId,
-    username,
-    functionName: regions[region],
-  });
-  const progress = await getRenderProgress({
-    bucketName: bucketName,
-    functionName: regions[region],
-    region: region,
-    renderId,
-  });
-  return {
-    renderId,
-    bucketName,
-    progress,
-    region,
-    functionName: regions[region],
-  };
+export const getFinality = (renderProgress: RenderProgress): Finality => {
+  if (renderProgress.outputFile) {
+    return {
+      type: "success",
+      url: renderProgress.outputFile,
+    };
+  }
+  if (renderProgress.fatalErrorEncountered) {
+    return {
+      type: "error",
+      errors: renderProgress.errors[0].stack,
+    };
+  }
+  return null;
 };

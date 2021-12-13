@@ -1,25 +1,34 @@
-import { AwsRegion, getRenderProgress, RenderProgress } from "@remotion/lambda";
+import { RenderProgress } from "@remotion/lambda";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Finality, getRender } from "../../src/db/renders";
+import { getRenderProgressWithFinality } from "../../src/get-render-progress-with-finality";
 
 type RequestData = {
-  renderId: string;
-  bucketName: string;
-  functionName: string;
-  region: AwsRegion;
+  username: string;
 };
+
+export type RenderProgressOrFinality =
+  | {
+      type: "progress";
+      progress: RenderProgress;
+    }
+  | {
+      type: "finality";
+      finality: Finality;
+    };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<RenderProgress>
+  res: NextApiResponse<RenderProgressOrFinality>
 ) {
   const body = JSON.parse(req.body) as RequestData;
+  const render = await getRender(body.username);
+  if (!render) {
+    throw new Error("Could not get progress for ");
+  }
 
-  const progress = await getRenderProgress({
-    renderId: body.renderId,
-    bucketName: body.bucketName,
-    functionName: body.functionName,
-    region: body.region,
-  });
+  const prog = await getRenderProgressWithFinality(render);
 
-  res.status(200).json(progress);
+  res.status(200).json(prog);
+  return;
 }

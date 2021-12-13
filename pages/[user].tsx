@@ -1,5 +1,4 @@
-import { AwsRegion, RenderProgress } from "@remotion/lambda";
-import { Player, PlayerInternals, PlayerRef } from "@remotion/player";
+import { Player, PlayerRef } from "@remotion/player";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,6 +15,7 @@ import Spinner from "../src/components/spinner";
 import { getRenderOrMake } from "../src/get-render-or-make";
 import { getStatsOrFetch } from "../src/get-stats-or-fetch";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
+import { RenderProgressOrFinality } from "./api/progress";
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true };
@@ -52,16 +52,11 @@ export const getStaticProps = async ({ params }) => {
     if (!compact) {
       return { notFound: true };
     }
-    const { progress, bucketName, renderId, region, functionName } =
-      await getRenderOrMake(user, compact);
+    const progress = await getRenderOrMake(user, compact);
     return {
       props: {
         user: compact,
         progress,
-        bucketName,
-        renderId,
-        region,
-        functionName,
       },
     };
   } catch (error) {
@@ -116,28 +111,15 @@ const layout: React.CSSProperties = {
 
 getFont();
 
-const useSizeIfClient = (ref: React.RefObject<HTMLElement>) => {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  return PlayerInternals.useElementSize(ref, { triggerOnWindowResize: true });
-};
-
 export default function User(props: {
   user: CompactStats | null;
-  renderId: string;
-  progress: RenderProgress;
-  bucketName: string;
-  functionName: string;
-  region: AwsRegion;
+  progress: RenderProgressOrFinality;
 }) {
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const player = useRef<PlayerRef>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const { user, progress, bucketName, renderId } = props;
+  const { user, progress } = props;
 
   const router = useRouter();
   const username = ([] as string[]).concat(router.query.user)[0];
@@ -306,11 +288,7 @@ export default function User(props: {
                 </p>
                 <Download
                   initialProgress={progress}
-                  bucketName={bucketName}
-                  renderId={renderId}
                   username={username}
-                  functionName={props.functionName}
-                  region={props.region}
                 ></Download>
                 {iosSafari() ? (
                   <p
