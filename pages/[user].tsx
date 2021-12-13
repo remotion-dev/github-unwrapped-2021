@@ -164,11 +164,7 @@ export default function User(props: {
             content={`${username}'s #GithubWrapped`}
             key="title"
           />
-          <meta property="og:image" content="/flash.png" />
-          <meta
-            property="og:image"
-            content="https://www.githubwrapped.com/flash.png"
-          />
+
           <meta
             name="description"
             content={`My coding 2021 in review. Get your own personalized video as well!`}

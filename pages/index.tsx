@@ -108,19 +108,7 @@ export default function Home() {
           name="description"
           content="Get your personalized video review of your coding 2021."
         />
-        <meta
-          property="og:image"
-          content="https://www.githubwrapped.com/flash.png"
-        />
-        <meta
-          property="twitter:image"
-          content="https://www.githubwrapped.com/flash.png"
-        />
         <link rel="icon" href="/fav.png" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
-        />
       </Head>
       <div style={abs} ref={ref}>
         {size ? (
