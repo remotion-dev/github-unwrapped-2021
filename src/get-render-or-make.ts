@@ -9,6 +9,7 @@ import { COMP_NAME, SITE_ID } from "./config";
 import {
   Finality,
   getRender,
+  lockRender,
   saveRender,
   updateRenderWithFinality,
 } from "./db/renders";
@@ -30,6 +31,7 @@ export const getRenderOrMake = async (
       return progress;
     }
     const region = getRandomRegion();
+    await lockRender(region, username);
 
     const { renderId, bucketName } = await renderVideoOnLambda({
       region: region,
@@ -50,7 +52,6 @@ export const getRenderOrMake = async (
       bucketName,
       renderId,
       username,
-      functionName,
     });
     const render = await getRender(username);
     if (!render) {
@@ -64,22 +65,24 @@ export const getRenderOrMake = async (
       (err as Error).stack,
     ]);
     if (_renderId && _region) {
-      await updateRenderWithFinality(_renderId, cache.username, _region, {
+      await updateRenderWithFinality(_renderId, username, _region, {
         type: "error",
-        errors: (err as Error).stack,
+        errors: (err as Error).stack as string,
       });
     }
     return {
       finality: {
         type: "error",
-        errors: (err as Error).stack,
+        errors: (err as Error).stack as string,
       },
       type: "finality",
     };
   }
 };
 
-export const getFinality = (renderProgress: RenderProgress): Finality => {
+export const getFinality = (
+  renderProgress: RenderProgress
+): Finality | null => {
   if (renderProgress.outputFile) {
     return {
       type: "success",

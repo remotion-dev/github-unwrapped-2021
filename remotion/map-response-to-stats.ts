@@ -6,7 +6,7 @@ import { All } from "../src/get-all";
 export type SpaceSavingContribution = [number, number, string, string];
 
 export type TopLanguage = {
-  color: string;
+  color: string | null;
   name: string;
 };
 
@@ -108,9 +108,10 @@ export const remapWeekdays = (weekday: number): Weekday => {
   if (weekday === 6) {
     return "5";
   }
+  throw new Error("unknown weekday" + weekday);
 };
 
-export const getTopLanguage = (response: All): TopLanguage => {
+export const getTopLanguage = (response: All): TopLanguage | null => {
   const langs: { [key: string]: number } = {};
   const languages = response.data.user.repositories.nodes
     .filter((n) => n.languages.edges?.[0])

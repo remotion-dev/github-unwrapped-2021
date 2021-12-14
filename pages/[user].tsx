@@ -21,13 +21,13 @@ export async function getStaticPaths() {
   return { paths: [], fallback: true };
 }
 
-function SafeHydrate({ children }) {
+const SafeHydrate: React.FC = ({ children }) => {
   return (
     <div suppressHydrationWarning>
       {typeof window === "undefined" ? null : children}
     </div>
   );
-}
+};
 
 const iosSafari = () => {
   if (typeof window === "undefined") {
@@ -39,7 +39,11 @@ const iosSafari = () => {
   return iOS && webkit;
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { user: string };
+}) => {
   const { user } = params;
 
   if (user.length > 40) {
@@ -122,10 +126,10 @@ export default function User(props: {
   const { user, progress } = props;
 
   const router = useRouter();
-  const username = ([] as string[]).concat(router.query.user)[0];
+  const username = ([] as string[]).concat(router.query.user ?? "")[0];
 
   useEffect(() => {
-    if (!ready || !user) {
+    if (!ready || !user || !player.current) {
       return;
     }
     player.current.addEventListener("pause", () => {

@@ -11,16 +11,14 @@ export type Finality =
   | {
       type: "error";
       errors: string;
-    }
-  | null;
+    };
 
 export type Render = {
-  renderId: string;
+  renderId: string | null;
   region: AwsRegion;
   username: string;
-  bucketName: string;
-  functionName: string;
-  finality: Finality;
+  bucketName: string | null;
+  finality: Finality | null;
 };
 
 export const rendersCollection = async () => {
@@ -28,28 +26,42 @@ export const rendersCollection = async () => {
   return client.db("wrapped").collection<Render>("renders");
 };
 
+export const lockRender = async (region: AwsRegion, username: string) => {
+  const coll = await rendersCollection();
+  await coll.insertOne({
+    region,
+    username: username.toLowerCase(),
+    bucketName: null,
+    finality: null,
+    renderId: null,
+  });
+};
+
 export const saveRender = async ({
   region,
   username,
   renderId,
   bucketName,
-  functionName,
 }: {
   region: AwsRegion;
   username: string;
   renderId: string;
   bucketName: string;
-  functionName: string;
 }) => {
   const coll = await rendersCollection();
-  await coll.insertOne({
-    region,
-    renderId,
-    username: username.toLowerCase(),
-    bucketName,
-    functionName,
-    finality: null,
-  });
+  await coll.updateOne(
+    {
+      region,
+      username: username.toLowerCase(),
+    },
+    {
+      $set: {
+        renderId,
+        bucketName,
+        finality: null,
+      },
+    }
+  );
 };
 
 export const updateRenderWithFinality = async (
@@ -58,7 +70,7 @@ export const updateRenderWithFinality = async (
   region: AwsRegion,
   finality: Finality
 ) => {
-  if (finality.type === "success") {
+  if (finality && finality.type === "success") {
     slackbot.send("#wrapped", [`Successfully rendered video for ${username}.`]);
   } else {
     slackbot.send("#wrapped", [`Failed to render video for ${username}!`]);
@@ -86,4 +98,11 @@ export const getRender = async (
   });
 
   return render ?? null;
+};
+
+export const deleteRender = async (render: WithId<Render>) => {
+  const coll = await rendersCollection();
+  await coll.deleteOne({
+    _id: render._id,
+  });
 };

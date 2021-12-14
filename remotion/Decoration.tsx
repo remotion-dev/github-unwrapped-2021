@@ -11,7 +11,7 @@ const noiseY = new SimplexNoise("seedY2");
 
 const items: {
   size: readonly [number, number];
-  Component: React.FC<SVGProps<SVGElement>>;
+  Component: React.FC<SVGProps<SVGSVGElement> & { fill: string }>;
 }[] = [
   {
     size: TwoSize,
@@ -56,6 +56,9 @@ export const Decoration: React.FC<{
     const pointSize = Math.sqrt(width * height) * 0.15;
 
     const ctx = ref.current.getContext("2d");
+    if (!ctx) {
+      return;
+    }
     ctx.clearRect(0, 0, width, height);
 
     for (let i = -0.8; i < 1.8 * progress; i += 0.005) {

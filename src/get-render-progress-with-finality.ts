@@ -15,6 +15,15 @@ export const getRenderProgressWithFinality = async (
     };
   }
 
+  if (!render.renderId || !render.bucketName) {
+    return {
+      progress: {
+        percent: 0,
+      },
+      type: "progress",
+    };
+  }
+
   const progress = await getRenderProgress({
     renderId: render.renderId,
     bucketName: render.bucketName,
@@ -40,6 +49,8 @@ export const getRenderProgressWithFinality = async (
 
   return {
     type: "progress",
-    progress,
+    progress: {
+      percent: progress.overallProgress,
+    },
   };
 };

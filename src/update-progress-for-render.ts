@@ -6,6 +6,9 @@ const script = async () => {
   const withoutFinality = renders.find({ finality: null });
   while (await withoutFinality.hasNext()) {
     const thisIsMyNext = await withoutFinality.next();
+    if (!thisIsMyNext) {
+      continue;
+    }
     await getRenderProgressWithFinality(thisIsMyNext);
     console.log("Done with " + thisIsMyNext.renderId);
   }
