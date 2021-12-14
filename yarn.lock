@@ -1229,10 +1229,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@remotion/bundler@3.0.0-wrappedup.221+18e6a3c9c":
-  version "3.0.0-wrappedup.221"
-  resolved "https://registry.yarnpkg.com/@remotion/bundler/-/bundler-3.0.0-wrappedup.221.tgz#87ace234b93743c39cde4d43196bf6375acb2428"
-  integrity sha512-+KabnEonlENADLlVZWCqZHmtb2swh8BH63xCUFlcV9uUy3RRRtoWWKRu69VXkk7MQDwF9yCiDBRupCRG0Q0b1g==
+"@remotion/bundler@3.0.0-wrappedup.222+5e3217098":
+  version "3.0.0-wrappedup.222"
+  resolved "https://registry.yarnpkg.com/@remotion/bundler/-/bundler-3.0.0-wrappedup.222.tgz#feed59a1d9822d69508f130b13930baa3d137c87"
+  integrity sha512-IFE/63CZf6epoOF1++QxvMHEmCs116+OrWIHteeEfjj+bG5JK2HgRdLWn3xa3I2+hFAMvdoOEjozZB/Pl0UMSw==
   dependencies:
     "@jonny/webpack-dev-middleware" "^4.1.3"
     "@webhotelier/webpack-fast-refresh" "5.1.0"
@@ -1243,22 +1243,22 @@
     file-loader "^6.2.0"
     latest-version "^5.1.0"
     react-refresh "^0.9.0-rc.2"
-    remotion "3.0.0-wrappedup.221+18e6a3c9c"
+    remotion "3.0.0-wrappedup.222+5e3217098"
     semver "7.3.4"
     source-map-loader "^3.0.0"
     style-loader "^2.0.0"
     webpack "5.60.0"
     webpack-hot-middleware "^2.25.0"
 
-"@remotion/cli@3.0.0-wrappedup.221+18e6a3c9c":
-  version "3.0.0-wrappedup.221"
-  resolved "https://registry.yarnpkg.com/@remotion/cli/-/cli-3.0.0-wrappedup.221.tgz#63962d21a5a86cba821fe6c84caca0b6dd22c6a3"
-  integrity sha512-2CvgvLFnuaCXvViPkJ7IvVFkIPDv7HFBPA39cXraEgk9xGBDMR29MZbcqbzg/uX4LqQW9/fQa6uNsite2OPcHg==
+"@remotion/cli@3.0.0-wrappedup.222+5e3217098":
+  version "3.0.0-wrappedup.222"
+  resolved "https://registry.yarnpkg.com/@remotion/cli/-/cli-3.0.0-wrappedup.222.tgz#69f248e366554fdac8b0afe02ded5dd07fca9741"
+  integrity sha512-A66neC9fvUDotVk7URJTmN/UxjUEEnwWA19+dGj92hAQxjVrD2R639LzcuJs0rdZLi8JXg3ft5WubQCorFwfbw==
   dependencies:
-    "@remotion/bundler" "3.0.0-wrappedup.221+18e6a3c9c"
-    "@remotion/media-utils" "3.0.0-wrappedup.221+18e6a3c9c"
-    "@remotion/player" "3.0.0-wrappedup.221+18e6a3c9c"
-    "@remotion/renderer" "3.0.0-wrappedup.221+18e6a3c9c"
+    "@remotion/bundler" "3.0.0-wrappedup.222+5e3217098"
+    "@remotion/media-utils" "3.0.0-wrappedup.222+5e3217098"
+    "@remotion/player" "3.0.0-wrappedup.222+5e3217098"
+    "@remotion/renderer" "3.0.0-wrappedup.222+5e3217098"
     ansi-diff "^1.1.1"
     better-opn "^2.1.1"
     chalk "^4.1.0"
@@ -1266,14 +1266,14 @@
     esbuild "^0.11.12"
     execa "^4.0.2"
     minimist "^1.2.5"
-    remotion "3.0.0-wrappedup.221+18e6a3c9c"
+    remotion "3.0.0-wrappedup.222+5e3217098"
     semver "^7.3.4"
     webpack "5.60.0"
 
-"@remotion/lambda@3.0.0-wrappedup.221+18e6a3c9c":
-  version "3.0.0-wrappedup.221"
-  resolved "https://registry.yarnpkg.com/@remotion/lambda/-/lambda-3.0.0-wrappedup.221.tgz#b971dfe6a8281f9a5f793715f42edfcb92d2ec35"
-  integrity sha512-YkERCi4XW3U1czXUH6WCuy92OLJwwcovc5YQw6eRcFU2DdcnNx7KO+aeGKsZbBMdKVjOuV26ZV8wxrRtufcBpA==
+"@remotion/lambda@3.0.0-wrappedup.222+5e3217098":
+  version "3.0.0-wrappedup.222"
+  resolved "https://registry.yarnpkg.com/@remotion/lambda/-/lambda-3.0.0-wrappedup.222.tgz#76eb42e809064d7de4e8dd5b327bbbad4009c496"
+  integrity sha512-TqqH3aPqBUCzVR9cXSJ8EAxKCPmJa+8PO4eWIRTs7h4BspYUspjvJfz+mdSuGyqOdYerAYNnYRo3T8EfO6vxLA==
   dependencies:
     "@aws-sdk/client-cloudwatch-logs" "3.42.0"
     "@aws-sdk/client-iam" "3.42.0"
@@ -1281,42 +1281,42 @@
     "@aws-sdk/client-s3" "3.42.0"
     "@aws-sdk/lib-storage" "3.42.0"
     "@aws-sdk/s3-request-presigner" "3.42.0"
-    "@remotion/bundler" "3.0.0-wrappedup.221+18e6a3c9c"
-    "@remotion/cli" "3.0.0-wrappedup.221+18e6a3c9c"
-    "@remotion/renderer" "3.0.0-wrappedup.221+18e6a3c9c"
+    "@remotion/bundler" "3.0.0-wrappedup.222+5e3217098"
+    "@remotion/cli" "3.0.0-wrappedup.222+5e3217098"
+    "@remotion/renderer" "3.0.0-wrappedup.222+5e3217098"
     aws-policies "^1.0.1"
     dotenv "^10.0.0"
     minimist "^1.2.5"
     p-limit "^3.1.0"
     prompt "^1.1.0"
-    remotion "3.0.0-wrappedup.221+18e6a3c9c"
+    remotion "3.0.0-wrappedup.222+5e3217098"
 
-"@remotion/media-utils@3.0.0-wrappedup.221+18e6a3c9c":
-  version "3.0.0-wrappedup.221"
-  resolved "https://registry.yarnpkg.com/@remotion/media-utils/-/media-utils-3.0.0-wrappedup.221.tgz#63593a44cacfe7789a295c7add7852ea77eaeba9"
-  integrity sha512-kp2ZuSxaJRy8HQeL96Xr38dU9LZWEC9bd+YcOVEloxbLM3YLa+S5Ur5vzKD+Yg4D64zYYUUmPNnPLGwz5yc8eg==
+"@remotion/media-utils@3.0.0-wrappedup.222+5e3217098":
+  version "3.0.0-wrappedup.222"
+  resolved "https://registry.yarnpkg.com/@remotion/media-utils/-/media-utils-3.0.0-wrappedup.222.tgz#491faa8c1797ac1baa0458574b881acee3705ed1"
+  integrity sha512-FzNXWUdbJomexRtHVR/ubKn1remDFJ8OcTkzIpHxCIJK+aWzb3oLtQ2o2I2ZLUEeknQUQW3JHDkJSY2zwfEIxw==
   dependencies:
-    remotion "3.0.0-wrappedup.221+18e6a3c9c"
+    remotion "3.0.0-wrappedup.222+5e3217098"
 
-"@remotion/player@3.0.0-wrappedup.221+18e6a3c9c":
-  version "3.0.0-wrappedup.221"
-  resolved "https://registry.yarnpkg.com/@remotion/player/-/player-3.0.0-wrappedup.221.tgz#23e612d188d8715b6bad9c69e6ba4d4fb346efd2"
-  integrity sha512-svsi1NdXyOdkYmPk58zEfSh5PcaBTR43OZ2gzRAQDJVLM4o7Idm7/pG8JVohzX7OYQl9MMzps2egvVVa4GX+Pg==
+"@remotion/player@3.0.0-wrappedup.222+5e3217098":
+  version "3.0.0-wrappedup.222"
+  resolved "https://registry.yarnpkg.com/@remotion/player/-/player-3.0.0-wrappedup.222.tgz#d31f35b46776314000511d374a1b7e0604e1959a"
+  integrity sha512-NXkGjyly6P4xHDTG7pyG40AXy+hHRI0aa0sChyTVUMN85u+nfFZWAKT7uDH1OLiWoHlTo+dDCEZM59i4xw39Fg==
   dependencies:
-    remotion "3.0.0-wrappedup.221+18e6a3c9c"
+    remotion "3.0.0-wrappedup.222+5e3217098"
 
-"@remotion/renderer@3.0.0-wrappedup.221+18e6a3c9c":
-  version "3.0.0-wrappedup.221"
-  resolved "https://registry.yarnpkg.com/@remotion/renderer/-/renderer-3.0.0-wrappedup.221.tgz#bc83b5a4736002a90c5934085fe0b9f7867a126c"
-  integrity sha512-LD9z9Trv6DclQpsvQ/ycnXYp9jTdEWtGBe4lukTbly0z27MNTCX/mor7T4s03WB5YquSIx2VrwOlEIphU6hnHQ==
+"@remotion/renderer@3.0.0-wrappedup.222+5e3217098":
+  version "3.0.0-wrappedup.222"
+  resolved "https://registry.yarnpkg.com/@remotion/renderer/-/renderer-3.0.0-wrappedup.222.tgz#31c1ab84c1e8f998c19d9d2d2a2c5ebcd55c7072"
+  integrity sha512-j5/f1zO2Bq1r8Vpm3ZccBYzKJWQjLRzCYpC04HiRi55TfeUI65y9NjukBmqPzqnTw1Csy+Mm3EmDaGHPUW3EyQ==
   dependencies:
-    "@remotion/bundler" "3.0.0-wrappedup.221+18e6a3c9c"
+    "@remotion/bundler" "3.0.0-wrappedup.222+5e3217098"
     "@testing-library/dom" "^8.7.2"
     execa "^4.0.2"
     got "11.8.2"
     p-limit "^3.1.0"
     puppeteer-core "^10.2.0"
-    remotion "3.0.0-wrappedup.221+18e6a3c9c"
+    remotion "3.0.0-wrappedup.222+5e3217098"
     sanitize-filename "^1.6.3"
     serve-handler "^6.1.3"
 
@@ -6074,10 +6074,10 @@ registry-url@^5.0.0:
   dependencies:
     rc "^1.2.8"
 
-remotion@3.0.0-wrappedup.221+18e6a3c9c:
-  version "3.0.0-wrappedup.221"
-  resolved "https://registry.yarnpkg.com/remotion/-/remotion-3.0.0-wrappedup.221.tgz#d69a9d11c094f0826791c90f142bb6ac251dada0"
-  integrity sha512-VXqUfar0hWCkj6werxfqPZ86qcsNF0tyMJeerA8Ubm6xTP3bpZBmnpBjnf2bjfG9Iw7GFkylNNJbuaTfGQBjYw==
+remotion@3.0.0-wrappedup.222+5e3217098:
+  version "3.0.0-wrappedup.222"
+  resolved "https://registry.yarnpkg.com/remotion/-/remotion-3.0.0-wrappedup.222.tgz#93a3ab6e68b9114f14aadfff3b708cbb7cdd65cf"
+  integrity sha512-RLUw/dXM9Yd9dK4wm9arxu5ESpLITB9URTFnjQIhLxsT9DXiNKZM4vfUAjMFrCztx0UIIbqZrXW14ryHG7DfFQ==
 
 repeat-element@^1.1.2:
   version "1.1.4"

@@ -1,7 +1,5 @@
 import { AwsRegion } from "@remotion/lambda";
 
-export const FUNCTION_NAME = "2021-12-15-2048mb-240sec";
-
 export const getRandomRegion = (): AwsRegion => {
   const regions: AwsRegion[] = [
     "ap-northeast-1",
