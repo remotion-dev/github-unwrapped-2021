@@ -157,11 +157,11 @@ export default function User(props: {
         <Head>
           <title>
             {username}
-            {"'"}s #GithubWrapped
+            {"'"}s #GitHubWrapped
           </title>
           <meta
             property="og:title"
-            content={`${username}'s #GithubWrapped`}
+            content={`${username}'s #GitHubWrapped`}
             key="title"
           />
 
@@ -176,7 +176,7 @@ export default function User(props: {
             <header style={style}>
               <br></br>
               <br></br>
-              <h1 style={title}>Here is your #GithubWrapped!</h1>
+              <h1 style={title}>Here is your #GitHubWrapped!</h1>
               <h3 style={subtitle}>@{username}</h3>
               <div
                 style={{
@@ -282,7 +282,7 @@ export default function User(props: {
                       color: "black",
                     }}
                   >
-                    #GithubWrapped
+                    #GitHubWrapped
                   </span>{" "}
                   hashtag!
                 </p>
