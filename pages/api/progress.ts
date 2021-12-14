@@ -28,7 +28,7 @@ export default async function handler(
     throw new Error("Could not get progress for ");
   }
 
-  const prog = await getRenderProgressWithFinality(render);
+  const prog = await getRenderProgressWithFinality(render, render.account ?? 1);
 
   res.status(200).json(prog);
   return;

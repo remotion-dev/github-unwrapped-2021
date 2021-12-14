@@ -14,9 +14,11 @@ import {
   updateRenderWithFinality,
 } from "./db/renders";
 import { functionName } from "./function-name";
+import { getRandomAwsAccount } from "./get-random-aws-account";
 import { getRenderProgressWithFinality } from "./get-render-progress-with-finality";
 import { slackbot } from "./post-to-slack";
 import { getRandomRegion } from "./regions";
+import { setEnvForKey } from "./set-env-for-key";
 
 export const getRenderOrMake = async (
   username: string,
@@ -27,11 +29,18 @@ export const getRenderOrMake = async (
   let _region: AwsRegion | null = cache?.region ?? null;
   try {
     if (cache) {
-      const progress = await getRenderProgressWithFinality(cache);
+      const progress = await getRenderProgressWithFinality(
+        cache,
+        cache.account ?? 1
+      );
       return progress;
     }
     const region = getRandomRegion();
-    await lockRender(region, username);
+    const account = getRandomAwsAccount();
+    console.log("selected account", account);
+    await lockRender(region, username, account);
+
+    setEnvForKey(account);
 
     const { renderId, bucketName } = await renderVideoOnLambda({
       region: region,
@@ -57,7 +66,7 @@ export const getRenderOrMake = async (
     if (!render) {
       throw new Error(`Didn't have error for ${username}`);
     }
-    const progress = await getRenderProgressWithFinality(render);
+    const progress = await getRenderProgressWithFinality(render, account);
     return progress;
   } catch (err) {
     slackbot.send("#wrapped", [

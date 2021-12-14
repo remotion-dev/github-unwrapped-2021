@@ -19,6 +19,7 @@ export type Render = {
   username: string;
   bucketName: string | null;
   finality: Finality | null;
+  account: number | undefined;
 };
 
 export const rendersCollection = async () => {
@@ -26,7 +27,11 @@ export const rendersCollection = async () => {
   return client.db("wrapped").collection<Render>("renders");
 };
 
-export const lockRender = async (region: AwsRegion, username: string) => {
+export const lockRender = async (
+  region: AwsRegion,
+  username: string,
+  account: number
+) => {
   const coll = await rendersCollection();
   await coll.insertOne({
     region,
@@ -34,6 +39,7 @@ export const lockRender = async (region: AwsRegion, username: string) => {
     bucketName: null,
     finality: null,
     renderId: null,
+    account: account,
   });
 };
 

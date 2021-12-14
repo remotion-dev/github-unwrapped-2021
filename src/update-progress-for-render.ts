@@ -9,7 +9,10 @@ const script = async () => {
     if (!thisIsMyNext) {
       continue;
     }
-    await getRenderProgressWithFinality(thisIsMyNext);
+    await getRenderProgressWithFinality(
+      thisIsMyNext,
+      thisIsMyNext.account ?? 1
+    );
     console.log("Done with " + thisIsMyNext.renderId);
   }
 };

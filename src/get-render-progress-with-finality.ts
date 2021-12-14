@@ -4,10 +4,14 @@ import { RenderProgressOrFinality } from "../pages/api/progress";
 import { Render, updateRenderWithFinality } from "./db/renders";
 import { functionName } from "./function-name";
 import { getFinality } from "./get-render-or-make";
+import { setEnvForKey } from "./set-env-for-key";
 
 export const getRenderProgressWithFinality = async (
-  render: WithId<Render>
+  render: WithId<Render>,
+  accountNumber: number
 ): Promise<RenderProgressOrFinality> => {
+  setEnvForKey(accountNumber);
+
   if (render.finality) {
     return {
       type: "finality",
