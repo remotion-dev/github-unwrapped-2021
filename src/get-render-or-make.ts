@@ -9,12 +9,14 @@ import { COMP_NAME, SITE_ID } from "./config";
 import {
   Finality,
   getRender,
+  lockRender,
   saveRender,
   updateRenderWithFinality,
 } from "./db/renders";
+import { functionName } from "./function-name";
 import { getRenderProgressWithFinality } from "./get-render-progress-with-finality";
 import { slackbot } from "./post-to-slack";
-import { getRandomRegion, regions } from "./regions";
+import { getRandomRegion } from "./regions";
 
 export const getRenderOrMake = async (
   username: string,
@@ -29,11 +31,11 @@ export const getRenderOrMake = async (
       return progress;
     }
     const region = getRandomRegion();
-    const functionName = regions[region];
+    await lockRender(region, username);
 
     const { renderId, bucketName } = await renderVideoOnLambda({
       region: region,
-      functionName,
+      functionName: functionName,
       serveUrl: SITE_ID,
       composition: COMP_NAME,
       inputProps: { stats: stats },
@@ -50,7 +52,6 @@ export const getRenderOrMake = async (
       bucketName,
       renderId,
       username,
-      functionName,
     });
     const render = await getRender(username);
     if (!render) {
@@ -64,22 +65,24 @@ export const getRenderOrMake = async (
       (err as Error).stack,
     ]);
     if (_renderId && _region) {
-      await updateRenderWithFinality(_renderId, cache.username, _region, {
+      await updateRenderWithFinality(_renderId, username, _region, {
         type: "error",
-        errors: (err as Error).stack,
+        errors: (err as Error).stack as string,
       });
     }
     return {
       finality: {
         type: "error",
-        errors: (err as Error).stack,
+        errors: (err as Error).stack as string,
       },
       type: "finality",
     };
   }
 };
 
-export const getFinality = (renderProgress: RenderProgress): Finality => {
+export const getFinality = (
+  renderProgress: RenderProgress
+): Finality | null => {
   if (renderProgress.outputFile) {
     return {
       type: "success",

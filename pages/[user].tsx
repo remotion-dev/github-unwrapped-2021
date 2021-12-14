@@ -12,22 +12,20 @@ import { backButton } from "../src/components/button";
 import Download from "../src/components/Download";
 import { Footer, FOOTER_HEIGHT } from "../src/components/Footer";
 import Spinner from "../src/components/spinner";
-import { getRenderOrMake } from "../src/get-render-or-make";
 import { getStatsOrFetch } from "../src/get-stats-or-fetch";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
-import { RenderProgressOrFinality } from "./api/progress";
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true };
 }
 
-function SafeHydrate({ children }) {
+const SafeHydrate: React.FC = ({ children }) => {
   return (
     <div suppressHydrationWarning>
       {typeof window === "undefined" ? null : children}
     </div>
   );
-}
+};
 
 const iosSafari = () => {
   if (typeof window === "undefined") {
@@ -39,7 +37,11 @@ const iosSafari = () => {
   return iOS && webkit;
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { user: string };
+}) => {
   const { user } = params;
 
   if (user.length > 40) {
@@ -52,11 +54,9 @@ export const getStaticProps = async ({ params }) => {
     if (!compact) {
       return { notFound: true };
     }
-    const progress = await getRenderOrMake(user, compact);
     return {
       props: {
         user: compact,
-        progress,
       },
     };
   } catch (error) {
@@ -111,21 +111,18 @@ const layout: React.CSSProperties = {
 
 getFont();
 
-export default function User(props: {
-  user: CompactStats | null;
-  progress: RenderProgressOrFinality;
-}) {
+export default function User(props: { user: CompactStats | null }) {
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const player = useRef<PlayerRef>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const { user, progress } = props;
+  const { user } = props;
 
   const router = useRouter();
-  const username = ([] as string[]).concat(router.query.user)[0];
+  const username = ([] as string[]).concat(router.query.user ?? "")[0];
 
   useEffect(() => {
-    if (!ready || !user) {
+    if (!ready || !user || !player.current) {
       return;
     }
     player.current.addEventListener("pause", () => {
@@ -157,11 +154,11 @@ export default function User(props: {
         <Head>
           <title>
             {username}
-            {"'"}s #GithubWrapped
+            {"'"}s #GitHubWrapped
           </title>
           <meta
             property="og:title"
-            content={`${username}'s #GithubWrapped`}
+            content={`${username}'s #GitHubWrapped`}
             key="title"
           />
 
@@ -176,7 +173,7 @@ export default function User(props: {
             <header style={style}>
               <br></br>
               <br></br>
-              <h1 style={title}>Here is your #GithubWrapped!</h1>
+              <h1 style={title}>Here is your #GitHubWrapped!</h1>
               <h3 style={subtitle}>@{username}</h3>
               <div
                 style={{
@@ -282,14 +279,11 @@ export default function User(props: {
                       color: "black",
                     }}
                   >
-                    #GithubWrapped
+                    #GitHubWrapped
                   </span>{" "}
                   hashtag!
                 </p>
-                <Download
-                  initialProgress={progress}
-                  username={username}
-                ></Download>
+                <Download username={username}></Download>
                 {iosSafari() ? (
                   <p
                     style={{

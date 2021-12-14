@@ -1,4 +1,3 @@
-import { RenderProgress } from "@remotion/lambda";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Finality, getRender } from "../../src/db/renders";
 import { getRenderProgressWithFinality } from "../../src/get-render-progress-with-finality";
@@ -10,7 +9,9 @@ type RequestData = {
 export type RenderProgressOrFinality =
   | {
       type: "progress";
-      progress: RenderProgress;
+      progress: {
+        percent: number;
+      };
     }
   | {
       type: "finality";

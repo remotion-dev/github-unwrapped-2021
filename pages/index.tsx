@@ -103,7 +103,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>#GithubWrapped 2021</title>
+        <title>#GitHubWrapped 2021</title>
         <meta
           name="description"
           content="Get your personalized video review of your coding 2021."
