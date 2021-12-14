@@ -10,13 +10,14 @@
     "render": "npx remotion render remotion/index.tsx main out/wrapped.mp4"
   },
   "dependencies": {
-    "@remotion/bundler": "3.0.0-wrapped.215+d68bdd242",
-    "@remotion/cli": "3.0.0-wrapped.215+d68bdd242",
-    "@remotion/lambda": "3.0.0-wrapped.215+d68bdd242",
-    "@remotion/player": "3.0.0-wrapped.215+d68bdd242",
-    "@remotion/renderer": "3.0.0-wrapped.215+d68bdd242",
+    "@remotion/bundler": "3.0.0-wrappedup.221+18e6a3c9c",
+    "@remotion/cli": "3.0.0-wrappedup.221+18e6a3c9c",
+    "@remotion/lambda": "3.0.0-wrappedup.221+18e6a3c9c",
+    "@remotion/player": "3.0.0-wrappedup.221+18e6a3c9c",
+    "@remotion/renderer": "3.0.0-wrappedup.221+18e6a3c9c",
     "@types/lodash.chunk": "^4.2.6",
     "@types/lodash.groupby": "^4.6.6",
+    "dotenv": "^10.0.0",
     "lodash.chunk": "^4.2.0",
     "lodash.groupby": "^4.6.0",
     "make-color-more-chill": "^0.2.2",
@@ -27,9 +28,10 @@
     "prettier-plugin-organize-imports": "^2.3.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "remotion": "3.0.0-wrapped.215+d68bdd242",
+    "remotion": "3.0.0-wrappedup.221+18e6a3c9c",
     "simplex-noise": "^3.0.0",
-    "slackbot": "^0.0.2"
+    "slackbot": "^0.0.2",
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.37",

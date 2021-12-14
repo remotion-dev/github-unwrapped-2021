@@ -1,17 +1,6 @@
 import { AwsRegion } from "@remotion/lambda";
 
-export const regions: { [key in AwsRegion]: string } = {
-  "ap-northeast-1": "remotion-render-4fmqfux9di",
-  "ap-south-1": "remotion-render-0o3apxbmkc",
-  "ap-southeast-1": "remotion-render-pbma6vbbo2",
-  "ap-southeast-2": "remotion-render-d86x3345fa",
-  "eu-central-1": "remotion-render-90ft7r8v0n",
-  "eu-west-1": "remotion-render-9d0uq5zh7g",
-  "eu-west-2": "remotion-render-mp3ucgfck5",
-  "us-east-1": "remotion-render-wqoe3pfmzh",
-  "us-east-2": "remotion-render-cn0iwf0m65",
-  "us-west-2": "remotion-render-8iutdsvlm4",
-};
+export const FUNCTION_NAME = "2021-12-15-2048mb-240sec";
 
 export const getRandomRegion = (): AwsRegion => {
   const regions: AwsRegion[] = [

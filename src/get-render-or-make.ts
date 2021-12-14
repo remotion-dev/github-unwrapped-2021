@@ -12,9 +12,10 @@ import {
   saveRender,
   updateRenderWithFinality,
 } from "./db/renders";
+import { functionName } from "./function-name";
 import { getRenderProgressWithFinality } from "./get-render-progress-with-finality";
 import { slackbot } from "./post-to-slack";
-import { getRandomRegion, regions } from "./regions";
+import { getRandomRegion } from "./regions";
 
 export const getRenderOrMake = async (
   username: string,
@@ -29,11 +30,10 @@ export const getRenderOrMake = async (
       return progress;
     }
     const region = getRandomRegion();
-    const functionName = regions[region];
 
     const { renderId, bucketName } = await renderVideoOnLambda({
       region: region,
-      functionName,
+      functionName: functionName,
       serveUrl: SITE_ID,
       composition: COMP_NAME,
       inputProps: { stats: stats },
