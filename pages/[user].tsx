@@ -12,10 +12,8 @@ import { backButton } from "../src/components/button";
 import Download from "../src/components/Download";
 import { Footer, FOOTER_HEIGHT } from "../src/components/Footer";
 import Spinner from "../src/components/spinner";
-import { getRenderOrMake } from "../src/get-render-or-make";
 import { getStatsOrFetch } from "../src/get-stats-or-fetch";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
-import { RenderProgressOrFinality } from "./api/progress";
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true };
@@ -56,11 +54,9 @@ export const getStaticProps = async ({
     if (!compact) {
       return { notFound: true };
     }
-    const progress = await getRenderOrMake(user, compact);
     return {
       props: {
         user: compact,
-        progress,
       },
     };
   } catch (error) {
@@ -115,15 +111,12 @@ const layout: React.CSSProperties = {
 
 getFont();
 
-export default function User(props: {
-  user: CompactStats | null;
-  progress: RenderProgressOrFinality;
-}) {
+export default function User(props: { user: CompactStats | null }) {
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const player = useRef<PlayerRef>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const { user, progress } = props;
+  const { user } = props;
 
   const router = useRouter();
   const username = ([] as string[]).concat(router.query.user ?? "")[0];
@@ -290,10 +283,7 @@ export default function User(props: {
                   </span>{" "}
                   hashtag!
                 </p>
-                <Download
-                  initialProgress={progress}
-                  username={username}
-                ></Download>
+                <Download username={username}></Download>
                 {iosSafari() ? (
                   <p
                     style={{

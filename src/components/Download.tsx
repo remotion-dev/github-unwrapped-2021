@@ -12,9 +12,9 @@ const downloadButton: React.CSSProperties = {
 
 const Download: React.FC<{
   username: string;
-  initialProgress: RenderProgressOrFinality;
-}> = ({ initialProgress, username }, ref) => {
-  const [downloadProgress, setDownloadProgress] = useState(initialProgress);
+}> = ({ username }, ref) => {
+  const [downloadProgress, setDownloadProgress] =
+    useState<RenderProgressOrFinality | null>(null);
   const [retrying, setRetrying] = useState(false);
 
   const pollProgress = useCallback(async () => {
@@ -37,30 +37,55 @@ const Download: React.FC<{
     }, 1000);
   }, [username]);
 
-  const retry = useCallback(async () => {
-    setRetrying(true);
-    await fetch("/api/retry", {
+  const render = useCallback(async () => {
+    const res = await fetch("/api/render", {
       method: "POST",
       body: JSON.stringify({
         username,
       }),
     });
+    const prog = (await res.json()) as RenderProgressOrFinality;
+    setDownloadProgress(prog);
+  }, [username]);
+
+  const retry = useCallback(async () => {
+    setRetrying(true);
+    const res = await fetch("/api/retry", {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+      }),
+    });
+    const prog = (await res.json()) as RenderProgressOrFinality;
+    setDownloadProgress(prog);
     setRetrying(false);
-    pollProgress();
-  }, [pollProgress, username]);
+  }, [username]);
+
+  const type = downloadProgress?.type ?? null;
 
   useEffect(() => {
-    if (downloadProgress.type === "finality") {
-      return;
+    if (type === "progress") {
+      pollProgress();
     }
-    pollProgress();
-  }, [downloadProgress.type, pollProgress]);
+  }, [type, pollProgress]);
+
+  useEffect(() => {
+    if (downloadProgress === null) {
+      render();
+    }
+  }, [downloadProgress, render]);
 
   return (
     <div>
-      {downloadProgress.type == "finality" &&
-      downloadProgress.finality &&
-      downloadProgress.finality.type === "success" ? (
+      {downloadProgress === null ? (
+        <div>
+          <button style={downloadButton} type="button">
+            Initializing render...
+          </button>
+        </div>
+      ) : downloadProgress.type == "finality" &&
+        downloadProgress.finality &&
+        downloadProgress.finality.type === "success" ? (
         <a href={downloadProgress.finality.url} download={`${username}`}>
           <div style={downloadButton}>Download video</div>
         </a>
