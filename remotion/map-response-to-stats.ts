@@ -106,27 +106,27 @@ export const getTopLanguage = (response: All): TopLanguage | null => {
   const langs: { [key: string]: number } = {};
   const languages = response.data.user.repositories.nodes
     .filter((n) => n.languages.edges?.[0])
-    .map((n) => n.languages.edges[0].node);
+    .map((n) => n.languages.edges[0]);
 
   for (const lang of languages) {
-    if (!langs[lang.id]) {
-      langs[lang.id] = 0;
+    if (!langs[lang.node.id]) {
+      langs[lang.node.id] = 0;
     }
-    langs[lang.id]++;
+    langs[lang.node.id] += lang.size;
   }
 
   const topEntries = Object.entries(langs)
     .sort((a, b) => a[1] - b[1])
     .reverse();
 
-  const lang = languages.find((l) => l.id === topEntries[0][0]);
+  const lang = languages.find((l) => l.node.id === topEntries[0][0]);
 
   if (!lang) {
     return null;
   }
   return {
-    color: lang.color,
-    name: lang.name,
+    color: lang.node.color,
+    name: lang.node.name,
   };
 };
 
