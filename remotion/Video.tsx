@@ -9,8 +9,6 @@ import { Issues } from "./Issues";
 import { Main } from "./Main";
 import { ManyLanguages } from "./ManyLanguages";
 import { mapResponseToStats } from "./map-response-to-stats";
-import { StarEmoji } from "./StarEmoji";
-import { Stars } from "./Stars";
 import { TitleCard } from "./TitleCard";
 import { TopWeekDays } from "./TopWeekday";
 import { TransitionDemo } from "./TransitionDemo";
@@ -25,22 +23,6 @@ export const Root: React.FC = () => {
         height={1080}
         width={1080}
         id={"wrapped"}
-      ></Composition>
-      <Composition
-        component={Stars}
-        durationInFrames={300}
-        fps={30}
-        height={1080}
-        width={1080}
-        id="stars"
-      ></Composition>
-      <Composition
-        component={StarEmoji}
-        durationInFrames={300}
-        fps={30}
-        height={1080}
-        width={1080}
-        id="star-emoji"
       ></Composition>
       <Composition
         component={Main}

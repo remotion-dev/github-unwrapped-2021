@@ -12,17 +12,6 @@ const query = (username: string) =>
     closedIssues: issues (first: 100, orderBy: {field:CREATED_AT, direction: ASC} filterBy: {since: "2021-01-01T00:00:00.000Z"}, states: CLOSED) {
       totalCount
     }
-    starredRepositories(first: 100, orderBy: {field: STARRED_AT, direction: DESC}) {
-      edges {
-        node {
-          name
-          owner {
-            login
-          }
-        }
-        starredAt
-      }
-    }
     repositories(last: 50, isFork: false) {
       nodes {
         name

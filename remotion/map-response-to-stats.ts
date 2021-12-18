@@ -29,7 +29,6 @@ export type CompactStats = {
   contributions: { [key: string]: SpaceSavingContribution[] };
   avatar: string;
   topLanguage: TopLanguage | null;
-  starsThisYear: number;
   weekdays: Weekdays;
   issues: Issues;
 };
@@ -39,14 +38,6 @@ export const getIssues = (response: All): Issues => {
     closed: response.data.user.closedIssues.totalCount,
     open: response.data.user.openIssues.totalCount,
   };
-};
-
-export const getStarsThisYear = (response: All) => {
-  const edge = response.data.user.starredRepositories.edges ?? [];
-  const starsThisYear = edge.filter(
-    (e) => new Date(e.starredAt).getFullYear() === 2021
-  );
-  return starsThisYear.length;
 };
 
 export type Weekday = "0" | "1" | "2" | "3" | "4" | "5" | "6";
@@ -164,7 +155,6 @@ export const mapResponseToStats = (response: All): CompactStats => {
     contributions: groupedByMonth,
     avatar: response.data.user.avatarUrl,
     topLanguage: getTopLanguage(response),
-    starsThisYear: getStarsThisYear(response),
     weekdays: getMostProductive(response),
     issues: getIssues(response),
   };
