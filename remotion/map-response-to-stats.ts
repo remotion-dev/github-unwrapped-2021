@@ -143,7 +143,8 @@ export const mapResponseToStats = (response: All): CompactStats => {
   const allDays =
     response.data.user.contributionsCollection.contributionCalendar.weeks
       .map((w) => w.contributionDays)
-      .flat(1);
+      .flat(1)
+      .filter((d) => d.date.startsWith("2021"));
 
   const groupedByMonth = groupBy(
     allDays.map(
