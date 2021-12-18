@@ -31,6 +31,7 @@ export type CompactStats = {
   topLanguage: TopLanguage | null;
   weekdays: Weekdays;
   issues: Issues;
+  fixedDec18Issues: boolean | undefined;
 };
 
 export const getIssues = (response: All): Issues => {
@@ -157,5 +158,6 @@ export const mapResponseToStats = (response: All): CompactStats => {
     topLanguage: getTopLanguage(response),
     weekdays: getMostProductive(response),
     issues: getIssues(response),
+    fixedDec18Issues: true,
   };
 };

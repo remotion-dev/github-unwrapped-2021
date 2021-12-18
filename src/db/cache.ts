@@ -31,3 +31,10 @@ export const getFromCache = async (
   }
   return null;
 };
+
+export const deleteCache = async (username: string) => {
+  const coll = await collection();
+  await coll.deleteMany({
+    username: username.toLowerCase(),
+  });
+};
