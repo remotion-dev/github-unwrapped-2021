@@ -29,8 +29,8 @@ const subtitle: React.CSSProperties = {
 export const EndCard2: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const chars = "githubwrapped";
-  const off = chars.length * 5 + 8;
+  const chars = "githubunwrapped";
+  const off = chars.length * 4 + 14;
   const bigspr = spring({
     frame: frame - off,
     fps,
@@ -62,7 +62,7 @@ export const EndCard2: React.FC = () => {
         >
           {chars.split("").map((char, i) => {
             const spr = spring({
-              frame: frame - i * 5,
+              frame: frame - i * 4,
               fps,
               config: {
                 mass: 0.1,

@@ -76,7 +76,7 @@ const Faq: React.FC = () => {
           Not yet, however we will release it as a Remotion reference project in
           2022 when Remotion 3.0 is stable!
         </p>
-        <h2>Who is behind GitHub Wrapped?</h2>
+        <h2>Who is behind GitHub Unwrapped?</h2>
         <p>
           This is a hackathon project by{" "}
           <a

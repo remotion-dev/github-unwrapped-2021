@@ -221,11 +221,11 @@ export default function User(props: { user: CompactStats | null }) {
         <Head>
           <title>
             {username}
-            {"'"}s #GitHubWrapped
+            {"'"}s #GitHubUnwrapped
           </title>
           <meta
             property="og:title"
-            content={`${username}'s #GitHubWrapped`}
+            content={`${username}'s #GitHubUnwrapped`}
             key="title"
           />
 
@@ -240,7 +240,7 @@ export default function User(props: { user: CompactStats | null }) {
             <header style={style}>
               <br></br>
               <br></br>
-              <h1 style={title}>Here is your #GitHubWrapped!</h1>
+              <h1 style={title}>Here is your #GitHubUnwrapped!</h1>
               <h3 style={subtitle}>@{username}</h3>
               <div
                 style={{
@@ -346,7 +346,7 @@ export default function User(props: { user: CompactStats | null }) {
                       color: "black",
                     }}
                   >
-                    #GitHubWrapped
+                    #GitHubUnwrapped
                   </span>{" "}
                   hashtag!
                 </p>
