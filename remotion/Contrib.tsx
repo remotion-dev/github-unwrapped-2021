@@ -29,19 +29,21 @@ export const Contributions: React.FC<{
           <Series.Sequence durationInFrames={45}>
             <IDidALot commitCount={stats.contributionCount}></IDidALot>
           </Series.Sequence>
-          {Object.keys(stats.contributions).map((m, i) => {
-            const val = stats.contributions[m];
-            const chunked = chunk(val, 7);
-            return (
-              <Series.Sequence
-                key={m[0]}
-                durationInFrames={i === 0 ? 35 : i === 11 ? 33 : 8}
-                layout="none"
-              >
-                <Green key={m[0]} chunked={chunked} i={i}></Green>
-              </Series.Sequence>
-            );
-          })}
+          {Object.keys(stats.contributions)
+            .sort()
+            .map((m, i) => {
+              const val = stats.contributions[m];
+              const chunked = chunk(val, 7);
+              return (
+                <Series.Sequence
+                  key={m[0]}
+                  durationInFrames={i === 0 ? 35 : i === 11 ? 33 : 8}
+                  layout="none"
+                >
+                  <Green key={m[0]} chunked={chunked} i={i}></Green>
+                </Series.Sequence>
+              );
+            })}
           <Series.Sequence durationInFrames={50}>
             <TotalContributions
               totalContributions={stats.contributionCount}

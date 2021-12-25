@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { transparentize } from "polished";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AbsoluteFill } from "remotion";
 import { getFont } from "../remotion/font";
 import { Main } from "../remotion/Main";
@@ -11,9 +11,11 @@ import { CompactStats } from "../remotion/map-response-to-stats";
 import { backButton } from "../src/components/button";
 import Download from "../src/components/Download";
 import { Footer, FOOTER_HEIGHT } from "../src/components/Footer";
+import Rerender from "../src/components/Rerender";
 import Spinner from "../src/components/spinner";
 import { getStatsOrFetch } from "../src/get-stats-or-fetch";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
+import { RenderProgressOrFinality } from "./api/progress";
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true };
@@ -140,6 +142,71 @@ export default function User(props: { user: CompactStats | null }) {
     setReady(true);
   }, []);
 
+  const [downloadProgress, setDownloadProgress] =
+    useState<RenderProgressOrFinality | null>(null);
+  const [retrying, setRetrying] = useState(false);
+
+  const pollProgress = useCallback(async () => {
+    const poll = async () => {
+      const progress = await fetch("/api/progress", {
+        method: "POST",
+        body: JSON.stringify({
+          username,
+        }),
+      });
+      const progressJson = (await progress.json()) as RenderProgressOrFinality;
+      setDownloadProgress(progressJson);
+      if (progressJson.type !== "finality") {
+        setTimeout(poll, 1000);
+      }
+    };
+
+    setTimeout(() => {
+      poll();
+    }, 1000);
+  }, [username]);
+
+  const render = useCallback(async () => {
+    if (!username) {
+      return;
+    }
+    const res = await fetch("/api/render", {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+      }),
+    });
+    const prog = (await res.json()) as RenderProgressOrFinality;
+    setDownloadProgress(prog);
+  }, [username]);
+
+  const retry = useCallback(async () => {
+    setRetrying(true);
+    const res = await fetch("/api/retry", {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+      }),
+    });
+    const prog = (await res.json()) as RenderProgressOrFinality;
+    setDownloadProgress(prog);
+    setRetrying(false);
+  }, [username]);
+
+  const type = downloadProgress?.type ?? null;
+
+  useEffect(() => {
+    if (type === "progress") {
+      pollProgress();
+    }
+  }, [type, pollProgress]);
+
+  useEffect(() => {
+    if (downloadProgress === null) {
+      render();
+    }
+  }, [downloadProgress, render]);
+
   if (!user) {
     return (
       <div ref={ref}>
@@ -154,11 +221,11 @@ export default function User(props: { user: CompactStats | null }) {
         <Head>
           <title>
             {username}
-            {"'"}s #GitHubWrapped
+            {"'"}s #GitHubUnwrapped
           </title>
           <meta
             property="og:title"
-            content={`${username}'s #GitHubWrapped`}
+            content={`${username}'s #GitHubUnwrapped`}
             key="title"
           />
 
@@ -173,7 +240,7 @@ export default function User(props: { user: CompactStats | null }) {
             <header style={style}>
               <br></br>
               <br></br>
-              <h1 style={title}>Here is your #GitHubWrapped!</h1>
+              <h1 style={title}>Here is your #GitHubUnwrapped!</h1>
               <h3 style={subtitle}>@{username}</h3>
               <div
                 style={{
@@ -279,11 +346,16 @@ export default function User(props: { user: CompactStats | null }) {
                       color: "black",
                     }}
                   >
-                    #GitHubWrapped
+                    #GitHubUnwrapped
                   </span>{" "}
                   hashtag!
                 </p>
-                <Download username={username}></Download>
+                <Download
+                  downloadProgress={downloadProgress}
+                  retry={retry}
+                  retrying={retrying}
+                  username={username}
+                ></Download>
                 {iosSafari() ? (
                   <p
                     style={{
@@ -306,6 +378,16 @@ export default function User(props: { user: CompactStats | null }) {
                 <Link href="/" passHref>
                   <button style={backButton}>View for another user</button>
                 </Link>
+                <div
+                  style={{
+                    height: 20,
+                  }}
+                ></div>
+                <Rerender
+                  stats={user}
+                  downloadProgress={downloadProgress}
+                  username={username}
+                ></Rerender>
                 <br />
                 <br />
                 <br />

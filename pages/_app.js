@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:image" content="/flash.png" />
         <meta
           property="og:image"
-          content="https://www.githubwrapped.com/flash.png"
+          content="https://www.githubunwrapped.com/flash.png"
         />
       </Head>
       <Component {...pageProps} />

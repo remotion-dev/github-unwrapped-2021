@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useState } from "react";
+import React, { forwardRef } from "react";
 import { RenderProgressOrFinality } from "../../pages/api/progress";
 import { button } from "./button";
 
@@ -12,69 +12,10 @@ const downloadButton: React.CSSProperties = {
 
 const Download: React.FC<{
   username: string;
-}> = ({ username }, ref) => {
-  const [downloadProgress, setDownloadProgress] =
-    useState<RenderProgressOrFinality | null>(null);
-  const [retrying, setRetrying] = useState(false);
-
-  const pollProgress = useCallback(async () => {
-    const poll = async () => {
-      const progress = await fetch("/api/progress", {
-        method: "POST",
-        body: JSON.stringify({
-          username,
-        }),
-      });
-      const progressJson = (await progress.json()) as RenderProgressOrFinality;
-      setDownloadProgress(progressJson);
-      if (progressJson.type !== "finality") {
-        setTimeout(poll, 1000);
-      }
-    };
-
-    setTimeout(() => {
-      poll();
-    }, 1000);
-  }, [username]);
-
-  const render = useCallback(async () => {
-    const res = await fetch("/api/render", {
-      method: "POST",
-      body: JSON.stringify({
-        username,
-      }),
-    });
-    const prog = (await res.json()) as RenderProgressOrFinality;
-    setDownloadProgress(prog);
-  }, [username]);
-
-  const retry = useCallback(async () => {
-    setRetrying(true);
-    const res = await fetch("/api/retry", {
-      method: "POST",
-      body: JSON.stringify({
-        username,
-      }),
-    });
-    const prog = (await res.json()) as RenderProgressOrFinality;
-    setDownloadProgress(prog);
-    setRetrying(false);
-  }, [username]);
-
-  const type = downloadProgress?.type ?? null;
-
-  useEffect(() => {
-    if (type === "progress") {
-      pollProgress();
-    }
-  }, [type, pollProgress]);
-
-  useEffect(() => {
-    if (downloadProgress === null) {
-      render();
-    }
-  }, [downloadProgress, render]);
-
+  downloadProgress: RenderProgressOrFinality | null;
+  retrying: boolean;
+  retry: () => Promise<void>;
+}> = ({ username, downloadProgress, retrying, retry }, ref) => {
   return (
     <div>
       {downloadProgress === null ? (

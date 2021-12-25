@@ -1,5 +1,5 @@
 {
-  "name": "github-wrapped",
+  "name": "github-unwrapped",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "preview": "npx remotion preview remotion/index.tsx",
-    "render": "npx remotion render remotion/index.tsx main out/wrapped.mp4"
+    "render": "npx remotion render remotion/index.tsx main out/unwrapped.mp4"
   },
   "dependencies": {
     "@remotion/bundler": "3.0.0-wrapped.224+8179ab6ae",

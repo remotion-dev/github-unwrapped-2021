@@ -177,7 +177,7 @@ export const TitleCard: React.FC<{
           <div style={titleStyle}>
             This is my
             <br />
-            #GitHubWrapped
+            #GitHubUnwrapped
           </div>
         </AbsoluteFill>
       ) : null}

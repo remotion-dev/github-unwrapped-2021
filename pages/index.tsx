@@ -103,7 +103,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>#GitHubWrapped 2021</title>
+        <title>#GitHubUnwrapped 2021</title>
         <meta
           name="description"
           content="Get your personalized video review of your coding 2021."
@@ -157,7 +157,9 @@ export default function Home() {
               <input
                 style={buttonStyle(loading)}
                 type="submit"
-                value={loading ? "Getting your Wrapped..." : "Get your Wrapped"}
+                value={
+                  loading ? "Getting your Unwrapped..." : "Get your Unwrapped"
+                }
               />
             </form>
           </header>
