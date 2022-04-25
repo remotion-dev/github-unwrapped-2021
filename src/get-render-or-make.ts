@@ -1,8 +1,8 @@
 import {
   AwsRegion,
+  renderMediaOnLambda,
   RenderProgress,
-  renderVideoOnLambda,
-} from "@remotion/lambda";
+} from "@remotion/lambda/client";
 import { RenderProgressOrFinality } from "../pages/api/progress";
 import { CompactStats } from "../remotion/map-response-to-stats";
 import { COMP_NAME, SITE_ID } from "./config";
@@ -37,12 +37,12 @@ export const getRenderOrMake = async (
     }
     const region = getRandomRegion();
     const account = getRandomAwsAccount();
-    console.log("selected account", account);
+    console.log(`Selected account ${account} to render`);
     await lockRender(region, username, account);
 
     setEnvForKey(account);
 
-    const { renderId, bucketName } = await renderVideoOnLambda({
+    const { renderId, bucketName } = await renderMediaOnLambda({
       region: region,
       functionName: functionName,
       serveUrl: SITE_ID,

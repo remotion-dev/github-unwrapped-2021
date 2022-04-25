@@ -4,9 +4,9 @@
 <img src="public/promo2.png">
 <img src="public/promo3.png">
 
-**Try it out live** https://githubunwrapped.com
+**Try it out live:** https://githubunwrapped.com
 
-Generates a video for each GitHub user.
+A platform that generates a year in review video for each GitHub user. Built with Next.JS, Remotion and AWS Lambda.
 
 ## Scaling strategy
 
@@ -36,13 +36,13 @@ You now have all environment variables.
 
 Run the web app:
 
-```
+```console
 npm run dev
 ```
 
 Edit the template in the Remotion preview
 
-```
+```console
 npm run preview
 ```
 
