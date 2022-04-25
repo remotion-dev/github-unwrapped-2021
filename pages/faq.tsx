@@ -45,7 +45,7 @@ const Faq: React.FC = () => {
           To display the video, the{" "}
           <a
             target="_blank"
-            href="https://remotion.dev/docs/player"
+            href="https://remotion.dev/player"
             rel="noreferrer"
             style={{
               color: "black",
@@ -54,8 +54,18 @@ const Faq: React.FC = () => {
             @remotion/player
           </a>{" "}
           library is being used. When a username is entered for the first time,
-          we render the video to an MP4 in an AWS Lambda function and cache it
-          in an S3 bucket.
+          we render the video to an MP4 in an AWS Lambda function using{" "}
+          <a
+            target="_blank"
+            href="https://remotion.dev/lambda"
+            rel="noreferrer"
+            style={{
+              color: "black",
+            }}
+          >
+            @remotion/lambda
+          </a>{" "}
+          and cache it in an S3 bucket.
         </p>
         <p>
           Want to make your own programmatic video solution? Check out{" "}
@@ -73,8 +83,20 @@ const Faq: React.FC = () => {
 
         <h2>Is the project open source?</h2>
         <p>
-          Not yet, however we will release it as a Remotion reference project in
-          2022 when Remotion 3.0 is stable!
+          Yes, the source code is available on{" "}
+          <a
+            style={{
+              color: "black",
+            }}
+            target={"_blank"}
+            href="https://github.com/remotion-dev/github-unwrapped"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+          ! The source code of the video is {'"'}open source{'"'}, while
+          Remotion, the framework for making videos is {'"'}source-available
+          {'"'} and requires companies to obtain a license to use it.
         </p>
         <h2>Who is behind GitHub Unwrapped?</h2>
         <p>
@@ -111,10 +133,10 @@ const Faq: React.FC = () => {
               color: "black",
             }}
             target="_blank"
-            href="mailto:hi@jonny.io"
+            href="mailto:hi@remotion.dev"
             rel="noreferrer"
           >
-            hi@jonny.io
+            hi@remotion.dev
           </a>
         </p>
       </section>

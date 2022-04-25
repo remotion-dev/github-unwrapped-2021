@@ -78,6 +78,7 @@ export default function Home() {
 
   const size = PlayerInternals.useElementSize(ref, {
     triggerOnWindowResize: true,
+    shouldApplyCssTransforms: false,
   });
 
   const onSubmit: React.FormEventHandler = useCallback(

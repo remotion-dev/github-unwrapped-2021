@@ -2,7 +2,6 @@ import { getRenderProgress } from "@remotion/lambda";
 import { WithId } from "mongodb";
 import { RenderProgressOrFinality } from "../pages/api/progress";
 import { Render, updateRenderWithFinality } from "./db/renders";
-import { functionName } from "./function-name";
 import { getFinality } from "./get-render-or-make";
 import { setEnvForKey } from "./set-env-for-key";
 
@@ -31,7 +30,7 @@ export const getRenderProgressWithFinality = async (
   const progress = await getRenderProgress({
     renderId: render.renderId,
     bucketName: render.bucketName,
-    functionName: functionName,
+    functionName: render.functionName,
     region: render.region,
   });
 

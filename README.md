@@ -20,13 +20,13 @@ To allow hundreds of people to render their video at the same time, we applied m
 
 1. Run `yarn` to install dependencies.
 2. Rename `.env.example` to `.env`
-3. Set up your AWS account according to the [Remotion Lambda Setup guide](https://remotion.dev/docs/lambda/setup).
+3. Set up your AWS account according to the [Remotion Lambda Setup guide](https://remotion.dev/docs/lambda/setup). We use multiple accounts for load-balancing:
    - Use `AWS_KEY_1` instead of `REMOTION_AWS_ACCESS_KEY_ID` and `AWS_SECRET_1` instead of `REMOTION_AWS_SECRET_ACCESS_KEY`.
    - You can use `AWS_KEY_2` and `AWS_SECRET_2` to load-balance between two accounts, or paste the same credentials as before to use the same account.
    - In `src/set-env-for-key.ts`, we rotate the environment variables.
 4. Deploy the functions into your AWS account(s):
    ```
-   REMOTION_AWS_ACCESS_KEY_ID=<id> REMOTION_AWS_SECRET_ACCESS_KEY=<secret> sh deploy.sh
+   npx ts-node deploy.ts
    ```
 5. For caching the videos and GitHub API responses, set up a MongoDB (I use a free MongoDB Atlas Cloud instance) to save the videos. Set the connection string as `MONGO_URL`
 6. For fetching data from GitHub, create a personal access token in your user settings and set it as `GITHUB_TOKEN`.

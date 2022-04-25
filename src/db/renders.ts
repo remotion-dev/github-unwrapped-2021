@@ -18,6 +18,7 @@ export type Render = {
   username: string;
   bucketName: string | null;
   finality: Finality | null;
+  functionName: string;
   account: number | undefined;
 };
 
@@ -29,7 +30,8 @@ export const rendersCollection = async () => {
 export const lockRender = async (
   region: AwsRegion,
   username: string,
-  account: number
+  account: number,
+  functionName: string
 ) => {
   const coll = await rendersCollection();
   await coll.insertOne({
@@ -39,6 +41,7 @@ export const lockRender = async (
     finality: null,
     renderId: null,
     account: account,
+    functionName,
   });
 };
 

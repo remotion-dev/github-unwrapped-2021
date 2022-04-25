@@ -1,8 +1,9 @@
 import {
   AwsRegion,
+  getFunctions,
   renderMediaOnLambda,
   RenderProgress,
-} from "@remotion/lambda/client";
+} from "@remotion/lambda";
 import { RenderProgressOrFinality } from "../pages/api/progress";
 import { CompactStats } from "../remotion/map-response-to-stats";
 import { COMP_NAME, SITE_ID } from "./config";
@@ -13,7 +14,6 @@ import {
   saveRender,
   updateRenderWithFinality,
 } from "./db/renders";
-import { functionName } from "./function-name";
 import { getRandomAwsAccount } from "./get-random-aws-account";
 import { getRenderProgressWithFinality } from "./get-render-progress-with-finality";
 import { getRandomRegion } from "./regions";
@@ -36,14 +36,17 @@ export const getRenderOrMake = async (
     }
     const region = getRandomRegion();
     const account = getRandomAwsAccount();
-    console.log(`Username=${username} Account=${account} Region=${region}`);
-    await lockRender(region, username, account);
-
     setEnvForKey(account);
+    const [first] = await getFunctions({
+      compatibleOnly: true,
+      region,
+    });
+    console.log(`Username=${username} Account=${account} Region=${region}`);
+    await lockRender(region, username, account, first.functionName);
 
     const { renderId, bucketName } = await renderMediaOnLambda({
       region: region,
-      functionName: functionName,
+      functionName: first.functionName,
       serveUrl: SITE_ID,
       composition: COMP_NAME,
       inputProps: { stats: stats },
