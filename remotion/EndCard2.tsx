@@ -9,14 +9,6 @@ import {
 } from "remotion";
 import { BACKGROUND_COLOR, BASE_COLOR } from "../src/palette";
 
-const title: React.CSSProperties = {
-  textAlign: "center",
-  fontSize: 70,
-  fontFamily: "Jelle",
-  color: BASE_COLOR,
-  fontWeight: "bold",
-};
-
 const subtitle: React.CSSProperties = {
   textAlign: "center",
   fontSize: 80,

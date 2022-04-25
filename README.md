@@ -28,9 +28,8 @@ To allow hundreds of people to render their video at the same time, we applied m
    ```
    REMOTION_AWS_ACCESS_KEY_ID=<id> REMOTION_AWS_SECRET_ACCESS_KEY=<secret> sh deploy.sh
    ```
-5. Create a Slackbot Token: https://your-team.slack.com/services/new/slackbot to get notified when a new video gets rendered (may become verbose, tweak the code to adjust when Slack notifications are sent or remove it). Set it as `SLACK_TOKEN`. You can also remove it entirely
-6. For caching the videos and GitHub API responses, set up a MongoDB (I use a free MongoDB Atlas Cloud instance) to save the videos. Set the connection string as `MONGO_URL`
-7. For fetching data from GitHub, create a personal access token in your user settings and set it as `GITHUB_TOKEN`.
+5. For caching the videos and GitHub API responses, set up a MongoDB (I use a free MongoDB Atlas Cloud instance) to save the videos. Set the connection string as `MONGO_URL`
+6. For fetching data from GitHub, create a personal access token in your user settings and set it as `GITHUB_TOKEN`.
 
 You now have all environment variables.
 

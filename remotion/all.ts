@@ -1,3 +1,4 @@
+// Demo data for the template
 export const all = {
   data: {
     user: {

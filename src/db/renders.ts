@@ -1,6 +1,5 @@
 import { AwsRegion } from "@remotion/lambda";
 import { WithId } from "mongodb";
-import { slackbot } from "../post-to-slack";
 import { mongoClient } from "./mongo";
 
 export type Finality =
@@ -77,9 +76,9 @@ export const updateRenderWithFinality = async (
   finality: Finality
 ) => {
   if (finality && finality.type === "success") {
-    slackbot.send("#wrapped", [`Successfully rendered video for ${username}.`]);
+    console.log(`Successfully rendered video for ${username}.`);
   } else {
-    slackbot.send("#wrapped", [`Failed to render video for ${username}!`]);
+    console.log(`Failed to render video for ${username}!`);
   }
   const coll = await rendersCollection();
   return coll.updateOne(

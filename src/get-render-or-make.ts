@@ -16,7 +16,6 @@ import {
 import { functionName } from "./function-name";
 import { getRandomAwsAccount } from "./get-random-aws-account";
 import { getRenderProgressWithFinality } from "./get-render-progress-with-finality";
-import { slackbot } from "./post-to-slack";
 import { getRandomRegion } from "./regions";
 import { setEnvForKey } from "./set-env-for-key";
 
@@ -37,7 +36,7 @@ export const getRenderOrMake = async (
     }
     const region = getRandomRegion();
     const account = getRandomAwsAccount();
-    console.log(`Selected account ${account} to render`);
+    console.log(`Username=${username} Account=${account} Region=${region}`);
     await lockRender(region, username, account);
 
     setEnvForKey(account);
@@ -69,10 +68,7 @@ export const getRenderOrMake = async (
     const progress = await getRenderProgressWithFinality(render, account);
     return progress;
   } catch (err) {
-    slackbot.send("#wrapped", [
-      `Failed to render video for ${username}`,
-      (err as Error).stack,
-    ]);
+    console.log(`Failed to render video for ${username}`, (err as Error).stack);
     if (_renderId && _region) {
       await updateRenderWithFinality(_renderId, username, _region, {
         type: "error",

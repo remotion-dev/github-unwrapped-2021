@@ -16,4 +16,3 @@ AWS_REGION=ap-south-1 npx remotion lambda functions deploy --timeout 240
 AWS_REGION=ap-southeast-1 npx remotion lambda functions deploy --timeout 240
 AWS_REGION=ap-southeast-2 npx remotion lambda functions deploy --timeout 240
 AWS_REGION=ap-northeast-1 npx remotion lambda functions deploy --timeout 240
-AWS_REGION=eu-central-1 npx remotion lambda functions deploy --timeout 240
