@@ -1,5 +1,3 @@
-# GitHub Unwrapped
-
 <img src="public/promo1.png">
 <img src="public/promo2.png">
 <img src="public/promo3.png">
@@ -39,7 +37,7 @@ Run the web app:
 npm run dev
 ```
 
-Edit the template in the Remotion preview
+Edit the template in the Remotion preview:
 
 ```console
 npm run preview
@@ -51,5 +49,5 @@ Don't forget to also set the environment variables there too.
 
 ## License
 
-The code in this repository is licensed under MIT.  
+The code in this repository: Licensed under MIT.  
 The Remotion library: Notice that for some entities a company license is needed. Read the terms here.
