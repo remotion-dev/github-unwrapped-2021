@@ -11,11 +11,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@remotion/bundler": "^3.0.0",
-    "@remotion/cli": "^3.0.0",
-    "@remotion/lambda": "^3.0.0",
-    "@remotion/player": "^3.0.0",
-    "@remotion/renderer": "^3.0.0",
+    "@remotion/bundler": "3.0.16",
+    "@remotion/cli": "3.0.16",
+    "@remotion/lambda": "3.0.16",
+    "@remotion/player": "3.0.16",
+    "@remotion/renderer": "3.0.16",
     "@types/lodash.chunk": "^4.2.6",
     "@types/lodash.groupby": "^4.6.6",
     "dotenv": "^10.0.0",
@@ -29,8 +29,8 @@
     "prettier-plugin-organize-imports": "^2.3.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "remotion": "^3.0.0",
-    "simplex-noise": "^3.0.0"
+    "remotion": "3.0.16",
+    "simplex-noise": "3.0.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.37",
