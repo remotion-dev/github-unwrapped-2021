@@ -50,4 +50,4 @@ Don't forget to also set the environment variables there too.
 ## License
 
 The code in this repository: Licensed under MIT.  
-The Remotion library: Notice that for some entities a company license is needed. Read the terms here.
+The Remotion library: Notice that for some entities a company license is needed. Read the terms [here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md#company-license).
