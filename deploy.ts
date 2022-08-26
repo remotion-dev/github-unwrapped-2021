@@ -5,6 +5,7 @@ import {
 } from "@remotion/lambda";
 import dotenv from "dotenv";
 import path from "path";
+import { SITE_ID } from "./src/config";
 import { getAccountCount } from "./src/get-account-count";
 import { usedRegions } from "./src/regions";
 import { setEnvForKey } from "./src/set-env-for-key";
@@ -29,7 +30,7 @@ const execute = async () => {
       );
       const { bucketName } = await getOrCreateBucket({ region });
       const { serveUrl } = await deploySite({
-        siteName: "unwrapped",
+        siteName: SITE_ID,
         bucketName,
         entryPoint: path.join(process.cwd(), "remotion/index.tsx"),
         region,

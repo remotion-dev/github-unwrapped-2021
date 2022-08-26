@@ -50,11 +50,14 @@ export const getRenderOrMake = async (
       serveUrl: SITE_ID,
       composition: COMP_NAME,
       inputProps: { stats: stats },
-      codec: "h264-mkv",
+      codec: "h264",
       imageFormat: "jpeg",
       maxRetries: 1,
-      framesPerLambda: 80,
       privacy: "public",
+      downloadBehavior: {
+        type: "download",
+        fileName: `${username}.mp4`,
+      },
     });
     _renderId = renderId;
     _region = region;
