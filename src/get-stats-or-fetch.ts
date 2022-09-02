@@ -5,7 +5,7 @@ import {
 import { getFromCache, saveCache } from "./db/cache";
 import { getAll } from "./get-all";
 
-const githubToken = (process.env.GITHUB_TOKEN = process.env.GITHUB_TOKEN);
+const githubToken = process.env.GITHUB_TOKEN;
 
 if (!githubToken) {
   throw new TypeError(`Expected GITHUB_TOKEN env variable`);
