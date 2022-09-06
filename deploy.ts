@@ -18,7 +18,7 @@ const execute = async () => {
   for (let i = 1; i <= count; i++) {
     for (const region of usedRegions) {
       setEnvForKey(i);
-      const { functionName } = await deployFunction({
+      const { functionName, alreadyExisted } = await deployFunction({
         architecture: "arm64",
         createCloudWatchLogGroup: true,
         memorySizeInMb: 2048,
@@ -26,7 +26,9 @@ const execute = async () => {
         region,
       });
       console.log(
-        `Deployed function "${functionName}" to ${region} in account ${i}`
+        `${
+          alreadyExisted ? "Ensured" : "Deployed"
+        } function "${functionName}" to ${region} in account ${i}`
       );
       const { bucketName } = await getOrCreateBucket({ region });
       const { serveUrl } = await deploySite({
