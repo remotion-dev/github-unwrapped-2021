@@ -10,7 +10,7 @@ A platform that generates a year in review video for each GitHub user. Built wit
 
 To allow hundreds of people to render their video at the same time, we applied multiple strategies for scaling:
 
-- Caching the video whenever possible. Before each render, a database lock is created to avoid multiple renders for the same GitHub user to be accidentially created.
+- Caching the video whenever possible. Before each render, a database lock is created to avoid multiple renders for the same GitHub user to be accidentally created.
 - A random region will be selected for each render to distribute renders to avoid hitting the [concurrency limit](https://www.remotion.dev/docs/lambda/troubleshooting/rate-limit).
 - Two AWS sub-accounts are used for rendering which each have their own concurrency limit of 1000 functions in parallel per region. In hindsight, it would have been easier to ask AWS for an increase.
 
