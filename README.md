@@ -1,3 +1,9 @@
+<a href="https://github.com/remotion-dev/github-unwrapped-2022">
+<img src="https://github.com/remotion-dev/github-unwrapped-2022/raw/main/public/promo1.png"/>
+<strong>This is the repo for the 2021 version. Go to the 2022 version!</strong>
+</a>
+<hr/>
+
 <img src="public/promo1.png">
 <img src="public/promo2.png">
 <img src="public/promo3.png">
