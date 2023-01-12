@@ -8,7 +8,7 @@
 <img src="public/promo2.png">
 <img src="public/promo3.png">
 
-**Try it out live:** https://githubunwrapped.com
+**Try it out live:** https://2021.githubunwrapped.com
 
 A platform that generates a year in review video for each GitHub user. Built with Next.JS, Remotion and AWS Lambda.
 
